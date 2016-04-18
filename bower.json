@@ -1,0 +1,20 @@
+{
+  "name": "bioinfo-apps",
+  "authors": [
+    "Edgar S. Hurtado <edsanhu@gmail.com>"
+  ],
+  "description": "An app launcher for bioinformatics tools at cipf",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  }
+}
