@@ -7,6 +7,8 @@
         <style is= "custom-style" include=" iron-flex iron-flex-alignment">
             .container{
                 width: 300px;
+                border: black solid 1px;
+                border-radius: 5%;
             }
 
             img {
@@ -17,10 +19,12 @@
                 margin-bottom: 10px;
                 background: #2F2F2F;
                 padding: 10px 0 10px 0;
-                border-radius: 5%;
+                border-radius: 5% 5% 0 0;
                 position: relative;
                 overflow: hidden;
             }
+
+
 
             .app-footer > span {
                 font-size: 2em;
@@ -43,10 +47,12 @@
 
             .app-options {
                position: absolute;
-                top: 100%;
+                bottom: 0;
                 background-color: rgba(2,2,2, 0.5);
                 width: 100%;
-                height: 100%
+                height: 0;
+                overflow: hidden;
+                transition: height 0.2s;
             }
         </style>
 
@@ -73,44 +79,16 @@
         Polymer({
             is: "app-wrapper",
             ready: function(){
-                this.$$(".iconHolder").addEventListener("mouseenter", this._slideUp.bind(this));
-                this.$$(".iconHolder").addEventListener("mouseleave", this._slideDown.bind(this))
+                this.$$(".iconHolder").addEventListener("mouseenter", function(){
+                    this.$$(".app-options").style.height = "100%";
+                }.bind(this));
+                this.$$(".iconHolder").addEventListener("mouseleave", function(){
+                    this.$$(".app-options").style.height = "0";
+                }.bind(this))
             },
 
             properties: {
                appInfo: Object
-            },
-
-            _slideUp: function(){
-                var timer;
-                var topPosition = 100;
-                var that = this;
-                var frame = function() {
-                    if(topPosition > 0){
-                        topPosition -= 2;
-                        that.$$(".app-options").style.top = topPosition + "%";
-                    }else {
-                        clearInterval(timer);
-                    }
-                }
-
-                timer = setInterval(frame, 0.05);
-            },
-
-            _slideDown: function() {
-                var timer;
-                var topPosition = 0;
-                var that = this;
-                var frame = function() {
-                    if(topPosition < 100){
-                        topPosition += 2;
-                        that.$$(".app-options").style.top = topPosition + "%";
-                    }else {
-                        clearInterval(timer);
-                    }
-                }
-
-                timer = setInterval(frame, 0.05);
             }
         })
     </script>
