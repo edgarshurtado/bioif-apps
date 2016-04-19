@@ -18,7 +18,7 @@
                 left: 0;
                 height: 100%;
                 width: 100%;
-                background-color: rgba(0,0,0, 0.8);
+                background-color: rgba(0,0,0, 0.9);
                 z-index: 1000;
             }
 
@@ -36,11 +36,11 @@
         </style>
         <div class="layout horizontal wrap">
             <template is="dom-repeat" items="{{appCollectionJson}}">
-                <app-wrapper app-info="{{item}}"></app-wrapper>
+                <app-wrapper app-info="{{item}}" on-open-info="_handleInfoRequest"></app-wrapper>
             </template>
         </div>
 
-        <div id="infoScreen" class="infoScreen">
+        <div id="infoScreen" class="infoScreen" hidden>
             <div id="closeInfo" class="closeButton layout horizontal center center-justified"><span>X</span></div>
         </div>
     </template>
@@ -52,12 +52,19 @@
                 srcJson: String,
                 appCollectionJson: {
                     type: Array/Object,
+                    observer: "_foo"
                 }
             },
 
             ready: function(){
                 this._setAppCollectionJson();
                 this.$.closeInfo.addEventListener("click", this._handleCloseInfo.bind(this))
+
+            },
+
+            _foo: function(){
+                var appWrapperElements = Polymer.dom(this.root).querySelectorAll("app-wrapper");
+                console.log(appWrapperElements);
             },
 
             _setAppCollectionJson: function(){
@@ -77,6 +84,10 @@
 
             _handleCloseInfo: function(){
                 Polymer.dom(this.$.infoScreen).setAttribute("hidden", true);
+            },
+
+            _handleInfoRequest: function(e) {
+                this.$.infoScreen.removeAttribute("hidden");
             }
         })
     </script>

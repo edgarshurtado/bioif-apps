@@ -67,10 +67,11 @@
         </style>
 
         <div class="container">
+
             <div class="iconHolder layout vertical center center-justified">
                 <img id="iconTag" src="{{_computeIconLink(appInfo)}}" alt="">
                 <div class="app-options layout horizontal center around-justified">
-                    <a href="#" class="layout vertical" on-click="_showInfo">
+                    <a href="#" on-click="_handleOpenInfo" class="layout vertical" on-click="_showInfo">
                         <i class="fa fa-file-text-o"></i>
                         <span>Info</span>
                     </a>
@@ -80,9 +81,11 @@
                     </a>
                 </div>
             </div>
+
             <div class="app-footer layout horizontal around-justified end">
                 <span>{{appInfo.name}}</span>
             </div>
+
         </div>
     </template>
     <script>
@@ -107,6 +110,11 @@
                 }else {
                     return this.appInfo.icon
                 }
+            },
+
+            _handleOpenInfo: function(e){
+                e.preventDefault();
+                this.fire("open-info", this.appInfo);
             }
         })
     </script>
