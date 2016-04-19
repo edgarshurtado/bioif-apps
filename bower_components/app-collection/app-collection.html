@@ -5,7 +5,7 @@
 
 <dom-module id="app-collection">
     <template>
-        <style is="custom-style" include="iron-flex iron-flex-alignment">
+        <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
             app-wrapper {
                 --app-wrap-width: 250px;
                 --app-icon-height: 150px;
@@ -20,6 +20,7 @@
                 width: 100%;
                 background-color: rgba(0,0,0, 0.9);
                 z-index: 1000;
+                color: white;
             }
 
             .infoScreen .closeButton {
@@ -30,9 +31,25 @@
                 width: 30px;
                 height: 30px;
                 border: white solid 3px;
-                color: white;
                 z-index: 1001;
+                cursor: pointer;
             }
+
+            .info-section {
+                width: 50%;
+            }
+
+            .completeDescription {
+                width: 75%;
+                height: 60vh;
+                font-size: 1.2em;
+                overflow-y: scroll;
+            }
+
+            a {
+                color: lightgreen;
+            }
+
         </style>
         <div class="layout horizontal wrap">
             <template is="dom-repeat" items="{{appCollectionJson}}">
@@ -40,8 +57,16 @@
             </template>
         </div>
 
-        <div id="infoScreen" class="infoScreen" hidden>
-            <div id="closeInfo" class="closeButton layout horizontal center center-justified"><span>X</span></div>
+        <div id="infoScreen" class="infoScreen layout horizontal" hidden>
+            <div id="closeInfo" on-click="_handleCloseInfo" class="closeButton layout horizontal center center-justified">
+                <span>X</span>
+            </div>
+            <div class="info-section left"></div>
+            <div class="info-section right">
+                <h1 id="appName"></h1>
+                <h2 id="appShortDescription"></h2>
+                <div id="completeDescription" class="completeDescription"></div>
+            </div>
         </div>
     </template>
     <script>
@@ -51,20 +76,12 @@
             properties:{
                 srcJson: String,
                 appCollectionJson: {
-                    type: Array/Object,
-                    observer: "_foo"
+                    type: Array/Object
                 }
             },
 
             ready: function(){
                 this._setAppCollectionJson();
-                this.$.closeInfo.addEventListener("click", this._handleCloseInfo.bind(this))
-
-            },
-
-            _foo: function(){
-                var appWrapperElements = Polymer.dom(this.root).querySelectorAll("app-wrapper");
-                console.log(appWrapperElements);
             },
 
             _setAppCollectionJson: function(){
@@ -83,10 +100,17 @@
             },
 
             _handleCloseInfo: function(){
-                Polymer.dom(this.$.infoScreen).setAttribute("hidden", true);
+                Polymer.dom(this.$.infoScreen).setAttribute("hidden", "");
             },
 
             _handleInfoRequest: function(e) {
+
+                Polymer.dom(this.$.appName).textContent = e.detail.name;
+                Polymer.dom(this.$.appShortDescription).textContent = e.detail.shortDescription;
+                //Polymer.dom(this.$.completeDescription).innerHtml = e.detail.completeDescription;
+                this.$.completeDescription.innerHTML = e.detail.completeDescription;
+
+
                 this.$.infoScreen.removeAttribute("hidden");
             }
         })
