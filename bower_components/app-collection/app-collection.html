@@ -12,15 +12,37 @@
                 margin: 10px;
             }
 
-            .apps-box {
+            .infoScreen{
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-color: rgba(0,0,0, 0.8);
+                z-index: 1000;
+            }
 
+            .infoScreen .closeButton {
+                position: absolute;
+                right: 3%;
+                top: 3%;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                border: white solid 3px;
+                color: white;
+                z-index: 1001;
             }
         </style>
-        <dom class="layout horizontal wrap apps-box center centerd-justify">
+        <div class="layout horizontal wrap">
             <template is="dom-repeat" items="{{appCollectionJson}}">
                 <app-wrapper app-info="{{item}}"></app-wrapper>
             </template>
-        </dom>
+        </div>
+
+        <div id="infoScreen" class="infoScreen">
+            <div id="closeInfo" class="closeButton layout horizontal center center-justified"><span>X</span></div>
+        </div>
     </template>
     <script>
         Polymer({
@@ -35,13 +57,12 @@
 
             ready: function(){
                 this._setAppCollectionJson();
+                this.$.closeInfo.addEventListener("click", this._handleCloseInfo.bind(this))
             },
 
             _setAppCollectionJson: function(){
                 var oReq = new XMLHttpRequest();
                 var that = this;
-
-                console.log("trying to reach JSON file");
 
                 function reqListener() {
                    that.appCollectionJson = JSON.parse(this.responseText);
@@ -52,6 +73,10 @@
 
                 oReq.addEventListener("load", reqListener);
                 oReq.addEventListener("error", function(){alert("Server currently unavailable")});
+            },
+
+            _handleCloseInfo: function(){
+                Polymer.dom(this.$.infoScreen).setAttribute("hidden", true);
             }
         })
     </script>
