@@ -1,0 +1,58 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-wrapper/app-wrapper.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+
+<dom-module id="app-collection">
+    <template>
+        <style is="custom-style" include="iron-flex iron-flex-alignment">
+            app-wrapper {
+                --app-wrap-width: 250px;
+                --app-icon-height: 150px;
+                margin: 10px;
+            }
+
+            .apps-box {
+
+            }
+        </style>
+        <dom class="layout horizontal wrap apps-box center centerd-justify">
+            <template is="dom-repeat" items="{{appCollectionJson}}">
+                <app-wrapper app-info="{{item}}"></app-wrapper>
+            </template>
+        </dom>
+    </template>
+    <script>
+        Polymer({
+            is: "app-collection",
+
+            properties:{
+                srcJson: String,
+                appCollectionJson: {
+                    type: Array/Object,
+                }
+            },
+
+            ready: function(){
+                this._setAppCollectionJson();
+            },
+
+            _setAppCollectionJson: function(){
+                var oReq = new XMLHttpRequest();
+                var that = this;
+
+                console.log("trying to reach JSON file");
+
+                function reqListener() {
+                   that.appCollectionJson = JSON.parse(this.responseText);
+                }
+
+                oReq.open("GET", this.srcJson);
+                oReq.send();
+
+                oReq.addEventListener("load", reqListener);
+                oReq.addEventListener("error", function(){alert("Server currently unavailable")});
+            }
+        })
+    </script>
+</dom-module>

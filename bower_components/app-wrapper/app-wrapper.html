@@ -6,9 +6,10 @@
     <template>
         <style is= "custom-style" include=" iron-flex iron-flex-alignment">
             .container{
-                width: 300px;
+                width: var(--app-wrap-width);
+                box-shadow: 5px 10px 30px black;
+                border-radius: 15%;
                 border: black solid 1px;
-                border-radius: 5%;
             }
 
             img {
@@ -17,19 +18,27 @@
 
             .iconHolder{
                 margin-bottom: 10px;
-                background: #2F2F2F;
+                background: #435F7A;
                 padding: 10px 0 10px 0;
                 border-radius: 5% 5% 0 0;
                 position: relative;
                 overflow: hidden;
-                height: var(--icon-holder-height);
+                height: var(--app-icon-height);
             }
 
 
 
+            .app-footer {
+                border-top: black solid 2px;
+                background-color: aliceblue;
+                border-radius: 0 0 15% 15%;
+                padding: 5px;
+                font-family: "Adobe Gothic Std";
+            }
             .app-footer > span {
                 font-size: 2em;
                 color: black;
+                margin-top: 5px;
             }
 
             a {
