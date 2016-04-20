@@ -1,0 +1,26 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.css">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../app-collection/bz-collection.html">
+<link rel="import" href="../app-wrapper/bz-wrapper.html">
+<link rel="import" href="../app-info/app-info.html">
+
+<dom-module id="bioinfo-apps-main">
+    <template>
+        <style is="custom-style" include="iron-flex"></style>
+        <div class="layout horizontal">
+            <bz-collection src-json="./src/test-apps.json" on-app-selected="_handleAppSelection"></bz-collection>
+            <app-info></app-info>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "bioinfo-apps-main",
+            _handleAppSelection(e){
+                var a = Polymer.dom(this.root).querySelector("app-info");
+                a.appToDisplay = e.detail;
+            }
+
+        })
+    </script>
+</dom-module>

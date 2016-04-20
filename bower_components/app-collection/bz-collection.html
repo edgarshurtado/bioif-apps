@@ -75,6 +75,7 @@
                     previousActivated.removeAttribute("activated");
                 }
                 Polymer.dom(normalizedEvent.localTarget).setAttribute("activated","");
+                this.fire("app-selected", normalizedEvent.localTarget.appInfo);
 
             }
         })
