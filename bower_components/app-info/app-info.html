@@ -23,7 +23,6 @@
         .screenshot.main {
             width: 80%;
 
-            margin-bottom:2%;
         }
 
         .thumbnails {
@@ -52,6 +51,7 @@
             -webkit-box-sizing: border-box;
             border: rgba(256,256,256, 0.5) solid 1px;
             margin: 5px;
+            width: 80%;
         }
 
         .half{
@@ -61,6 +61,7 @@
 
         .content-element.publications {
             max-height: 20vh;
+            margin-bottom:2%;
         }
 
         a {
@@ -103,31 +104,34 @@
         </div>
 
         <div class="layout horizontal">
-            <div class="half layout vertical center">
+
+            <div class="half content layout vertical center">
                 <div class="link-icons">
                     <a href=""><i class="fa fa-github"></i> Source</a>
                     <a href=""><i class="fa fa-file-text-o"></i> Documentation</a>
                     <a href=""><i class="fa fa-youtube-square"></i> Tutorial</a>
+                    <a href=""><i class="fa fa-bar-chart"></i> Usage Stats</a>
                 </div>
-                <div class="layout vertical center">
-                   <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                   <div class="layout horizontal thumbnails">
-                      <template is="dom-repeat" items="{{_selectThumbnails(appToDisplay.screenshots)}}">
-                          <img src="{{item}}" class="thumbnail-item" alt="">
-                      </template>
-                   </div>
+                <div id="description" class="content-element"></div>
+                <div class="content-element publications">
+                    <ol id="publications"></ol>
                 </div>
                 <a href="{{appToDisplay.link}}" target="_blank">
                     <div class="launch-button">Launch</div>
                 </a>
             </div>
 
-            <div class="half content layout vertical center">
-                <div id="description" class="content-element"></div>
-                <div class="content-element publications">
-                    <ol id="publications"></ol>
+            <div class="half layout vertical center">
+                <div class="layout vertical center">
+                   <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                </div>
+
+                <div class="content-element">
+                    <h1>How to cite:</h1>
+                    <p>{{appToDisplay.citation}}</p>
                 </div>
             </div>
+
         </div>
         <footer>
 
