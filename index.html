@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bioapps Launcher</title>
+    <title>Bioinfo-apps</title>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../app-collection/bz-collection.html">
+    <style>
+
+        body {
+            background-image: url("./img/9414193062_8911b19530_o.jpg");
+            background-size: cover;
+        }
+
+        bz-collection {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+    </style>
 </head>
 <body>
-
+<div>
+    <bz-collection src-json="./src/test-apps.json"></bz-collection>
+</div>
 </body>
 </html>
