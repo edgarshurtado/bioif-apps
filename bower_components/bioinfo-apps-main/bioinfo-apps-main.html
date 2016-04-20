@@ -7,7 +7,11 @@
 
 <dom-module id="bioinfo-apps-main">
     <template>
-        <style is="custom-style" include="iron-flex"></style>
+        <style is="custom-style" include="iron-flex">
+            bz-collection {
+                width: 15%;
+            }
+        </style>
         <div class="layout horizontal">
             <bz-collection src-json="./src/test-apps.json" on-app-selected="_handleAppSelection"></bz-collection>
             <app-info></app-info>
