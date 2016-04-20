@@ -1,0 +1,82 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-wrapper/bz-wrapper.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+
+<dom-module id="bz-collection">
+    <template>
+        <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
+
+            .apps-scroll{
+                height: 100vh;
+                width: 200px;
+                overflow-y: scroll;
+                background-color: rgba(0,0,0,0.8);
+                padding-top: 5px;
+            }
+
+        </style>
+        <div class="layout vertical apps-scroll center">
+            <template is="dom-repeat" items="{{appCollectionJson}}">
+                <bz-wrapper app-info="{{item}}" on-click="_handleActivation"></bz-wrapper>
+            </template>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "bz-collection",
+
+            properties:{
+                srcJson: String,
+                appCollectionJson: {
+                    type: Array/Object
+                }
+            },
+
+            ready: function(){
+
+                this._setAppCollectionJson();
+            },
+
+            _setAppCollectionJson: function(){
+                var oReq = new XMLHttpRequest();
+                var that = this;
+
+                function reqListener() {
+                    that.appCollectionJson = JSON.parse(this.responseText);
+                }
+
+                oReq.open("GET", this.srcJson);
+                oReq.send();
+
+                oReq.addEventListener("load", reqListener);
+                oReq.addEventListener("error", function(){alert("Server currently unavailable")});
+            },
+
+            _handleCloseInfo: function(){
+                Polymer.dom(this.$.infoScreen).setAttribute("hidden", "");
+            },
+
+            _handleInfoRequest: function(e) {
+
+                Polymer.dom(this.$.appName).textContent = e.detail.name;
+                Polymer.dom(this.$.appShortDescription).textContent = e.detail.shortDescription;
+                //Polymer.dom(this.$.completeDescription).innerHtml = e.detail.completeDescription;
+                this.$.completeDescription.innerHTML = e.detail.completeDescription;
+
+
+                this.$.infoScreen.removeAttribute("hidden");
+            },
+
+            _handleActivation: function(e){
+                var normalizedEvent = Polymer.dom(e);
+                var previousActivated = document.querySelector("[activated]");
+                if(previousActivated !== null){
+                    previousActivated.removeAttribute("activated");
+                }
+                Polymer.dom(normalizedEvent.localTarget).setAttribute("activated","");
+
+            }
+        })
+    </script>
+</dom-module>

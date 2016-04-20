@@ -42,11 +42,7 @@
                 transition: background-color 1s;
             }
 
-            .container[active=false]:hover .iconHolder{
-                background-color: hsla(220, 100%, 50%, 1);
-            }
-
-            .container[active=true] .iconHolder{
+            .container[active=false]:hover .iconHolder, .container[active=true] .iconHolder{
                 background-color: hsla(220, 100%, 50%, 1);
             }
 
@@ -67,7 +63,11 @@
             },
 
             properties: {
-                appInfo: Object
+                appInfo: Object,
+                activated: {
+                    type: Boolean,
+                    observer: "_handleActivate"
+                }
             },
 
             _computeIconLink: function(appInfo) {
@@ -79,7 +79,11 @@
             },
 
             _handleActivate: function(){
-                Polymer.dom(this.$.container).setAttribute("active", true);
+                if(this.activated){
+                    Polymer.dom(this.$.container).setAttribute("active", true);
+                }else if(!this.activated){
+                    Polymer.dom(this.$.container).setAttribute("active", false);
+                }
             }
         })
     </script>
