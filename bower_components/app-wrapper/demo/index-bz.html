@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>app-wrapper demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../bz-wrapper.html">
+
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+<bz-wrapper app-info=''></bz-wrapper>
+<script>
+    var element = document.querySelector('bz-wrapper');
+
+    var test_app = {
+        "name": "PATHiVar",
+        "shortDescription": "Assessing the impact of mutations found in next generation sequencing data over human signaling pathways",
+        "link": "http://pathivar.babelomics.org/",
+        "icon": "http://pathivar.babelomics.org/images/pathiways-logo.svg"
+    };
+
+    element.appInfo = test_app;
+</script>
+</body>
+</html>

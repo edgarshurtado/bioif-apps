@@ -1,0 +1,86 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.css">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="bz-wrapper">
+    <template>
+        <style is= "custom-style" include=" iron-flex iron-flex-alignment">
+
+            :host {
+                color: white;
+            }
+
+            .container{
+                width: var(--app-wrap-width, 180px);
+                height: var(--container-height, 150px);
+                border: transparent solid 1px;
+
+            }
+
+            .container[active=true]{
+                background-color: rgba(0,15,255,0.5);
+                border: rgb(0,143,255) solid 1px;
+            }
+
+            .container[active=false]:hover {
+                background-color: rgba(255,255,255, 0.2);
+                border: rgba(255,255,255, 0.2) solid 1px;
+            }
+
+            img {
+                width: 85%;
+            }
+
+            .iconHolder{
+                margin-bottom: 10px;
+                background-color: hsla(220, 100%, 30%, 1);
+                border-radius: 15%;
+                position: relative;
+                overflow: hidden;
+                height: var(--app-icon-height, 100px);
+                width: var(--app-icon-width, 100px);
+                transition: background-color 1s;
+            }
+
+            .container[active=false]:hover .iconHolder{
+                background-color: hsla(220, 100%, 50%, 1);
+            }
+
+            .container[active=true] .iconHolder{
+                background-color: hsla(220, 100%, 50%, 1);
+            }
+
+
+        </style>
+
+        <div id="container" class="container layout vertical center center-justified" on-click="_handleActivate" active="false">
+            <div class="iconHolder layout vertical center center-justified">
+                <img id="iconTag" src="{{_computeIconLink(appInfo)}}" alt="">
+            </div>
+            <span id="appName">{{appInfo.name}}</span>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "bz-wrapper",
+            ready: function(){
+            },
+
+            properties: {
+                appInfo: Object
+            },
+
+            _computeIconLink: function(appInfo) {
+                if(this.appInfo.icon === ""){
+                    return "../../app-wrapper/default.svg"
+                }else {
+                    return this.appInfo.icon
+                }
+            },
+
+            _handleActivate: function(){
+                Polymer.dom(this.$.container).setAttribute("active", true);
+            }
+        })
+    </script>
+</dom-module>
