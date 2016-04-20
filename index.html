@@ -5,6 +5,7 @@
     <title>Bioinfo-apps</title>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../app-collection/bz-collection.html">
+    <link rel="import" href="../app-info/app-info.html">
     <style>
 
         body {
@@ -13,16 +14,20 @@
         }
 
         bz-collection {
-            position: absolute;
             top: 0;
             left: 0;
+        }
+
+        .application{
+            display: flex;
         }
 
     </style>
 </head>
 <body>
-<div>
+<div class="application">
     <bz-collection src-json="./src/test-apps.json"></bz-collection>
+    <app-info></app-info>
 </div>
 </body>
 </html>
