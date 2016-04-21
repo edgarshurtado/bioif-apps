@@ -64,14 +64,16 @@
         Polymer({
             is: "bz-wrapper",
             ready: function(){
-                this.addEventListener("click", this._handleActivate.bind(this));
+                this.addEventListener("click", function(){this.activated = true}.bind(this));
             },
 
             properties: {
                 appInfo: Object,
                 activated: {
                     type: Boolean,
-                    value: false
+                    value: false,
+                    reflectToAttribute: true,
+                    observer: "_handleActivate"
                 }
             },
 
@@ -83,15 +85,15 @@
                 }
             },
 
-            _handleActivate: function(){
-                this.activated = true;
-
-                if(this.activated){
-                    Polymer.dom(this.$.container).setAttribute("active", "");
-                }else if(!this.activated){
-                    Polymer.dom(this.$.container).setAttribute("active", "");
+            _handleActivate: function(newValue, oldValue){
+                if(oldValue !== undefined){
+                    if(this.activated){
+                        Polymer.dom(this.$.container).setAttribute("active", "");
+                    }else if(!this.activated){
+                        Polymer.dom(this.$.container).removeAttribute("active");
+                    }
+                    this.fire("change-active", this.appInfo);
                 }
-                this.fire("activated", this.appInfo);
             }
         })
     </script>

@@ -22,7 +22,7 @@
         </style>
         <div class="layout vertical apps-scroll center">
             <template is="dom-repeat" items="{{appCollectionJson}}">
-                <bz-wrapper app-info="{{item}}" on-activated="_handleActivation"></bz-wrapper>
+                <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation"></bz-wrapper>
             </template>
         </div>
     </template>
@@ -34,6 +34,10 @@
                 srcJson: String,
                 appCollectionJson: {
                     type: Array/Object
+                },
+                activeObject: {
+                    type:Object,
+                    value: undefined
                 }
             },
 
@@ -73,12 +77,11 @@
             },
 
             _handleActivation: function(e){
-                var appDetails = e.detail;
-                var previousActivated = document.querySelector("[activated]");
-                if(previousActivated !== null){
-                    previousActivated.removeAttribute("activated");
+                if(this.activeObject !== undefined){
+                    this.activeObject.activated = false;
                 }
-                this.fire("app-selected", appDetails);
+                this.activeObject = Polymer.dom(e).rootTarget;
+                this.fire("app-selected", e.detail);
 
             }
         })
