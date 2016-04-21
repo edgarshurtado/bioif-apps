@@ -123,7 +123,6 @@
                 <section class="link-icons layout horizontal wrap">
                     <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
                     <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.citation)}}"><i class="fa fa-pencil-square-o"></i> How to cite</a>
                     <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
                     <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
                 </section>
@@ -131,6 +130,8 @@
                 <div class="layout horizontal">
                     <div class="half content layout vertical">
                         <section id="description" class="content-element description"></section>
+                        <br>
+                        <section id="citation" class="content-element"></section>
                         <br>
                         <section class="content-element publications">
                             <h2>Publications</h2>
@@ -166,6 +167,9 @@
                 desc += this.appToDisplay.completeDescription;
                 Polymer.dom(this.$.description).innerHTML = desc;
                 this._handlePublications();
+
+
+                Polymer.dom(this.$.citation).innerHTML = "<h2>How to cite</h2>"+ this.appToDisplay.citation;
             },
 
             _handlePublications: function(){
