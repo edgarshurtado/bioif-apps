@@ -18,12 +18,12 @@
 
             }
 
-            .container[active=true]{
+            .container[active]{
                 background-color: rgba(0,15,255,0.5);
                 border: rgb(0,143,255) solid 1px;
             }
 
-            .container[active=false]:hover {
+            .container:hover:not([active]){
                 background-color: rgba(255,255,255, 0.2);
                 border: rgba(255,255,255, 0.2) solid 1px;
             }
@@ -46,14 +46,14 @@
             }
 
 
-            .container[active=false]:hover .iconHolder, .container[active=true] .iconHolder{
+            .container:hover:not([active]) .iconHolder, .container[active] .iconHolder{
                 background-color: hsla(220, 100%, 50%, 1);
             }
 
 
         </style>
 
-        <div id="container" class="container" active="false">
+        <div id="container" class="container">
             <div class="iconHolder layout vertical center center-justified">
                 <img id="iconTag" src="{{_computeIconLink(appInfo)}}" alt="">
             </div>
@@ -87,9 +87,9 @@
                 this.activated = true;
 
                 if(this.activated){
-                    Polymer.dom(this.$.container).setAttribute("active", "true");
+                    Polymer.dom(this.$.container).setAttribute("active", "");
                 }else if(!this.activated){
-                    Polymer.dom(this.$.container).setAttribute("active", "false");
+                    Polymer.dom(this.$.container).setAttribute("active", "");
                 }
                 this.fire("activated", this.appInfo);
             }
