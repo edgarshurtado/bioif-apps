@@ -10,7 +10,6 @@
         }
         .link-icons{
             margin-bottom: 5px;
-            width: 90%;
         }
         .link-icons > a {
             margin-right: 15px;
@@ -54,8 +53,6 @@
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
             border: rgba(256,256,256, 0.5) solid 1px;
-            margin: 5px;
-            width: 90%;
         }
 
         .half{
@@ -111,32 +108,34 @@
             <p>{{appToDisplay.shortDescription}}<p>
         </header>
 
-        <div class="layout horizontal">
-            <div class="half content layout vertical center">
-                <section class="link-icons layout horizontal wrap">
-                    <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.citation)}}"><i class="fa fa-pencil-square-o"></i> How to cite</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
-                </section>
-                <div id="description" class="content-element description"></div>
-                <div class="content-element publications">
-                    <h2>Publications</h2>
-                    <ol id="publications"></ol>
+        <main>
+            <section class="link-icons layout horizontal wrap">
+                <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.citation)}}"><i class="fa fa-pencil-square-o"></i> How to cite</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
+            </section>
+
+            <div class="layout horizontal">
+                <div class="half content layout vertical">
+                    <section id="description" class="content-element description"></section>
+                    <section class="content-element publications">
+                        <h2>Publications</h2>
+                        <ol id="publications"></ol>
+                    </section>
+                </div>
+
+                <div class="half layout vertical center">
+                    <section class="layout vertical center">
+                        <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                    </section>
+                    <a href="{{appToDisplay.launch-link}}" target="_blank">
+                        <div class="launch-button">Launch</div>
+                    </a>
                 </div>
             </div>
-
-            <div class="half layout vertical center">
-                <section class="layout vertical center">
-                   <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                </section>
-                <a href="{{appToDisplay.launch-link}}" target="_blank">
-                    <div class="launch-button">Launch</div>
-                </a>
-            </div>
-
-        </div>
+        </main>
     </template>
     <script>
         Polymer({
