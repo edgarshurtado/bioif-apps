@@ -10,7 +10,6 @@
         }
         .link-icons{
             margin-bottom: 5px;
-            font-size: 1.5em;
             width: 90%;
         }
         .link-icons > a {
@@ -24,6 +23,11 @@
         .link-icons > a:hover {
             color: #3cb0fd;
         }
+
+        .link-icons > a[href=""], .link-icons > a:not([href]) {
+            display: none;
+        }
+
         .screenshot.main {
             width: 90%;
 
@@ -34,6 +38,11 @@
             text-shadow: 2px 2px black;
             font-size: 5em;
             margin: 0;
+        }
+
+        .logo-box > p {
+            margin: 0;
+            font-size: 2em;
         }
 
 
@@ -60,7 +69,7 @@
         }
 
         .content-element.description {
-            max-height: 30vh;
+            max-height: 50vh;
         }
 
         a {
@@ -97,45 +106,37 @@
 
     </style>
     <template>
-        <div class="layout vertical center center-justified logo-box">
+        <header class="layout vertical center center-justified logo-box">
             <h1>{{appToDisplay.name}}</h1>
-            <h2>{{appToDisplay.shortDescription}}</h2>
-        </div>
+            <p>{{appToDisplay.shortDescription}}<p>
+        </header>
 
         <div class="layout horizontal">
-
             <div class="half content layout vertical center">
-                <div class="link-icons layout horizontal wrap">
-                    <a href=""><i class="fa fa-github"></i> Source</a>
-                    <a href=""><i class="fa fa-file-text-o"></i> Documentation</a>
-                    <a href=""><i class="fa fa-youtube-square"></i> Tutorial</a>
-                    <a href=""><i class="fa fa-bar-chart"></i> Usage Stats</a>
-                </div>
+                <section class="link-icons layout horizontal wrap">
+                    <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
+                    <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
+                    <a href="{{_computeLinkIcon(appToDisplay.links.citation)}}"><i class="fa fa-pencil-square-o"></i> How to cite</a>
+                    <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
+                    <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
+                </section>
                 <div id="description" class="content-element description"></div>
                 <div class="content-element publications">
+                    <h2>Publications</h2>
                     <ol id="publications"></ol>
                 </div>
-                <a href="{{appToDisplay.link}}" target="_blank">
+            </div>
+
+            <div class="half layout vertical center">
+                <section class="layout vertical center">
+                   <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                </section>
+                <a href="{{appToDisplay.launch-link}}" target="_blank">
                     <div class="launch-button">Launch</div>
                 </a>
             </div>
 
-            <div class="half layout vertical center">
-                <div class="layout vertical center">
-                   <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                </div>
-
-                <div class="content-element">
-                    <h1>How to cite:</h1>
-                    <p>{{appToDisplay.citation}}</p>
-                </div>
-            </div>
-
         </div>
-        <footer>
-
-        </footer>
-
     </template>
     <script>
         Polymer({
@@ -148,7 +149,7 @@
             },
 
             _handleInfo: function(){
-                var desc = "<h1>Description</h1>";
+                var desc = "<h2>Description</h2>";
                 desc += this.appToDisplay.completeDescription;
                 Polymer.dom(this.$.description).innerHTML = desc;
                 this._handlePublications();
@@ -158,8 +159,6 @@
                 var publications = this.appToDisplay.publications;
                 var publicationsHolder = this.$.publications;
 
-                publicationsHolder.innerHTML = "<h1>Publications</h1>";
-
                 publications.forEach(function(publication){
                     var li = document.createElement("li");
                     Polymer.dom(li).textContent = publication;
@@ -167,6 +166,15 @@
                     Polymer.dom(publicationsHolder).appendChild(li);
                 })
             },
+
+            _computeLinkIcon: function(link){
+                if(link === undefined){
+                    return "";
+                }else {
+                    return link;
+                }
+            },
+
 
             _selectMainSS: function(ssArray){
                 return ssArray[0];
