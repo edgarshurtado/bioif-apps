@@ -22,7 +22,7 @@
         </style>
         <div class="layout vertical apps-scroll center">
             <template is="dom-repeat" items="{{appCollectionJson}}">
-                <bz-wrapper app-info="{{item}}" on-click="_handleActivation"></bz-wrapper>
+                <bz-wrapper app-info="{{item}}" on-activated="_handleActivation"></bz-wrapper>
             </template>
         </div>
     </template>
@@ -73,13 +73,12 @@
             },
 
             _handleActivation: function(e){
-                var normalizedEvent = Polymer.dom(e);
+                var appDetails = e.detail;
                 var previousActivated = document.querySelector("[activated]");
                 if(previousActivated !== null){
                     previousActivated.removeAttribute("activated");
                 }
-                Polymer.dom(normalizedEvent.localTarget).setAttribute("activated","");
-                this.fire("app-selected", normalizedEvent.localTarget.appInfo);
+                this.fire("app-selected", appDetails);
 
             }
         })

@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-<bz-wrapper app-info=''></bz-wrapper>
+<bz-wrapper></bz-wrapper>
 <script>
     var element = document.querySelector('bz-wrapper');
 
@@ -27,6 +27,8 @@
     };
 
     element.appInfo = test_app;
+
+    element.addEventListener("activated", function(){console.log("activated!")});
 </script>
 </body>
 </html>
