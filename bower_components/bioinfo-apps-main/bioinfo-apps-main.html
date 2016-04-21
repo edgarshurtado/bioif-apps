@@ -8,9 +8,33 @@
 <dom-module id="bioinfo-apps-main">
     <template>
         <style is="custom-style" include="iron-flex">
-            bz-collection {
-                width: 15%;
+
+
+
+
+            @media (max-width: 1301px){
+                :host {
+                    --apps-scroll-width:102px;
+                    --app-icon-width: 100px;
+                    --app-icon-height: 100px;
+                }
             }
+
+            :host {
+                --apps-scroll-width: 300px;
+            }
+
+            /*@media (max-width: 1301px){*/
+                /*bz-collection {*/
+                    /*--apps-scroll-width: 301px;*/
+                    /*--app-icon-width: 100px;*/
+                    /*--app-icon-height: 100px;*/
+                    /*background-color:red !important;*/
+                    /*width: 50px !important;*/
+                /*}*/
+            /*}*/
+
+
         </style>
         <div class="layout horizontal">
             <bz-collection src-json="./src/test-apps.json" on-app-selected="_handleAppSelection"></bz-collection>
