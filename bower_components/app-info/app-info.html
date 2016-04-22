@@ -14,11 +14,6 @@
             text-decoration: none;
         }
 
-        main {
-            width: 98%;
-            margin-top: 2%;
-        }
-
         h1, h2 {
             color: #647276;
         }
@@ -94,8 +89,7 @@
         }
 
         .content-element {
-            width: 99%;
-            padding: 10px;
+            width: 100%;
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -115,25 +109,14 @@
            font-size: 1.2em;
         }
 
-        .half{
+        .half-width{
             width: 50%;
-            height: 100%;
-        }
-
-        .content-element.description {
-            max-height: 50vh;
-        }
-
-        .content-element.citation {
-           padding-top: 5%;
-            padding-bottom: 5%;
+            margin: 5% 5% 0 5%;
         }
 
         .content-element a {
             color: lightgreen;
         }
-
-
 
         .launch-button {
             background: #3498db;
@@ -189,27 +172,24 @@
         </header>
 
         <main>
-            <section class="layout horizontal">
-                <div id="description" class="content-element dark description"></div>
-                <div class="half layout vertical center">
-                    <section class="layout vertical center">
-                        <template is="dom-if" if="{{!mediumWidth}}">
-                            <polymer-slideshow height="500" width="700">
-                                <polymer-slide>
-                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                </polymer-slide>
-                                <polymer-slide>
-                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                </polymer-slide>
-                            </polymer-slideshow>
-                        </template>
-                    </section>
+            <section class="content-element light description">
+                <h1>Description</h1>
+                <div class="layout horizontal">
+                    <div id="description" class="half-width"></div>
+                    <polymer-slideshow height="500" width="700" class="half-width">
+                        <polymer-slide>
+                            <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                        </polymer-slide>
+                        <polymer-slide>
+                            <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                        </polymer-slide>
+                    </polymer-slideshow>
                 </div>
             </section>
 
-            <section id="citation" class="content-element light citation"></section>
+            <section id="citation" class="content-element dark citation"></section>
 
-            <section class="content-element dark publications">
+            <section class="content-element light publications">
                 <h2>Publications</h2>
                 <template is="dom-repeat" items="{{publications}}">
                     <li>{{item}}</li>
@@ -244,8 +224,7 @@
             },
 
             _handleInfo: function(){
-                var desc = "<h2>Description</h2>";
-                desc += this.appToDisplay.completeDescription;
+                var desc = this.appToDisplay.completeDescription;
                 Polymer.dom(this.$.description).innerHTML = desc;
                 Polymer.dom(this.$.citation).innerHTML = "<h2>How to cite</h2>"+ this.appToDisplay.citation;
                 this.publications = this.appToDisplay.publications;
