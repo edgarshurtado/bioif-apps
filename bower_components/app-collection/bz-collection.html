@@ -46,6 +46,10 @@
                 this._setAppCollectionJson();
             },
 
+            attached: function() {
+                Polymer.dom(this.root).querySelector("bz-wrapper").activated = true;
+            },
+
             _setAppCollectionJson: function(){
                 var oReq = new XMLHttpRequest();
                 var that = this;
