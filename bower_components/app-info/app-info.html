@@ -2,6 +2,7 @@
 <link rel="import" href="../app-collection/bz-collection.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../font-awesome/css/font-awesome.min.css">
+<link rel="import" href="../polymer-slideshow/polymer-slideshow.html">
 
 <dom-module id="app-info">
     <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
@@ -60,10 +61,10 @@
             display: none;
         }
 
-        .screenshot.main {
-            max-height: 50vh;
-            max-width: 70vh;
-        }
+        /*.screenshot.main {*/
+            /*max-height: 50vh;*/
+            /*max-width: 70vh;*/
+        /*}*/
 
         h2 {
             margin-top: 0;
@@ -134,6 +135,14 @@
             text-decoration: none;
         }
 
+        polymer-slideshow {
+            overflow: hidden;
+        }
+
+        polymer-slide > img {
+            width: 100%;
+        }
+
     </style>
     <template>
         <div class="layout vertical center">
@@ -155,7 +164,7 @@
                         <br>
                         <section id="citation" class="content-element"></section>
                         <br>
-                        <template is="dom-if" if="{{!small}}">
+                        <template is="dom-if" if="{{!mediumWidth}}">
                             <section class="content-element publications">
                                 <h2>Publications</h2>
                                 <template is="dom-repeat" items="{{publications}}">
@@ -167,14 +176,34 @@
 
                     <div class="half layout vertical center">
                         <section class="layout vertical center">
-                            <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+
+                            <template is="dom-if" if="{{!mediumWidth}}">
+                                <polymer-slideshow height="500" width="700">
+                                    <polymer-slide>
+                                        <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                                    </polymer-slide>
+                                    <polymer-slide>
+                                        <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                                    </polymer-slide>
+                                </polymer-slideshow>
+                            </template>
+                            <template is="dom-if" if="{{mediumWidth}}">
+                                <polymer-slideshow height="300" width="500">
+                                    <polymer-slide>
+                                        <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                                    </polymer-slide>
+                                    <polymer-slide>
+                                        <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                                    </polymer-slide>
+                                </polymer-slideshow>
+                            </template>
                         </section>
                         <br>
                         <a href="{{appToDisplay.launch-link}}" target="_blank">
                             <div class="launch-button">Launch</div>
                         </a>
                         <br>
-                        <template is="dom-if" if="{{small}}">
+                        <template is="dom-if" if="{{mediumWidth}}">
                             <section class="content-element publications">
                                 <h2>Publications</h2>
                                 <template is="dom-repeat" items="{{publications}}">
@@ -199,11 +228,15 @@
                     type: Array
                 },
 
-                small : Boolean,
+                mediumWidth : Boolean,
 
                 short: {
                     type: Boolean,
                     reflectToAttribute: true
+                },
+
+                _screenShotDisplay: {
+                    type: Object
                 }
             },
 
@@ -222,7 +255,6 @@
                     return link;
                 }
             },
-
 
             _selectMainSS: function(ssArray){
                 return ssArray[0];

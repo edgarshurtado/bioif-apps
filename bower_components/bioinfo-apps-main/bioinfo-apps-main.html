@@ -14,7 +14,7 @@
 
         </style>
 
-        <iron-media-query query="(max-width:1300px)" query-matches="{{small}}"></iron-media-query>
+        <iron-media-query query="(max-width:1600px)" query-matches="{{mediumWidth}}"></iron-media-query>
         <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
         <div class="layout horizontal">
             <bz-collection src-json="./src/test-apps.json" on-app-selected="_handleAppSelection"></bz-collection>
@@ -26,7 +26,7 @@
             is: "bioinfo-apps-main",
 
             properties: {
-                small: {
+                mediumWidth: {
                     type: Boolean,
                     observer: "_changedWidth"
                 },
@@ -52,7 +52,7 @@
                     this.customStyle["--app-icon-height"] = "100px"
                     this.customStyle["--app-icon-width"] = "100px"
                 }
-                Polymer.dom(this.root).querySelector("app-info").small = this.small;
+                Polymer.dom(this.root).querySelector("app-info").mediumWidth = this.mediumWidth;
                 this.updateStyles();
             },
 
