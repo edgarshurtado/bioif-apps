@@ -15,6 +15,7 @@
         </style>
 
         <iron-media-query query="(max-width:1300px)" query-matches="{{small}}"></iron-media-query>
+        <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
         <div class="layout horizontal">
             <bz-collection src-json="./src/test-apps.json" on-app-selected="_handleAppSelection"></bz-collection>
             <app-info></app-info>
@@ -27,7 +28,12 @@
             properties: {
                 small: {
                     type: Boolean,
-                    observer: "_changed"
+                    observer: "_changedWidth"
+                },
+
+                short: {
+                    type: Boolean,
+                    observer: "_changedHeight"
                 }
             },
 
@@ -36,7 +42,7 @@
                 a.appToDisplay = e.detail;
             },
 
-            _changed: function() {
+            _changedWidth: function() {
                 if(this.small){
                     this.customStyle["--apps-scroll-width"] = "100px";
                     this.customStyle["--app-icon-height"] = "70px"
@@ -46,8 +52,12 @@
                     this.customStyle["--app-icon-height"] = "100px"
                     this.customStyle["--app-icon-width"] = "100px"
                 }
-
+                Polymer.dom(this.root).querySelector("app-info").small = this.small;
                 this.updateStyles();
+            },
+
+            _changedHeight: function() {
+                Polymer.dom(this.root).querySelector("app-info").short = this.short;
             }
 
         })

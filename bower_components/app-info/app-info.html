@@ -14,8 +14,30 @@
             margin-top: 2%;
         }
 
-        h2 {
-            margin-top: 0;
+        .logo-box > h1 {
+            font-family: "Copperplate";
+            text-shadow: 2px 2px black;
+            margin: 0;
+        }
+
+        :host:not([short]) .logo-box > h1 {
+            font-size: 5em;
+        }
+
+        :host[short] .logo-box > h1 {
+            font-size: 3em;
+        }
+
+        .logo-box > p {
+            margin: 0;
+        }
+
+        :host:not([short]) .logo-box > p{
+            font-size: 2em;
+        }
+
+        :host[short] .logo-box > p{
+            font-size: 1em;
         }
 
         .link-icons{
@@ -39,25 +61,17 @@
         }
 
         .screenshot.main {
-            width: 90%;
-
+            max-height: 50vh;
+            max-width: 70vh;
         }
 
-        .logo-box > h1 {
-            font-family: "Copperplate";
-            text-shadow: 2px 2px black;
-            font-size: 5em;
-            margin: 0;
+        h2 {
+            margin-top: 0;
         }
-
-        .logo-box > p {
-            margin: 0;
-            font-size: 2em;
-        }
-
 
         .content-element {
             background-color: rgba(15, 30, 62, 0.8);
+            width: 99%;
             overflow-y: scroll;
             padding: 10px;
             box-sizing: border-box;
@@ -66,14 +80,21 @@
             border: rgba(256,256,256, 0.5) solid 1px;
         }
 
+        :host[short] .content-element > h2{
+           font-size: 1.2em;
+        }
+
         .half{
             width: 50%;
             height: 100%;
         }
 
-        .content-element.publications {
+        :host:not([short]) .content-element.publications {
             max-height: 20vh;
-            margin-bottom:2%;
+        }
+
+        :host[short] .content-element.publications {
+            max-height: 15vh;
         }
 
         .content-element.description {
@@ -84,6 +105,7 @@
             text-decoration: none;
             color: white;
         }
+
 
         .launch-button {
             background: #3498db;
@@ -133,10 +155,14 @@
                         <br>
                         <section id="citation" class="content-element"></section>
                         <br>
-                        <section class="content-element publications">
-                            <h2>Publications</h2>
-                            <ol id="publications"></ol>
-                        </section>
+                        <template is="dom-if" if="{{!small}}">
+                            <section class="content-element publications">
+                                <h2>Publications</h2>
+                                <template is="dom-repeat" items="{{publications}}">
+                                    <li>{{item}}</li>
+                                </template>
+                            </section>
+                        </template>
                     </div>
 
                     <div class="half layout vertical center">
@@ -147,6 +173,15 @@
                         <a href="{{appToDisplay.launch-link}}" target="_blank">
                             <div class="launch-button">Launch</div>
                         </a>
+                        <br>
+                        <template is="dom-if" if="{{small}}">
+                            <section class="content-element publications">
+                                <h2>Publications</h2>
+                                <template is="dom-repeat" items="{{publications}}">
+                                    <li>{{item}}</li>
+                                </template>
+                            </section>
+                        </template>
                     </div>
                 </div>
             </main>
@@ -159,6 +194,16 @@
                 appToDisplay: {
                     type: Object,
                     observer: "_handleInfo"
+                },
+                publications:{
+                    type: Array
+                },
+
+                small : Boolean,
+
+                short: {
+                    type: Boolean,
+                    reflectToAttribute: true
                 }
             },
 
@@ -166,22 +211,8 @@
                 var desc = "<h2>Description</h2>";
                 desc += this.appToDisplay.completeDescription;
                 Polymer.dom(this.$.description).innerHTML = desc;
-                this._handlePublications();
-
-
                 Polymer.dom(this.$.citation).innerHTML = "<h2>How to cite</h2>"+ this.appToDisplay.citation;
-            },
-
-            _handlePublications: function(){
-                var publications = this.appToDisplay.publications;
-                var publicationsHolder = this.$.publications;
-
-                publications.forEach(function(publication){
-                    var li = document.createElement("li");
-                    Polymer.dom(li).textContent = publication;
-
-                    Polymer.dom(publicationsHolder).appendChild(li);
-                })
+                this.publications = this.appToDisplay.publications;
             },
 
             _computeLinkIcon: function(link){
