@@ -18,7 +18,7 @@
             color: #647276;
         }
 
-        header, footer {
+        header, footer{
             background-color: #435f7a;
         }
 
@@ -28,8 +28,18 @@
             width: 100%;
         }
 
-        header, header > h1 {
+        header, header > h1, footer {
             color: #FBFBF9;
+        }
+
+        footer {
+            padding-top: 2em;
+            padding-bottom: 1em;
+            text-align: center;
+        }
+
+        footer > div {
+            margin-top: 1em;
         }
 
         header > h1 {
@@ -59,14 +69,19 @@
             font-size: 1em;
         }
 
-        .link-icons{
+        header .link-icons {
             position: absolute;
             bottom: 0;
-            width: 100%;
-            background-color: rgba(0,0,0,0.1);
             padding-top: 10px;
             padding-bottom: 10px;
+            background-color: rgba(0,0,0,0.1);
         }
+
+        .link-icons{
+            width: 100%;
+            font-size: 1.2em;
+        }
+
         .link-icons > a {
             margin-right: 15px;
             color: white;
@@ -85,6 +100,8 @@
         }
 
         section {
+            padding-top: 2em;
+            padding-bottom: 2em;
             font-size: 1.5em;
         }
 
@@ -233,6 +250,16 @@
                 </div>
             </section>
         </main>
+        <footer>
+            <strong>{{appToDisplay.name}}</strong> has been developed by the <strong>Computational Genomics Department</strong>
+            <br>
+            Principe Felipe Research Center
+            <br>
+            <div class="link-icons">
+                <a href="#"> <i class="fa fa-twitter"></i> </a>
+                <a href="#"><i class="fa fa-envelope-o"></i></a>
+            </div>
+        </footer>
 
 
     </template>
@@ -276,6 +303,7 @@
             },
 
             _selectMainSS: function(ssArray){
+                console.log(ssArray[0]);
                 return ssArray[0];
             },
 
