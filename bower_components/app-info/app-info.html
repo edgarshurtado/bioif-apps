@@ -84,38 +84,53 @@
             display: none;
         }
 
-        h2 {
-            margin-top: 0;
-        }
-
-        .content-element {
-            width: 100%;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            border: rgba(256,256,256, 0.5) solid 1px;
+        section {
             font-size: 1.5em;
         }
 
-        .content-element.light {
+        section h2 {
+            text-align: center;
+        }
+
+        .light {
             background-color: white;
         }
 
-        .content-element.dark {
+        .dark {
             background-color: #f1f5f5;
         }
 
-        :host[short] .content-element > h2{
-           font-size: 1.2em;
-        }
 
         .half-width{
             width: 50%;
-            margin: 5% 5% 0 5%;
         }
 
-        .content-element a {
-            color: lightgreen;
+        .medium-width {
+            width: 70%;
+        }
+
+        .large-width{
+            width: 80%;
+        }
+
+        .content-text {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+        }
+
+
+        .big-icon {
+            font-size: 15em;
+        }
+
+        p:first-child {
+            margin-top: 0;
+        }
+
+        ol > li {
+            margin-bottom: 1.2%;
         }
 
         .launch-button {
@@ -125,8 +140,8 @@
             background-image: -ms-linear-gradient(top, #3498db, #2980b9);
             background-image: -o-linear-gradient(top, #3498db, #2980b9);
             background-image: linear-gradient(to bottom, #3498db, #2980b9);
-            -webkit-border-radius: 5;
-            -moz-border-radius: 5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
             border-radius: 5px;
             font-family: Arial;
             color: #ffffff;
@@ -147,6 +162,8 @@
 
         polymer-slideshow {
             overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         polymer-slide > img {
@@ -172,28 +189,48 @@
         </header>
 
         <main>
-            <section class="content-element light description">
-                <h1>Description</h1>
+            <section class="light description">
+                <h2>Description</h2>
                 <div class="layout horizontal">
-                    <div id="description" class="half-width"></div>
-                    <polymer-slideshow height="500" width="700" class="half-width">
-                        <polymer-slide>
-                            <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                        </polymer-slide>
-                        <polymer-slide>
-                            <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                        </polymer-slide>
-                    </polymer-slideshow>
+                    <div class="half-width">
+                        <div id="description" class="content-text"></div>
+                    </div>
+                    <div class="half-width">
+                        <polymer-slideshow height="500" width="700" >
+                            <polymer-slide>
+                                <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                            </polymer-slide>
+                            <polymer-slide>
+                                <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                            </polymer-slide>
+                        </polymer-slideshow>
+                    </div>
                 </div>
             </section>
 
-            <section id="citation" class="content-element dark citation"></section>
+            <section class="dark citation">
+                <div class="layout horizontal center-justified">
+                    <div class="large-width">
+                        <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
+                        <div id="citation" class="content-text"></div>
+                    </div>
+                </div>
+            </section>
 
-            <section class="content-element light publications">
+            <section class="light publications">
                 <h2>Publications</h2>
-                <template is="dom-repeat" items="{{publications}}">
-                    <li>{{item}}</li>
-                </template>
+                <div class="layout horizontal around-justified">
+                    <div class="layout vertical center center-justified">
+                            <i class="fa fa-file-text-o big-icon"></i>
+                    </div>
+                    <div class="medium-width">
+                        <ol class="content-text">
+                            <template is="dom-repeat" items="{{publications}}">
+                                <li>{{item}}</li>
+                            </template>
+                        </ol>
+                    </div>
+                </div>
             </section>
         </main>
 
@@ -226,7 +263,7 @@
             _handleInfo: function(){
                 var desc = this.appToDisplay.completeDescription;
                 Polymer.dom(this.$.description).innerHTML = desc;
-                Polymer.dom(this.$.citation).innerHTML = "<h2>How to cite</h2>"+ this.appToDisplay.citation;
+                Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
                 this.publications = this.appToDisplay.publications;
             },
 
