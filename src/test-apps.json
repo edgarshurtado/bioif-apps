@@ -25,11 +25,9 @@
             "./Babelomics5.jpg"
         ],
 
-        "background": "",
-
-        "citation": "Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments. Nucleic Acids Res. 34:W472-W476"
-
+        "background": ""
     },
+
     {
         "name": "VARIANT",
         "shortDescription": "Fast and accurate functional characterization of variants in VCF files",
