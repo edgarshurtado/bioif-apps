@@ -7,7 +7,11 @@
 <dom-module id="app-info">
     <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
         :host {
-            color: black;
+            color: #647276;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         main {
@@ -15,38 +19,62 @@
             margin-top: 2%;
         }
 
-        .logo-box > h1 {
+        h1, h2 {
+            color: #647276;
+        }
+
+        header, footer {
+            background-color: #435f7a;
+        }
+
+        header {
+            position: relative;
+            height: 40vh;
+            width: 100%;
+        }
+
+        header, header > h1 {
+            color: #FBFBF9;
+        }
+
+        header > h1 {
             font-family: "Copperplate";
             text-shadow: 2px 2px black;
             margin: 0;
         }
 
-        :host:not([short]) .logo-box > h1 {
+
+        :host:not([short]) header > h1 {
             font-size: 5em;
         }
 
-        :host[short] .logo-box > h1 {
+        :host[short] header > h1 {
             font-size: 3em;
         }
 
-        .logo-box > p {
+        header > p {
             margin: 0;
         }
 
-        :host:not([short]) .logo-box > p{
+        :host:not([short]) header > p{
             font-size: 2em;
         }
 
-        :host[short] .logo-box > p{
+        :host[short] header > p{
             font-size: 1em;
         }
 
         .link-icons{
-            margin-bottom: 5px;
-
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.1);
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
         .link-icons > a {
             margin-right: 15px;
+            color: white;
         }
 
         .link-icons > a > i {
@@ -61,24 +89,26 @@
             display: none;
         }
 
-        /*.screenshot.main {*/
-            /*max-height: 50vh;*/
-            /*max-width: 70vh;*/
-        /*}*/
-
         h2 {
             margin-top: 0;
         }
 
         .content-element {
-            background-color: rgba(15, 30, 62, 0.8);
             width: 99%;
-            overflow-y: scroll;
             padding: 10px;
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
             border: rgba(256,256,256, 0.5) solid 1px;
+            font-size: 1.5em;
+        }
+
+        .content-element.light {
+            background-color: white;
+        }
+
+        .content-element.dark {
+            background-color: #f1f5f5;
         }
 
         :host[short] .content-element > h2{
@@ -90,26 +120,19 @@
             height: 100%;
         }
 
-        :host:not([short]) .content-element.publications {
-            max-height: 20vh;
-        }
-
-        :host[short] .content-element.publications {
-            max-height: 15vh;
-        }
-
         .content-element.description {
             max-height: 50vh;
+        }
+
+        .content-element.citation {
+           padding-top: 5%;
+            padding-bottom: 5%;
         }
 
         .content-element a {
             color: lightgreen;
         }
 
-        a {
-            text-decoration: none;
-            color: white;
-        }
 
 
         .launch-button {
@@ -149,76 +172,52 @@
 
     </style>
     <template>
-        <div class="layout vertical center">
-            <header class="layout vertical center center-justified logo-box">
-                <h1>{{appToDisplay.name}}</h1>
-                <p>{{appToDisplay.shortDescription}}<p>
-            </header>
-            <main>
-                <section class="link-icons layout horizontal wrap">
-                    <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
-                </section>
+        <header id="header" class="layout vertical center center-justified ">
+            <h1>{{appToDisplay.name}}</h1>
+            <p><strong>{{appToDisplay.shortDescription}}</strong></p>
+            <br>
+            <a href="{{appToDisplay.launch-link}}" target="_blank">
+                <div class="launch-button">Launch</div>
+            </a>
 
-                <div class="layout horizontal">
-                    <div class="half content layout vertical">
-                        <section id="description" class="content-element description"></section>
-                        <br>
-                        <section id="citation" class="content-element"></section>
-                        <br>
+            <div class="link-icons layout horizontal center-justified">
+                <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="layout horizontal">
+                <div id="description" class="content-element dark description"></div>
+                <div class="half layout vertical center">
+                    <section class="layout vertical center">
                         <template is="dom-if" if="{{!mediumWidth}}">
-                            <section class="content-element publications">
-                                <h2>Publications</h2>
-                                <template is="dom-repeat" items="{{publications}}">
-                                    <li>{{item}}</li>
-                                </template>
-                            </section>
+                            <polymer-slideshow height="500" width="700">
+                                <polymer-slide>
+                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                                </polymer-slide>
+                                <polymer-slide>
+                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                                </polymer-slide>
+                            </polymer-slideshow>
                         </template>
-                    </div>
-
-                    <div class="half layout vertical center">
-                        <section class="layout vertical center">
-
-                            <template is="dom-if" if="{{!mediumWidth}}">
-                                <polymer-slideshow height="500" width="700">
-                                    <polymer-slide>
-                                        <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                    </polymer-slide>
-                                    <polymer-slide>
-                                        <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                    </polymer-slide>
-                                </polymer-slideshow>
-                            </template>
-                            <template is="dom-if" if="{{mediumWidth}}">
-                                <polymer-slideshow height="300" width="500">
-                                    <polymer-slide>
-                                        <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                    </polymer-slide>
-                                    <polymer-slide>
-                                        <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                    </polymer-slide>
-                                </polymer-slideshow>
-                            </template>
-                        </section>
-                        <br>
-                        <a href="{{appToDisplay.launch-link}}" target="_blank">
-                            <div class="launch-button">Launch</div>
-                        </a>
-                        <br>
-                        <template is="dom-if" if="{{mediumWidth}}">
-                            <section class="content-element publications">
-                                <h2>Publications</h2>
-                                <template is="dom-repeat" items="{{publications}}">
-                                    <li>{{item}}</li>
-                                </template>
-                            </section>
-                        </template>
-                    </div>
+                    </section>
                 </div>
-            </main>
-        </div>
+            </section>
+
+            <section id="citation" class="content-element light citation"></section>
+
+            <section class="content-element dark publications">
+                <h2>Publications</h2>
+                <template is="dom-repeat" items="{{publications}}">
+                    <li>{{item}}</li>
+                </template>
+            </section>
+        </main>
+
+
     </template>
     <script>
         Polymer({

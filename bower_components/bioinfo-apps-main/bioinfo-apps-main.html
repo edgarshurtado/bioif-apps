@@ -10,13 +10,21 @@
     <template>
         <style is="custom-style" include="iron-flex">
 
+            .container {
+                height: 100%;
+            }
+
+            app-info {
+                height:100vh;
+                overflow-y: scroll;
+            }
 
 
         </style>
 
         <iron-media-query query="(max-width:1600px)" query-matches="{{mediumWidth}}"></iron-media-query>
         <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
-        <div class="layout horizontal">
+        <div class="layout horizontal container">
             <bz-collection src-json="./src/test-apps.json" on-app-selected="_handleAppSelection"></bz-collection>
             <app-info></app-info>
         </div>
