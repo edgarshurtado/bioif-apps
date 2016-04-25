@@ -13,7 +13,6 @@
                 background-color: rgb(45, 64, 82);
                 padding-top: 5px;
                 width: var(--apps-scroll-width, 200px);
-                overflow: -moz-scrollbars-none;
             }
 
             .apps-scroll::-webkit-scrollbar{
@@ -93,7 +92,7 @@
 
             setAppActive: function(position) {
                 var app = Polymer.dom(this.root).querySelectorAll("bz-wrapper")[position];
-                this.fire("change-active", null,{"node": app});
+                app.click();
             }
         })
     </script>
