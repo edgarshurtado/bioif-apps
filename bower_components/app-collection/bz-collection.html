@@ -7,18 +7,27 @@
     <template>
         <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
 
-            .apps-scroll{
-                height: 100vh;
-                overflow-y: scroll;
-                background-color: rgb(45, 64, 82);
+
+            .outer-div{
+                overflow-x: hidden;
             }
 
-            :host[display-mode=large] .apps-scroll {
+            .outer-div, .apps-scroll {
+                height: 100vh;
+            }
+
+            .apps-scroll{
+                overflow-y: scroll;
+                background-color: rgb(45, 64, 82);
+                padding-right: 20px;
+            }
+
+            :host[display-mode=large] .outer-div,:host[display-mode=large] .apps-scroll  {
                 width: var(--apps-scroll-width, 200px);
             }
 
-            :host[display-mode=small] .apps-scroll {
-                width: var(--apps-scroll-width, 120px);
+            :host[display-mode=small] .outer-div, :host[display-mode=small] .apps-scroll{
+                width: var(--apps-scroll-width, 130px);
             }
 
             .apps-scroll::-webkit-scrollbar{
@@ -30,10 +39,12 @@
             }
 
         </style>
-        <div class="layout vertical apps-scroll center">
-            <template id="appCollectionDom" is="dom-repeat" items="{{appCollectionJson}}">
-                <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation" display-mode="{{displayMode}}"></bz-wrapper>
-            </template>
+        <div class="outer-div">
+            <div class="layout vertical apps-scroll center">
+                <template id="appCollectionDom" is="dom-repeat" items="{{appCollectionJson}}">
+                    <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation" display-mode="{{displayMode}}"></bz-wrapper>
+                </template>
+            </div>
         </div>
     </template>
     <script>
