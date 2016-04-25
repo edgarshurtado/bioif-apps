@@ -13,8 +13,8 @@
             app-info {
                 height:100vh;
                 overflow-y: scroll;
+                overflow-x: hidden;
             }
-
 
         </style>
 
@@ -26,7 +26,9 @@
                     on-app-selected="_handleAppSelection"
                     display-mode="{{_bzCollectionDisplay}}">
             </bz-collection>
-            <app-info></app-info>
+            <app-info id="appInfo"
+                display-mode="{{_bzCollectionDisplay}}"
+            ></app-info>
         </div>
     </template>
     <script>
@@ -63,6 +65,7 @@
             _changedWidth: function() {
                 if(this.mediumWidth){
                     this._bzCollectionDisplay = "small";
+
                 }else {
                     this._bzCollectionDisplay = "large";
                 }

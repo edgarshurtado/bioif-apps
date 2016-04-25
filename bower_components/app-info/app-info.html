@@ -75,6 +75,7 @@
 
         header .link-icons {
             position: absolute;
+            left: 0;
             bottom: 0;
             padding-top: 10px;
             padding-bottom: 10px;
@@ -217,14 +218,26 @@
                         <div id="description" class="content-text"></div>
                     </div>
                     <div class="half-width">
-                        <polymer-slideshow height="500" width="700" >
-                            <polymer-slide>
-                                <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                            </polymer-slide>
-                            <polymer-slide>
-                                <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                            </polymer-slide>
-                        </polymer-slideshow>
+                        <template is="dom-if" if="{{_isLargeDisplay(displayMode)}}">
+                            <polymer-slideshow height="500" width="700" >
+                                <polymer-slide>
+                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                                </polymer-slide>
+                                <polymer-slide>
+                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                                </polymer-slide>
+                            </polymer-slideshow>
+                        </template>
+                        <template is="dom-if" if="{{!_isLargeDisplay(displayMode)}}">
+                            <polymer-slideshow height="300" width="500" >
+                                <polymer-slide>
+                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                                </polymer-slide>
+                                <polymer-slide>
+                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                                </polymer-slide>
+                            </polymer-slideshow>
+                        </template>
                     </div>
                 </div>
             </section>
@@ -288,7 +301,16 @@
 
                 _screenShotDisplay: {
                     type: Object
+                },
+
+                displayMode: {
+                    type: String,
+                    reflectToAttribute: true
                 }
+            },
+
+            attached: function() {
+                console.log(this.displayMode);
             },
 
             _handleInfo: function(){
@@ -312,6 +334,10 @@
 
             _selectThumbnails: function(ssArray){
                 return ssArray.splice(1);
+            },
+
+            _isLargeDisplay: function(displayMode){
+                return displayMode == 'large';
             }
         })
     </script>
