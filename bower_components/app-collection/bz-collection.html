@@ -13,6 +13,11 @@
                 background-color: rgb(45, 64, 82);
                 padding-top: 5px;
                 width: var(--apps-scroll-width, 200px);
+                overflow: -moz-scrollbars-none;
+            }
+
+            .apps-scroll::-webkit-scrollbar{
+                display: none;
             }
 
             bz-wrapper {
@@ -42,12 +47,7 @@
             },
 
             ready: function(){
-
                 this._setAppCollectionJson();
-            },
-
-            attached: function() {
-                Polymer.dom(this.root).querySelector("bz-wrapper").activated = true;
             },
 
             _setAppCollectionJson: function(){
@@ -73,7 +73,6 @@
 
                 Polymer.dom(this.$.appName).textContent = e.detail.name;
                 Polymer.dom(this.$.appShortDescription).textContent = e.detail.shortDescription;
-                //Polymer.dom(this.$.completeDescription).innerHtml = e.detail.completeDescription;
                 this.$.completeDescription.innerHTML = e.detail.completeDescription;
 
 
@@ -87,6 +86,11 @@
                 this.activeObject = Polymer.dom(e).rootTarget;
                 this.fire("app-selected", e.detail);
 
+            },
+
+            setAppActive: function(position) {
+                var apps = Polymer.dom(this.root).querySelectorAll("bz-wrapper");
+                apps[position].activated = true;
             }
         })
     </script>
