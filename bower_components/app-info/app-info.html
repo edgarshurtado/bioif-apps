@@ -213,31 +213,19 @@
         <main>
             <section class="light description">
                 <h2>Description</h2>
-                <div class="layout horizontal">
+                <div id="descriptionContent" class="layout horizontal">
                     <div class="half-width">
                         <div id="description" class="content-text"></div>
                     </div>
                     <div class="half-width">
-                        <template is="dom-if" if="{{_isLargeDisplay(displayMode)}}">
-                            <polymer-slideshow height="500" width="700" >
-                                <polymer-slide>
-                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                </polymer-slide>
-                                <polymer-slide>
-                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                </polymer-slide>
-                            </polymer-slideshow>
-                        </template>
-                        <template is="dom-if" if="{{!_isLargeDisplay(displayMode)}}">
-                            <polymer-slideshow height="300" width="500" >
-                                <polymer-slide>
-                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                </polymer-slide>
-                                <polymer-slide>
-                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                </polymer-slide>
-                            </polymer-slideshow>
-                        </template>
+                        <polymer-slideshow height="300" width="500" >
+                            <polymer-slide>
+                                <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                            </polymer-slide>
+                            <polymer-slide>
+                                <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                            </polymer-slide>
+                        </polymer-slideshow>
                     </div>
                 </div>
             </section>
@@ -254,10 +242,12 @@
             <section class="light publications">
                 <h2>Publications</h2>
                 <div class="layout horizontal around-justified">
-                    <div class="layout vertical center center-justified">
+                    <template is="dom-if" if="{{!_isTabletDisplay(displayMode)}}">
+                        <div id="publicationsIcon" class="layout vertical center center-justified">
                             <i class="fa fa-file-text-o big-icon"></i>
-                    </div>
-                    <div class="medium-width">
+                        </div>
+                    </template>
+                    <div id="publications" class="medium-width">
                         <ol class="content-text">
                             <template is="dom-repeat" items="{{publications}}">
                                 <li>{{item}}</li>
@@ -305,7 +295,8 @@
 
                 displayMode: {
                     type: String,
-                    reflectToAttribute: true
+                    reflectToAttribute: true,
+                    observer: "_setLayout"
                 }
             },
 
@@ -338,6 +329,31 @@
 
             _isLargeDisplay: function(displayMode){
                 return displayMode == 'large';
+            },
+
+            _isTabletDisplay: function(displayMode){
+                return displayMode == 'tablet';
+            },
+
+            _setLayout(){
+                switch(this.displayMode){
+                    case 'tablet':
+                        Polymer.dom(this.$.descriptionContent).classList.remove("horizontal");
+                        Polymer.dom(this.$.descriptionContent).classList.add("vertical");
+                        Polymer.dom(this.$.descriptionContent).classList.add("around-justified");
+                        Polymer.dom(this.$.descriptionContent).classList.add("center");
+                        Polymer.dom(this.$.description).parentNode.classList.remove("half-width");
+                        Polymer.dom(this.$.description).parentNode.classList.add("large-width");
+                        break;
+                    default:
+                        Polymer.dom(this.$.descriptionContent).classList.remove("vertical");
+                        Polymer.dom(this.$.descriptionContent).classList.add("horizontal");
+                        Polymer.dom(this.$.descriptionContent).classList.remove("around-justified");
+                        Polymer.dom(this.$.descriptionContent).classList.remove("center");
+                        Polymer.dom(this.$.description).parentNode.classList.add("half-width");
+                        Polymer.dom(this.$.description).parentNode.classList.remove("large-width");
+
+                }
             }
         })
     </script>

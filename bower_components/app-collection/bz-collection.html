@@ -22,12 +22,12 @@
                 padding-right: 20px;
             }
 
-            :host[display-mode=large] .outer-div,:host[display-mode=large] .apps-scroll  {
-                width: var(--apps-scroll-width, 200px);
+            .outer-div, .apps-scroll{
+                width: 130px;
             }
 
-            :host[display-mode=small] .outer-div, :host[display-mode=small] .apps-scroll{
-                width: var(--apps-scroll-width, 130px);
+            :host[display-mode=tablet] .outer-div, :host[display-mode=tablet] .apps-scroll{
+                width: 0px;
             }
 
             .apps-scroll::-webkit-scrollbar{

@@ -19,15 +19,17 @@
         </style>
 
         <iron-media-query query="(max-width:1600px)" query-matches="{{mediumWidth}}"></iron-media-query>
+        <iron-media-query query="(max-width:1130px)" query-matches="{{_tabletWidth}}"></iron-media-query>
+        <!--TODO: Delete all references for the media query below-->
         <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
         <div class="layout horizontal">
             <bz-collection
                     src-json="./src/test-apps.json"
                     on-app-selected="_handleAppSelection"
-                    display-mode="{{_bzCollectionDisplay}}">
+                    display-mode="{{_displayType}}">
             </bz-collection>
             <app-info id="appInfo"
-                display-mode="{{_bzCollectionDisplay}}"
+                display-mode="{{_displayType}}"
             ></app-info>
         </div>
     </template>
@@ -49,12 +51,17 @@
                     type: Boolean,
                     observer: "_changedWidth"
                 },
+                _tabletWidth: {
+                    type: Boolean,
+                    observer: "_changedWidth"
+
+                },
 
                 short: {
                     type: Boolean,
                     observer: "_changedHeight"
                 },
-                _bzCollectionDisplay: String
+                _displayType: String
             },
 
             _handleAppSelection(e){
@@ -63,11 +70,10 @@
             },
 
             _changedWidth: function() {
-                if(this.mediumWidth){
-                    this._bzCollectionDisplay = "small";
-
+                if(this._tabletWidth){
+                    this._displayType="tablet";
                 }else {
-                    this._bzCollectionDisplay = "large";
+                    this._displayType="";
                 }
             },
 
