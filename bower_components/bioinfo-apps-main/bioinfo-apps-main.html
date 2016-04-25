@@ -31,6 +31,7 @@
 
             ready: function() {
                 var collection = Polymer.dom(this.root).querySelector("bz-collection");
+                var that = this;
                 // Needed to wait until the dom-repeat of `<bz-collection>` is initialized
                 collection.addEventListener("dom-change", function(){
                     collection.setAppActive(0);
@@ -56,16 +57,19 @@
 
             _changedWidth: function() {
                 if(this.mediumWidth){
-                    this.customStyle["--apps-scroll-width"] = "100px";
-                    this.customStyle["--app-icon-height"] = "70px"
-                    this.customStyle["--app-icon-width"] = "70px"
+                    this.customStyle["--apps-scroll-width"] = "110px";
+                    this.customStyle["--app-icon-height"] = "70px";
+                    this.customStyle["--app-icon-width"] = "70px";
                 }else{
                     this.customStyle["--apps-scroll-width"] = "200px";
-                    this.customStyle["--app-icon-height"] = "100px"
-                    this.customStyle["--app-icon-width"] = "100px"
+                    this.customStyle["--app-icon-height"] = "100px";
+                    this.customStyle["--app-icon-width"] = "100px";
                 }
+                console.log(this.customStyle);
                 Polymer.dom(this.root).querySelector("app-info").mediumWidth = this.mediumWidth;
-                this.updateStyles();
+                this.async(function(){
+                    this.updateStyles();
+                }, 10);
             },
 
             _changedHeight: function() {
