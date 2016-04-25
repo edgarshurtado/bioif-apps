@@ -40,9 +40,17 @@
                 left: 50%;
                 transform: translate(-50%, 0);
                 overflow: hidden;
+                transition: background-color 1s;
+            }
+
+            :host[display-mode=large] .iconHolder {
                 height: var(--app-icon-height, 100px);
                 width: var(--app-icon-width, 100px);
-                transition: background-color 1s;
+            }
+
+            :host[display-mode=small] .iconHolder {
+                height: var(--app-icon-height, 70px);
+                width: var(--app-icon-width, 70px);
             }
 
 
@@ -74,6 +82,10 @@
                     value: false,
                     reflectToAttribute: true,
                     observer: "_handleActivate"
+                },
+                displayMode : {
+                    type: String,
+                    reflectToAttribute: true
                 }
             },
 

@@ -21,7 +21,11 @@
         <iron-media-query query="(max-width:1600px)" query-matches="{{mediumWidth}}"></iron-media-query>
         <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
         <div class="layout horizontal">
-            <bz-collection src-json="./src/test-apps.json" on-app-selected="_handleAppSelection"></bz-collection>
+            <bz-collection
+                    src-json="./src/test-apps.json"
+                    on-app-selected="_handleAppSelection"
+                    display-mode="{{_bzCollectionDisplay}}">
+            </bz-collection>
             <app-info></app-info>
         </div>
     </template>
@@ -47,7 +51,8 @@
                 short: {
                     type: Boolean,
                     observer: "_changedHeight"
-                }
+                },
+                _bzCollectionDisplay: String
             },
 
             _handleAppSelection(e){
@@ -57,19 +62,10 @@
 
             _changedWidth: function() {
                 if(this.mediumWidth){
-                    this.customStyle["--apps-scroll-width"] = "110px";
-                    this.customStyle["--app-icon-height"] = "70px";
-                    this.customStyle["--app-icon-width"] = "70px";
-                }else{
-                    this.customStyle["--apps-scroll-width"] = "200px";
-                    this.customStyle["--app-icon-height"] = "100px";
-                    this.customStyle["--app-icon-width"] = "100px";
+                    this._bzCollectionDisplay = "small";
+                }else {
+                    this._bzCollectionDisplay = "large";
                 }
-                console.log(this.customStyle);
-                Polymer.dom(this.root).querySelector("app-info").mediumWidth = this.mediumWidth;
-                this.async(function(){
-                    this.updateStyles();
-                }, 10);
             },
 
             _changedHeight: function() {
