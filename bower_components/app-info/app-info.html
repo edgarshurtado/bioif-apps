@@ -7,46 +7,84 @@
 <dom-module id="app-info">
     <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
         :host {
-            color: white;
+            color: #647276;
         }
 
-        main {
-            width: 98%;
-            margin-top: 2%;
+        a {
+            text-decoration: none;
         }
 
-        .logo-box > h1 {
+        h1, h2 {
+            color: #647276;
+        }
+
+        header, footer{
+            background-color: #435f7a;
+        }
+
+        header {
+            position: relative;
+            height: 40vh;
+            width: 100%;
+        }
+
+        header, header > h1, footer {
+            color: #FBFBF9;
+        }
+
+        footer {
+            padding-top: 2em;
+            padding-bottom: 1em;
+            text-align: center;
+        }
+
+        footer > div {
+            margin-top: 1em;
+        }
+
+        header > h1 {
             font-family: "Copperplate";
             text-shadow: 2px 2px black;
             margin: 0;
         }
 
-        :host:not([short]) .logo-box > h1 {
+
+        :host:not([short]) header > h1 {
             font-size: 5em;
         }
 
-        :host[short] .logo-box > h1 {
+        :host[short] header > h1 {
             font-size: 3em;
         }
 
-        .logo-box > p {
+        header > p {
             margin: 0;
         }
 
-        :host:not([short]) .logo-box > p{
+        :host:not([short]) header > p{
             font-size: 2em;
         }
 
-        :host[short] .logo-box > p{
+        :host[short] header > p{
             font-size: 1em;
         }
 
-        .link-icons{
-            margin-bottom: 5px;
-
+        header .link-icons {
+            position: absolute;
+            bottom: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: rgba(0,0,0,0.1);
         }
+
+        .link-icons{
+            width: 100%;
+            font-size: 1.2em;
+        }
+
         .link-icons > a {
             margin-right: 15px;
+            color: white;
         }
 
         .link-icons > a > i {
@@ -61,56 +99,56 @@
             display: none;
         }
 
-        /*.screenshot.main {*/
-            /*max-height: 50vh;*/
-            /*max-width: 70vh;*/
-        /*}*/
+        section {
+            padding-top: 2em;
+            padding-bottom: 2em;
+            font-size: 1.5em;
+        }
 
-        h2 {
+        section h2 {
+            text-align: center;
+        }
+
+        .light {
+            background-color: white;
+        }
+
+        .dark {
+            background-color: #f1f5f5;
+        }
+
+
+        .half-width{
+            width: 50%;
+        }
+
+        .medium-width {
+            width: 70%;
+        }
+
+        .large-width{
+            width: 80%;
+        }
+
+        .content-text {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+        }
+
+
+        .big-icon {
+            font-size: 15em;
+        }
+
+        p:first-child {
             margin-top: 0;
         }
 
-        .content-element {
-            background-color: rgba(15, 30, 62, 0.8);
-            width: 99%;
-            overflow-y: scroll;
-            padding: 10px;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            border: rgba(256,256,256, 0.5) solid 1px;
+        ol > li {
+            margin-bottom: 1.2%;
         }
-
-        :host[short] .content-element > h2{
-           font-size: 1.2em;
-        }
-
-        .half{
-            width: 50%;
-            height: 100%;
-        }
-
-        :host:not([short]) .content-element.publications {
-            max-height: 20vh;
-        }
-
-        :host[short] .content-element.publications {
-            max-height: 15vh;
-        }
-
-        .content-element.description {
-            max-height: 50vh;
-        }
-
-        .content-element a {
-            color: lightgreen;
-        }
-
-        a {
-            text-decoration: none;
-            color: white;
-        }
-
 
         .launch-button {
             background: #3498db;
@@ -119,8 +157,8 @@
             background-image: -ms-linear-gradient(top, #3498db, #2980b9);
             background-image: -o-linear-gradient(top, #3498db, #2980b9);
             background-image: linear-gradient(to bottom, #3498db, #2980b9);
-            -webkit-border-radius: 5;
-            -moz-border-radius: 5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
             border-radius: 5px;
             font-family: Arial;
             color: #ffffff;
@@ -141,6 +179,8 @@
 
         polymer-slideshow {
             overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         polymer-slide > img {
@@ -149,76 +189,79 @@
 
     </style>
     <template>
-        <div class="layout vertical center">
-            <header class="layout vertical center center-justified logo-box">
-                <h1>{{appToDisplay.name}}</h1>
-                <p>{{appToDisplay.shortDescription}}<p>
-            </header>
-            <main>
-                <section class="link-icons layout horizontal wrap">
-                    <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
-                    <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
-                </section>
+        <header id="header" class="layout vertical center center-justified ">
+            <h1>{{appToDisplay.name}}</h1>
+            <p><strong>{{appToDisplay.shortDescription}}</strong></p>
+            <br>
+            <a href="{{appToDisplay.launch-link}}" target="_blank">
+                <div class="launch-button">Launch</div>
+            </a>
 
+            <div class="link-icons layout horizontal center-justified">
+                <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
+                <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="light description">
+                <h2>Description</h2>
                 <div class="layout horizontal">
-                    <div class="half content layout vertical">
-                        <section id="description" class="content-element description"></section>
-                        <br>
-                        <section id="citation" class="content-element"></section>
-                        <br>
-                        <template is="dom-if" if="{{!mediumWidth}}">
-                            <section class="content-element publications">
-                                <h2>Publications</h2>
-                                <template is="dom-repeat" items="{{publications}}">
-                                    <li>{{item}}</li>
-                                </template>
-                            </section>
-                        </template>
+                    <div class="half-width">
+                        <div id="description" class="content-text"></div>
                     </div>
-
-                    <div class="half layout vertical center">
-                        <section class="layout vertical center">
-
-                            <template is="dom-if" if="{{!mediumWidth}}">
-                                <polymer-slideshow height="500" width="700">
-                                    <polymer-slide>
-                                        <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                    </polymer-slide>
-                                    <polymer-slide>
-                                        <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                    </polymer-slide>
-                                </polymer-slideshow>
-                            </template>
-                            <template is="dom-if" if="{{mediumWidth}}">
-                                <polymer-slideshow height="300" width="500">
-                                    <polymer-slide>
-                                        <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                    </polymer-slide>
-                                    <polymer-slide>
-                                        <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                    </polymer-slide>
-                                </polymer-slideshow>
-                            </template>
-                        </section>
-                        <br>
-                        <a href="{{appToDisplay.launch-link}}" target="_blank">
-                            <div class="launch-button">Launch</div>
-                        </a>
-                        <br>
-                        <template is="dom-if" if="{{mediumWidth}}">
-                            <section class="content-element publications">
-                                <h2>Publications</h2>
-                                <template is="dom-repeat" items="{{publications}}">
-                                    <li>{{item}}</li>
-                                </template>
-                            </section>
-                        </template>
+                    <div class="half-width">
+                        <polymer-slideshow height="500" width="700" >
+                            <polymer-slide>
+                                <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                            </polymer-slide>
+                            <polymer-slide>
+                                <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                            </polymer-slide>
+                        </polymer-slideshow>
                     </div>
                 </div>
-            </main>
-        </div>
+            </section>
+
+            <section class="dark citation">
+                <div class="layout horizontal center-justified">
+                    <div class="large-width">
+                        <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
+                        <div id="citation" class="content-text"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="light publications">
+                <h2>Publications</h2>
+                <div class="layout horizontal around-justified">
+                    <div class="layout vertical center center-justified">
+                            <i class="fa fa-file-text-o big-icon"></i>
+                    </div>
+                    <div class="medium-width">
+                        <ol class="content-text">
+                            <template is="dom-repeat" items="{{publications}}">
+                                <li>{{item}}</li>
+                            </template>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <strong>{{appToDisplay.name}}</strong> has been developed by the <strong>Computational Genomics Department</strong>
+            <br>
+            Principe Felipe Research Center
+            <br>
+            <div class="link-icons">
+                <a href="#"> <i class="fa fa-twitter"></i> </a>
+                <a href="#"><i class="fa fa-envelope-o"></i></a>
+            </div>
+        </footer>
+
+
     </template>
     <script>
         Polymer({
@@ -245,10 +288,9 @@
             },
 
             _handleInfo: function(){
-                var desc = "<h2>Description</h2>";
-                desc += this.appToDisplay.completeDescription;
+                var desc = this.appToDisplay.completeDescription;
                 Polymer.dom(this.$.description).innerHTML = desc;
-                Polymer.dom(this.$.citation).innerHTML = "<h2>How to cite</h2>"+ this.appToDisplay.citation;
+                Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
                 this.publications = this.appToDisplay.publications;
             },
 

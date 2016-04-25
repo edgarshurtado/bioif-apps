@@ -10,9 +10,13 @@
             .apps-scroll{
                 height: 100vh;
                 overflow-y: scroll;
-                background-color: rgba(0,0,0,0.8);
+                background-color: rgb(45, 64, 82);
                 padding-top: 5px;
                 width: var(--apps-scroll-width, 200px);
+            }
+
+            .apps-scroll::-webkit-scrollbar{
+                display: none;
             }
 
             bz-wrapper {
@@ -21,7 +25,7 @@
 
         </style>
         <div class="layout vertical apps-scroll center">
-            <template is="dom-repeat" items="{{appCollectionJson}}">
+            <template id="appCollectionDom" is="dom-repeat" items="{{appCollectionJson}}">
                 <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation"></bz-wrapper>
             </template>
         </div>
@@ -42,13 +46,11 @@
             },
 
             ready: function(){
-
                 this._setAppCollectionJson();
+                this.$.appCollectionDom.addEventListener("dom-change", function(){
+                }.bind(this))
             },
 
-            attached: function() {
-                Polymer.dom(this.root).querySelector("bz-wrapper").activated = true;
-            },
 
             _setAppCollectionJson: function(){
                 var oReq = new XMLHttpRequest();
@@ -73,7 +75,6 @@
 
                 Polymer.dom(this.$.appName).textContent = e.detail.name;
                 Polymer.dom(this.$.appShortDescription).textContent = e.detail.shortDescription;
-                //Polymer.dom(this.$.completeDescription).innerHtml = e.detail.completeDescription;
                 this.$.completeDescription.innerHTML = e.detail.completeDescription;
 
 
@@ -85,8 +86,13 @@
                     this.activeObject.activated = false;
                 }
                 this.activeObject = Polymer.dom(e).rootTarget;
-                this.fire("app-selected", e.detail);
+                this.fire("app-selected", this.activeObject.appInfo);
 
+            },
+
+            setAppActive: function(position) {
+                var app = Polymer.dom(this.root).querySelectorAll("bz-wrapper")[position];
+                app.click();
             }
         })
     </script>
