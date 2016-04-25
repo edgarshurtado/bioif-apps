@@ -26,7 +26,7 @@
 
         </style>
         <div class="layout vertical apps-scroll center">
-            <template is="dom-repeat" items="{{appCollectionJson}}">
+            <template id="appCollectionDom" is="dom-repeat" items="{{appCollectionJson}}">
                 <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation"></bz-wrapper>
             </template>
         </div>
@@ -48,7 +48,10 @@
 
             ready: function(){
                 this._setAppCollectionJson();
+                this.$.appCollectionDom.addEventListener("dom-change", function(){
+                }.bind(this))
             },
+
 
             _setAppCollectionJson: function(){
                 var oReq = new XMLHttpRequest();
@@ -84,13 +87,13 @@
                     this.activeObject.activated = false;
                 }
                 this.activeObject = Polymer.dom(e).rootTarget;
-                this.fire("app-selected", e.detail);
+                this.fire("app-selected", this.activeObject.appInfo);
 
             },
 
             setAppActive: function(position) {
-                var apps = Polymer.dom(this.root).querySelectorAll("bz-wrapper");
-                apps[position].activated = true;
+                var app = Polymer.dom(this.root).querySelectorAll("bz-wrapper")[position];
+                this.fire("change-active", null,{"node": app});
             }
         })
     </script>

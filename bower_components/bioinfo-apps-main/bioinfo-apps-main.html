@@ -30,6 +30,11 @@
             is: "bioinfo-apps-main",
 
             ready: function() {
+                var collection = Polymer.dom(this.root).querySelector("bz-collection");
+                // Needed to wait until the dom-repeat of `<bz-collection>` is initialized
+                collection.addEventListener("dom-change", function(){
+                    collection.setAppActive(0);
+                });
             },
 
             properties: {
