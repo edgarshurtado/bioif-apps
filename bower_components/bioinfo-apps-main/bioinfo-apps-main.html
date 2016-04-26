@@ -55,8 +55,8 @@
 
         </style>
 
-        <iron-media-query query="(max-width:1600px)" query-matches="{{mediumWidth}}"></iron-media-query>
-        <iron-media-query query="(max-width:1130px)" query-matches="{{_tabletWidth}}"></iron-media-query>
+        <iron-media-query query="(max-width:1130px) and (min-width:990px)" query-matches="{{_tabletWidth}}"></iron-media-query>
+        <iron-media-query query="(max-width:990px)" query-matches="{{_mobileWidth}}"></iron-media-query>
         <!--TODO: Delete all references for the media query below-->
         <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
 
@@ -120,6 +120,12 @@
 
                 },
 
+                _mobileWidth: {
+                    type: Boolean,
+                    observer: "_changedWidth"
+
+                },
+
                 short: {
                     type: Boolean,
                     observer: "_changedHeight"
@@ -133,11 +139,16 @@
             },
 
             _changedWidth: function() {
-                if(this._tabletWidth){
-                    this._displayType="tablet";
+                if(this._tabletWidth || this._mobileWidth){
                     this.$.appInfo.style.left = "0";
                     Polymer.dom(this.$.appMenu).classList.add("toggleableMenu");
                     Polymer.dom(this.$.btnToggleMenu).removeAttribute("hidden");
+
+                    if(this._tabletWidth && !this._mobileWidth){
+                        this._displayType="tablet";
+                    }else if(this._mobileWidth && !this._tabletWidth){
+                        this._displayType="mobile";
+                    }
                 }else {
                     this._displayType="";
                     Polymer.dom(this.root).querySelector("app-info").style.left = "130px";
