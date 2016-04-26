@@ -14,6 +14,43 @@
                 height:100vh;
                 overflow-y: scroll;
                 overflow-x: hidden;
+                position: absolute;
+                left: 130px;
+            }
+
+            .menu {
+                position: absolute;
+                left:0;
+                top: 0;
+                width: 130px;
+            }
+
+            .btnToggleMenu {
+                position: absolute;
+                left: 15px;
+                top: 15px;
+                z-index: 5;
+                color: white;
+                font-size: 1.5em;
+            }
+
+            .menu.toggleableMenu {
+                left: -130px;
+                transition: left 0.2s;
+                z-index: 1000;
+            }
+
+            .menu.toggleableMenu[show]{
+                left: 0;
+            }
+
+            .blockingDiv {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                transition: opacity 5s linear;
+                opacity: 0.2;
             }
 
         </style>
@@ -22,16 +59,22 @@
         <iron-media-query query="(max-width:1130px)" query-matches="{{_tabletWidth}}"></iron-media-query>
         <!--TODO: Delete all references for the media query below-->
         <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
-        <div class="layout horizontal">
-            <bz-collection
-                    src-json="./src/test-apps.json"
-                    on-app-selected="_handleAppSelection"
-                    display-mode="{{_displayType}}">
-            </bz-collection>
-            <app-info id="appInfo"
-                display-mode="{{_displayType}}"
-            ></app-info>
-        </div>
+
+        <bz-collection
+                id="appMenu"
+                class="menu"
+                tabindex="-1"
+                src-json="./src/test-apps.json"
+                on-app-selected="_handleAppSelection">
+        </bz-collection>
+
+       <div id="btnToggleMenu" class="btnToggleMenu" hidden>
+           <i class="fa fa-bars"></i>
+       </div>
+
+        <app-info id="appInfo" class="darker" display-mode="{{_displayType}}"></app-info>
+
+        <div id="blockingDiv" class="blockingDiv" hidden></div>
     </template>
     <script>
         Polymer({
@@ -44,6 +87,26 @@
                 collection.addEventListener("dom-change", function(){
                     collection.setAppActive(0);
                 });
+
+
+                this.$.btnToggleMenu.addEventListener("click", function(){
+
+                    var appMenu = this.$.appMenu;
+                    var blockingDiv = this.$.blockingDiv;
+
+                    appMenu.setAttribute("show","");
+                    appMenu.focus();
+                    Polymer.dom(blockingDiv).removeAttribute("hidden");
+
+                   appMenu.addEventListener("blur", function(){
+                       Polymer.dom(appMenu).removeAttribute("show");
+                       Polymer.dom(blockingDiv).setAttribute("hidden", "");
+
+                    });
+
+                    Polymer.dom(blockingDiv).classList.add("dark");
+
+                }.bind(this))
             },
 
             properties: {
@@ -72,8 +135,14 @@
             _changedWidth: function() {
                 if(this._tabletWidth){
                     this._displayType="tablet";
+                    this.$.appInfo.style.left = "0";
+                    Polymer.dom(this.$.appMenu).classList.add("toggleableMenu");
+                    Polymer.dom(this.$.btnToggleMenu).removeAttribute("hidden");
                 }else {
                     this._displayType="";
+                    Polymer.dom(this.root).querySelector("app-info").style.left = "130px";
+                    Polymer.dom(this.$.btnToggleMenu).setAttribute("hidden", "");
+                    Polymer.dom(this.$.appMenu).classList.remove("toggleableMenu");
                 }
             },
 
