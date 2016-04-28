@@ -3,6 +3,7 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../font-awesome/css/font-awesome.min.css">
 <link rel="import" href="../polymer-slideshow/polymer-slideshow.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="app-info">
     <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
@@ -156,6 +157,7 @@
         * Main
         */
         section {
+            width: 100%;
             padding: 2em 0;
             font-size: 1.5em;
         }
@@ -252,6 +254,7 @@
             polymer-slideshow{
                 display: none;
             }
+
         }
 
         @media screen and (min-width: 425px){
@@ -261,6 +264,12 @@
 
             footer .link-icons.app-info > ul {
                 width: 191.25px
+            }
+        }
+
+        @media screen and (max-width: 490px){
+            section {
+                font-size: 1.2em;
             }
         }
 
@@ -292,11 +301,31 @@
             .description_text {
                 width: 50%;
             }
+
+            .section_container {
+                width: 1250px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media screen and (min-width: 1440px){
+            .link-icons {
+                font-size: 1.5em;
+            }
+
+            .link-icons > ul {
+                width: 700px;
+            }
         }
 
 
     </style>
     <template>
+
+        <iron-media-query query="(max-width: 530px)" query-matches="{{_smallSlider}}"></iron-media-query>
+        <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
+
         <header id="header">
             <div class="site-nav" on-click="_fireToggleMenu">
                 <i class="fa fa-bars"></i>
@@ -323,11 +352,11 @@
 
         <main>
             <section class="light description">
-                <h2>Description</h2>
+                    <h2>Description</h2>
                     <div class="layout horizontal wrap content-text">
                         <div id="description" class="description_text"></div>
                         <div class="slideshow_container">
-                            <polymer-slideshow height="300" width="500" >
+                            <polymer-slideshow height="{{_currentSliderSize.height}}" width="{{_currentSliderSize.width}}" auto="false">
                                 <polymer-slide>
                                     <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
                                 </polymer-slide>
@@ -339,25 +368,23 @@
                     </div>
             </section>
 
+            <!--CITATION-->
             <section class="dark_background citation">
-                <div class="section_content">
+                <div class="section_container">
                     <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
                     <div id="citation" class="content-text"></div>
                 </div>
             </section>
 
-            <section class="light publications">
-                <div class="">
-                    <h2>Publications</h2>
-                    <div class="layout horizontal around-justified">
-                        <div id="publications">
-                            <ol class="content-text publications_list">
-                                <template is="dom-repeat" items="{{publications}}">
-                                    <li>{{item}}</li>
-                                </template>
-                            </ol>
-                        </div>
-                    </div>
+            <!-- PUBLICATIONS -->
+            <section>
+                <h2>Publications</h2>
+                <div id="publications">
+                    <ol class="content-text publications_list">
+                        <template is="dom-repeat" items="{{publications}}">
+                            <li>{{item}}</li>
+                        </template>
+                    </ol>
                 </div>
             </section>
         </main>
@@ -403,11 +430,30 @@
                     type: String,
                     reflectToAttribute: true,
                     observer: "_setLayout"
-                }
-            },
+                },
 
-            attached: function() {
-                console.log(this.displayMode);
+                _smallSlider: {
+                    type: Boolean,
+                    observer: "_setSliderSize"
+                },
+
+                _bigSlider: {
+                    type: Boolean,
+                    observer: "_setSliderSize"
+                },
+
+                _sliderSizes: {
+                    type: Object,
+                    value: {
+                        "default": {height: 300, width: 500},
+                        "big": {height: 500, width: 700},
+                        "small": {height: 300, width: 400},
+                    }
+                },
+
+                _currentSliderSize: {
+                    type: Object
+                }
             },
 
             _handleInfo: function(){
@@ -429,6 +475,22 @@
                 }
             },
 
+            _setSliderSize: function(){
+                if(this._smallSlider){
+                    this._currentSliderSize = this._sliderSizes.small;
+                }else if(this._bigSlider){
+                    this._currentSliderSize = this._sliderSizes.big;
+                }else {
+                    this._currentSliderSize = this._sliderSizes.default;
+                }
+
+                var slideshowContainer = Polymer.dom(this.root).querySelector(".slideshow_container");
+                var slideshow = Polymer.dom(this.root).querySelector("polymer-slideshow");
+
+                Polymer.dom(slideshowContainer).removeChild(slideshow);
+                Polymer.dom(slideshowContainer).appendChild(slideshow);
+            },
+
             _selectMainSS: function(ssArray){
                 return ssArray[0];
             },
@@ -437,13 +499,6 @@
                 return ssArray.splice(1);
             },
 
-            _isLargeDisplay: function(displayMode){
-                return displayMode == 'large';
-            },
-
-            _isTabletDisplay: function(displayMode){
-                return displayMode == 'tablet';
-            }
         })
     </script>
 </dom-module>
