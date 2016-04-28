@@ -185,6 +185,14 @@
             text-align: justify;
         }
 
+        .description_text {
+            width:100%;
+        }
+
+        .slideshow_container{
+            width: 100%;
+        }
+
         .publications_list > li {
             border-bottom: black solid 1px;
             margin: 1em 0;
@@ -215,6 +223,11 @@
             margin-right: auto;
         }
 
+        footer > a {
+            color:#99ccff;
+            border-bottom: 1px dotted #C5596D;
+        }
+
 
         /*
         * Polymer Slideshow
@@ -224,11 +237,63 @@
             overflow: hidden;
             margin-left: auto;
             margin-right: auto;
+            padding: 2rem;
         }
 
         polymer-slide > img {
             width: 100%;
         }
+
+        /*
+        * Media Queries
+        */
+
+        @media screen and (max-width: 425px){
+            polymer-slideshow{
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 425px){
+            .launch-button{
+                width: 255px;
+            }
+
+            footer .link-icons.app-info > ul {
+                width: 191.25px
+            }
+        }
+
+        @media screen and (min-width: 620px){
+            header .site-container > h1{
+               font-size: 5rem;
+            }
+
+            header .site-container > p {
+               font-size: 1.7em;
+            }
+
+            .link-icons > ul {
+                width: 558px;
+            }
+        }
+
+        @media screen and (min-width: 1200px){
+            .site-nav {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 1400px) {
+            .slideshow_container {
+                width: 50%;
+            }
+
+            .description_text {
+                width: 50%;
+            }
+        }
+
 
     </style>
     <template>
@@ -259,39 +324,45 @@
         <main>
             <section class="light description">
                 <h2>Description</h2>
-                    <div id="description" class="content-text"></div>
-                    <div>
-<!--                        <polymer-slideshow height="300" width="500" >
-                            <polymer-slide>
-                                <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                            </polymer-slide>
-                            <polymer-slide>
-                                <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                            </polymer-slide>
-                        </polymer-slideshow>-->
+                    <div class="layout horizontal wrap content-text">
+                        <div id="description" class="description_text"></div>
+                        <div class="slideshow_container">
+                            <polymer-slideshow height="300" width="500" >
+                                <polymer-slide>
+                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                                </polymer-slide>
+                                <polymer-slide>
+                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                                </polymer-slide>
+                            </polymer-slideshow>
+                        </div>
                     </div>
             </section>
 
             <section class="dark_background citation">
-                <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
-                <div id="citation" class="content-text"></div>
+                <div class="section_content">
+                    <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
+                    <div id="citation" class="content-text"></div>
+                </div>
             </section>
 
             <section class="light publications">
-                <h2>Publications</h2>
-                <div class="layout horizontal around-justified">
-                    <div id="publications">
-                        <ol class="content-text publications_list">
-                            <template is="dom-repeat" items="{{publications}}">
-                                <li>{{item}}</li>
-                            </template>
-                        </ol>
+                <div class="">
+                    <h2>Publications</h2>
+                    <div class="layout horizontal around-justified">
+                        <div id="publications">
+                            <ol class="content-text publications_list">
+                                <template is="dom-repeat" items="{{publications}}">
+                                    <li>{{item}}</li>
+                                </template>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
         <footer>
-            <strong>{{appToDisplay.name}}</strong> has been developed by the <strong>Computational Genomics Department</strong>
+            <a href="{{appToDisplay.link}}">{{appToDisplay.name}}</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
             <br>
             Principe Felipe Research Center
             <br>
