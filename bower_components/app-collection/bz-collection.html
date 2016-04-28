@@ -44,8 +44,7 @@
                     this.activeObject.activated = false;
                 }
                 this.activeObject = Polymer.dom(e).rootTarget;
-                this.fire("app-selected", this.activeObject.appInfo);
-
+                this.fire("app-selection", this.activeObject.appInfo);
             },
 
             setAppActive: function(position) {

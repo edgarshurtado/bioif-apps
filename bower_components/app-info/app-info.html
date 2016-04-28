@@ -233,7 +233,7 @@
     </style>
     <template>
         <header id="header">
-            <div class="site-nav">
+            <div class="site-nav" on-click="_fireToggleMenu">
                 <i class="fa fa-bars"></i>
             </div>
             <div class="site-container">
@@ -344,6 +344,10 @@
                 Polymer.dom(this.$.description).innerHTML = desc;
                 Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
                 this.publications = this.appToDisplay.publications;
+            },
+
+            _fireToggleMenu: function() {
+                this.fire("click-menu");
             },
 
             _computeLinkIcon: function(link){
