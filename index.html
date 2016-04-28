@@ -28,6 +28,13 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        .menu_wrapper{
+            width: 150px;
+            height: 100%;
+            position: absolute;
+            overflow-x: hidden;
+        }
+
         bz-collection {
             display: block;
             width: 150px;
@@ -35,7 +42,7 @@
             transform: translate(-150px, 0);
             transition: transform 0.5s;
 
-
+            padding-right: 40px;
             height: 100vh;
             overflow-y: scroll;
             overflow-x: hidden;
@@ -81,7 +88,9 @@
 </head>
 <body>
     <div class="container">
-        <bz-collection tabindex="-1"></bz-collection>
+        <div class="menu_wrapper">
+            <bz-collection tabindex="-1"></bz-collection>
+        </div>
         <app-info></app-info>
         <div class="blocking_div" hidden></div>
     </div>
