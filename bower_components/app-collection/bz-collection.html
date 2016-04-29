@@ -2,45 +2,27 @@
 <link rel="import" href="../app-wrapper/bz-wrapper.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 
-
 <dom-module id="bz-collection">
     <template>
         <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
 
+           .container {
+               background-color: #435F7A;
+               width: 100%;
+           }
 
-            .outer-div{
-                overflow-x: hidden;
-            }
-
-            .outer-div, .apps-scroll {
-                height: 100vh;
-            }
-
-            .apps-scroll{
-                overflow-y: scroll;
-                background-color: rgb(45, 64, 82);
-                padding-right: 20px;
-            }
-
-            .outer-div, .apps-scroll{
-                width: 130px;
-            }
-
-            .apps-scroll::-webkit-scrollbar{
-                display: none;
-            }
-
-            bz-wrapper {
-                width: 100%;
-            }
+           bz-wrapper {
+               width: 100%;
+               margin-left: auto;
+               margin-right: auto;
+               display: block;
+           }
 
         </style>
-        <div class="outer-div">
-            <div class="layout vertical apps-scroll center">
-                <template id="appCollectionDom" is="dom-repeat" items="{{appCollectionJson}}">
-                    <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation" display-mode="{{displayMode}}"></bz-wrapper>
-                </template>
-            </div>
+        <div class="container">
+            <template id="appCollectionDom" is="dom-repeat" items="{{appCollectionJson}}">
+                <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation"></bz-wrapper>
+            </template>
         </div>
     </template>
     <script>
@@ -48,52 +30,13 @@
             is: "bz-collection",
 
             properties:{
-                srcJson: String,
                 appCollectionJson: {
                     type: Array/Object
                 },
                 activeObject: {
                     type:Object,
                     value: undefined
-                },
-                displayMode: {
-                    type: String,
-                    reflectToAttribute: true
                 }
-            },
-
-            ready: function(){
-                this._setAppCollectionJson();
-            },
-
-
-            _setAppCollectionJson: function(){
-                var oReq = new XMLHttpRequest();
-                var that = this;
-
-                function reqListener() {
-                    that.appCollectionJson = JSON.parse(this.responseText);
-                }
-
-                oReq.open("GET", this.srcJson);
-                oReq.send();
-
-                oReq.addEventListener("load", reqListener);
-                oReq.addEventListener("error", function(){alert("Server currently unavailable")});
-            },
-
-            _handleCloseInfo: function(){
-                Polymer.dom(this.$.infoScreen).setAttribute("hidden", "");
-            },
-
-            _handleInfoRequest: function(e) {
-
-                Polymer.dom(this.$.appName).textContent = e.detail.name;
-                Polymer.dom(this.$.appShortDescription).textContent = e.detail.shortDescription;
-                this.$.completeDescription.innerHTML = e.detail.completeDescription;
-
-
-                this.$.infoScreen.removeAttribute("hidden");
             },
 
             _handleActivation: function(e){
@@ -101,8 +44,7 @@
                     this.activeObject.activated = false;
                 }
                 this.activeObject = Polymer.dom(e).rootTarget;
-                this.fire("app-selected", this.activeObject.appInfo);
-
+                this.fire("app-selection", this.activeObject.appInfo);
             },
 
             setAppActive: function(position) {

@@ -3,80 +3,119 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../font-awesome/css/font-awesome.min.css">
 <link rel="import" href="../polymer-slideshow/polymer-slideshow.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="app-info">
     <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
+
         :host {
-            color: #647276;
+            font-family: SansSerif;
         }
 
         a {
             text-decoration: none;
         }
 
-        h1, h2 {
-            color: #647276;
+        header, main {
+            width: 100%;
         }
 
         header, footer{
             background-color: #435f7a;
         }
 
-        header {
-            position: relative;
-            height: 40vh;
-            min-height: 300px;
+        ul, ol {
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            display: block;
         }
 
-        header, main {
-            width: 100%;
+        /*
+        * Font general Settings
+        */
+
+        :host {
+            color: #647276;
         }
 
-        header, header > h1, footer {
+        h1, h2 {
+            color: #647276;
+            margin: 0;
+            padding: 1rem 0;
+        }
+        header, footer {
             color: #FBFBF9;
         }
 
-        footer {
-            padding-top: 2em;
-            padding-bottom: 1em;
+
+        /*
+        * Header
+        */
+
+        header .site-nav {
+            padding: 1rem;
+        }
+
+        header .site-container {
             text-align: center;
+            padding: 3rem 0;
+        }
+        header .site-container > h1 {
+            color: #FBFBF9;
         }
 
-        footer > div {
-            margin-top: 1em;
-        }
-
-        header > h1 {
+        header .site-container > h1 {
             font-family: "Copperplate";
             text-shadow: 2px 2px black;
             margin: 0;
-        }
-
-
-        :host:not([short]) header > h1 {
-            font-size: 5em;
-        }
-
-        :host[short] header > h1 {
             font-size: 3em;
         }
 
-        header > p {
-            margin: 0;
+        header .site-container > p {
+            text-align: center;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        :host:not([short]) header > p{
-            font-size: 2em;
+         /*Launch button*/
+        .launch_btn_holder {
+            padding: 3rem 0 2rem 0;
         }
 
-        :host[short] header > p{
-            font-size: 1em;
+        .launch-button {
+            background: #3498db;
+            background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+            background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+            background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+            background-image: -o-linear-gradient(top, #3498db, #2980b9);
+            background-image: linear-gradient(to bottom, #3498db, #2980b9);
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 1.5em;
+            padding: 1rem 0;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            text-decoration: none;
         }
 
+        .launch-button:hover {
+            background: #3cb0fd;
+            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+            text-decoration: none;
+        }
+
+        /* Link icons */
         header .link-icons {
-            position: absolute;
-            left: 0;
-            bottom: 0;
             padding-top: 10px;
             padding-bottom: 10px;
             background-color: rgba(0,0,0,0.1);
@@ -87,26 +126,39 @@
             font-size: 1.2em;
         }
 
-        .link-icons > a {
+        .link-icons > ul {
+            width: 90%;
+        }
+
+        .link-icons > ul > li {
+            padding: 1.25rem;
+        }
+
+        .link-icons  a {
+            display: block;
             margin-right: 15px;
             color: white;
         }
 
-        .link-icons > a > i {
+        .link-icons  a  i {
             color: #3cb0fd;
         }
 
-        .link-icons > a:hover {
+        .link-icons  a:hover {
             color: #3cb0fd;
         }
 
-        .link-icons > a[href=""], .link-icons > a:not([href]) {
+/*        .link-icons a[href=""] li, .link-icons a:not([href]) li {
             display: none;
-        }
+        }*/
 
+
+        /*
+        * Main
+        */
         section {
-            padding-top: 2em;
-            padding-bottom: 2em;
+            width: 100%;
+            padding: 2em 0;
             font-size: 1.5em;
         }
 
@@ -123,22 +175,10 @@
             background-color: white;
         }
 
-        .dark {
+        .dark_background {
             background-color: #f1f5f5;
         }
 
-
-        .half-width{
-            width: 50%;
-        }
-
-        .medium-width {
-            width: 70%;
-        }
-
-        .large-width{
-            width: 80%;
-        }
 
         .content-text {
             width: 90%;
@@ -147,129 +187,217 @@
             text-align: justify;
         }
 
-
-        .big-icon {
-            font-size: 15em;
+        .description_text {
+            width:100%;
         }
 
-        p:first-child {
-            margin-top: 0;
+        .slideshow_container{
+            width: 100%;
         }
 
-        ol > li {
-            margin-bottom: 1.2%;
+        .publications_list > li {
+            border-bottom: black solid 1px;
+            margin: 1em 0;
+            padding: 1em 0;
         }
 
-        .launch-button {
-            background: #3498db;
-            background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-            background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-            background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-            background-image: -o-linear-gradient(top, #3498db, #2980b9);
-            background-image: linear-gradient(to bottom, #3498db, #2980b9);
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            font-family: Arial;
-            color: #ffffff;
-            font-size: 2em;
-            padding: 11px 30px 10px 30px;
-            text-decoration: none;
+        .publications_list li:last-of-type {
+            border-bottom: none;
         }
 
-        .launch-button:hover {
-            background: #3cb0fd;
-            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-            text-decoration: none;
+        /*
+        * Footer
+        */
+        footer {
+            padding-top: 2em;
+            padding-bottom: 1em;
+            text-align: center;
         }
+
+        footer > div {
+            margin-top: 1em;
+        }
+
+        .link-icons.footer-container {
+            display: block;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer > a {
+            color:#99ccff;
+            border-bottom: 1px dotted #C5596D;
+        }
+
+
+        /*
+        * Polymer Slideshow
+        */
 
         polymer-slideshow {
             overflow: hidden;
             margin-left: auto;
             margin-right: auto;
+            padding: 2rem;
         }
 
         polymer-slide > img {
             width: 100%;
         }
 
+        /*
+        * Media Queries
+        */
+
+        @media screen and (max-width: 425px){
+            polymer-slideshow{
+                display: none;
+            }
+
+        }
+
+        @media screen and (min-width: 425px){
+            .launch-button{
+                width: 255px;
+            }
+
+            footer .link-icons.app-info > ul {
+                width: 191.25px
+            }
+        }
+
+        @media screen and (max-width: 490px){
+            section {
+                font-size: 1.2em;
+            }
+        }
+
+        @media screen and (min-width: 620px){
+            header .site-container > h1{
+               font-size: 5rem;
+            }
+
+            header .site-container > p {
+               font-size: 1.7em;
+            }
+
+            .link-icons > ul {
+                width: 558px;
+            }
+        }
+
+        @media screen and (min-width: 1200px){
+            .site-nav {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 1400px) {
+            .slideshow_container {
+                width: 50%;
+            }
+
+            .description_text {
+                width: 50%;
+            }
+
+            .section_container {
+                width: 1250px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media screen and (min-width: 1440px){
+            .link-icons {
+                font-size: 1.5em;
+            }
+
+            .link-icons > ul {
+                width: 700px;
+            }
+        }
+
+
     </style>
     <template>
-        <header id="header" class="layout vertical center center-justified ">
-            <h1>{{appToDisplay.name}}</h1>
-            <p><strong>{{appToDisplay.shortDescription}}</strong></p>
-            <br>
-            <a href="{{appToDisplay.launch-link}}" target="_blank">
-                <div class="launch-button">Launch</div>
-            </a>
 
-            <div class="link-icons layout horizontal center-justified">
-                <a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i> Source</a>
-                <a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i> Documentation</a>
-                <a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i> Tutorial</a>
-                <a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i> Usage Stats</a>
+        <iron-media-query query="(max-width: 530px)" query-matches="{{_smallSlider}}"></iron-media-query>
+        <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
+
+        <header id="header">
+            <div class="site-nav" on-click="_fireToggleMenu">
+                <i class="fa fa-bars"></i>
+            </div>
+            <div class="site-container">
+                <h1>{{appToDisplay.name}}</h1>
+                <p>{{appToDisplay.shortDescription}}</p>
+                <div class="launch_btn_holder">
+                    <a href="{{appToDisplay.launch-link}}"  target="_blank">
+                        <div class="launch-button">Launch</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="link-icons">
+                <ul class="layout horizontal wrap">
+                    <li><a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i><span> Source</span></a></li>
+                    <li><a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i><span> Docs</span></a></li>
+                    <li><a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i><span> Tutorial</span></a></li>
+                    <li><a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i><span> Usage Stats</span></a></li>
+                </ul>
             </div>
         </header>
 
         <main>
             <section class="light description">
-                <h2>Description</h2>
-                <div id="descriptionContent" class="layout horizontal">
-                    <div class="half-width">
-                        <div id="description" class="content-text"></div>
-                    </div>
-                    <div class="half-width">
-                        <polymer-slideshow height="300" width="500" >
-                            <polymer-slide>
-                                <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                            </polymer-slide>
-                            <polymer-slide>
-                                <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                            </polymer-slide>
-                        </polymer-slideshow>
-                    </div>
-                </div>
-            </section>
-
-            <section class="dark citation">
-                <div class="layout horizontal center-justified">
-                    <div class="large-width">
-                        <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
-                        <div id="citation" class="content-text"></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="light publications">
-                <h2>Publications</h2>
-                <div class="layout horizontal around-justified">
-                    <template is="dom-if" if="{{!_isTabletDisplay(displayMode)}}">
-                        <div id="publicationsIcon" class="layout vertical center center-justified">
-                            <i class="fa fa-file-text-o big-icon"></i>
+                    <h2>Description</h2>
+                    <div class="layout horizontal wrap content-text">
+                        <div id="description" class="description_text"></div>
+                        <div class="slideshow_container">
+                            <polymer-slideshow height="{{_currentSliderSize.height}}" width="{{_currentSliderSize.width}}" auto="false">
+                                <polymer-slide>
+                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
+                                </polymer-slide>
+                                <polymer-slide>
+                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
+                                </polymer-slide>
+                            </polymer-slideshow>
                         </div>
-                    </template>
-                    <div id="publications" class="medium-width">
-                        <ol class="content-text">
-                            <template is="dom-repeat" items="{{publications}}">
-                                <li>{{item}}</li>
-                            </template>
-                        </ol>
                     </div>
+            </section>
+
+            <!--CITATION-->
+            <section class="dark_background citation">
+                <div class="section_container">
+                    <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
+                    <div id="citation" class="content-text"></div>
+                </div>
+            </section>
+
+            <!-- PUBLICATIONS -->
+            <section>
+                <h2>Publications</h2>
+                <div id="publications">
+                    <ol class="content-text publications_list">
+                        <template is="dom-repeat" items="{{publications}}">
+                            <li>{{item}}</li>
+                        </template>
+                    </ol>
                 </div>
             </section>
         </main>
         <footer>
-            <strong>{{appToDisplay.name}}</strong> has been developed by the <strong>Computational Genomics Department</strong>
+            <a href="{{appToDisplay.link}}">{{appToDisplay.name}}</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
             <br>
             Principe Felipe Research Center
             <br>
-            <div class="link-icons">
-                <a href="#"> <i class="fa fa-twitter"></i> </a>
-                <a href="#"><i class="fa fa-envelope-o"></i></a>
+            <div class="link-icons footer-container">
+                <ul class="layout horizontal around-justified">
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
+                </ul>
             </div>
         </footer>
 
@@ -302,11 +430,30 @@
                     type: String,
                     reflectToAttribute: true,
                     observer: "_setLayout"
-                }
-            },
+                },
 
-            attached: function() {
-                console.log(this.displayMode);
+                _smallSlider: {
+                    type: Boolean,
+                    observer: "_setSliderSize"
+                },
+
+                _bigSlider: {
+                    type: Boolean,
+                    observer: "_setSliderSize"
+                },
+
+                _sliderSizes: {
+                    type: Object,
+                    value: {
+                        "default": {height: 300, width: 500},
+                        "big": {height: 500, width: 700},
+                        "small": {height: 300, width: 400},
+                    }
+                },
+
+                _currentSliderSize: {
+                    type: Object
+                }
             },
 
             _handleInfo: function(){
@@ -314,6 +461,10 @@
                 Polymer.dom(this.$.description).innerHTML = desc;
                 Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
                 this.publications = this.appToDisplay.publications;
+            },
+
+            _fireToggleMenu: function() {
+                this.fire("click-menu");
             },
 
             _computeLinkIcon: function(link){
@@ -324,6 +475,22 @@
                 }
             },
 
+            _setSliderSize: function(){
+                if(this._smallSlider){
+                    this._currentSliderSize = this._sliderSizes.small;
+                }else if(this._bigSlider){
+                    this._currentSliderSize = this._sliderSizes.big;
+                }else {
+                    this._currentSliderSize = this._sliderSizes.default;
+                }
+
+                var slideshowContainer = Polymer.dom(this.root).querySelector(".slideshow_container");
+                var slideshow = Polymer.dom(this.root).querySelector("polymer-slideshow");
+
+                Polymer.dom(slideshowContainer).removeChild(slideshow);
+                Polymer.dom(slideshowContainer).appendChild(slideshow);
+            },
+
             _selectMainSS: function(ssArray){
                 return ssArray[0];
             },
@@ -332,34 +499,6 @@
                 return ssArray.splice(1);
             },
 
-            _isLargeDisplay: function(displayMode){
-                return displayMode == 'large';
-            },
-
-            _isTabletDisplay: function(displayMode){
-                return displayMode == 'tablet';
-            },
-
-            _setLayout(){
-                switch(this.displayMode){
-                    case 'tablet':
-                        Polymer.dom(this.$.descriptionContent).classList.remove("horizontal");
-                        Polymer.dom(this.$.descriptionContent).classList.add("vertical");
-                        Polymer.dom(this.$.descriptionContent).classList.add("around-justified");
-                        Polymer.dom(this.$.descriptionContent).classList.add("center");
-                        Polymer.dom(this.$.description).parentNode.classList.remove("half-width");
-                        Polymer.dom(this.$.description).parentNode.classList.add("large-width");
-                        break;
-                    default:
-                        Polymer.dom(this.$.descriptionContent).classList.remove("vertical");
-                        Polymer.dom(this.$.descriptionContent).classList.add("horizontal");
-                        Polymer.dom(this.$.descriptionContent).classList.remove("around-justified");
-                        Polymer.dom(this.$.descriptionContent).classList.remove("center");
-                        Polymer.dom(this.$.description).parentNode.classList.add("half-width");
-                        Polymer.dom(this.$.description).parentNode.classList.remove("large-width");
-
-                }
-            }
         })
     </script>
 </dom-module>
