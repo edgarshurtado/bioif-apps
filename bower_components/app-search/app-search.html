@@ -1,0 +1,114 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.css">
+
+<dom-module id="app-search">
+    <template>
+        <style>
+            input{
+                border: black 1px solid;
+                padding: 0.2rem;
+            }
+            .results_box{
+                box-sizing: border-box;
+                border: 1px solid black;
+            }
+
+            .results_box > ul{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+
+            .results_box > ul > li {
+                padding: 0.5rem;
+            }
+
+            .results_box > ul > li.label{
+                background-color: cornflowerblue;
+                color: white;
+            }
+
+            .results_box > ul > li:not(.label):hover {
+                background-color: #99ccff;
+            }
+        </style>
+
+        <input type="text" id="queryBox" value="path">
+        <div class="results_box" id="resultsBox" hidden>
+            <ul id="resultsList">
+                <template is="dom-repeat" items="{{results}}">
+                    <li class="label"><i class$="fa {{item.iconFaTag}}"></i> {{item.classTag}}</li>
+                    <template is="dom-repeat" items="{{item.items}}">
+                        <li><i class="fa fa-dot-circle-o"></i> {{item.name}}</li>
+                    </template>
+                </template>
+            </ul>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "app-search",
+
+            properties:{
+                db: {
+                    type: Array/Object
+                },
+
+                results: {
+                    type: Array/Object,
+                    value: function(){
+                        return this._testValues();
+                    },
+                }
+            },
+
+            ready: function() {
+                this.$.queryBox.addEventListener("click", function(){
+                    Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
+                }.bind(this));
+
+                this.$.queryBox.addEventListener("blur", function(){
+                    Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+                }.bind(this));
+            },
+
+            _testValues: function() {
+                var data = [
+                    {
+                        "classTag": "Applications",
+                        "iconFaTag": "fa-desktop",
+                        "items": [
+                            {"name": "HiPathia", "id": 0},{"name": "PathVar", "id": 1}
+                        ]
+                    },
+
+                    {
+                        "classTag": "Pathway",
+                        "iconFaTag": "fa-tag",
+                        "items": [
+                                {"name": "Babelomics", "id": 2},
+                                {"name": "HiPathia", "id": 0},
+                                {"name": "PathVar", "id": 1}
+                        ]
+                    }
+                ]
+
+                return data;
+            },
+
+
+            _search: function(query){
+                var re = new RegExp(".*" + query + ".*", "g");
+                var results = [];
+                db.forEach(function(app){
+                    var reResult = re.exec(app.name);
+                    if(reResult !== null){
+                        result.push(app.name);
+                    }
+                })
+                return results;
+            }
+        });
+    </script>
+</dom-module>
