@@ -13,6 +13,11 @@
                 border: 1px solid black;
             }
 
+            .no_results {
+                display: block;
+                padding: 1em;
+            }
+
             .results_box > ul{
                 list-style: none;
                 margin: 0;
@@ -34,13 +39,13 @@
             }
         </style>
 
-        <input type="text" id="queryBox" value="path">
+        <input type="text" id="queryBox" value="" on-keyup="_search">
         <div class="results_box" id="resultsBox" hidden>
             <ul id="resultsList">
                 <template is="dom-repeat" items="{{results}}">
                     <li class="label"><i class$="fa {{item.iconFaTag}}"></i> {{item.classTag}}</li>
                     <template is="dom-repeat" items="{{item.items}}">
-                        <li><i class="fa fa-dot-circle-o"></i> {{item.name}}</li>
+                        <li><i class="fa fa-dot-circle-o"></i> {{item}}</li>
                     </template>
                 </template>
             </ul>
@@ -57,57 +62,84 @@
 
                 results: {
                     type: Array/Object,
-                    value: function(){
-                        return this._testValues();
-                    },
+                    observer: "_areResults"
+                },
+
+                _resultsFound: {
+                    type: Boolean,
+                    value: false
                 }
             },
 
             ready: function() {
-                this.$.queryBox.addEventListener("click", function(){
-                    Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
-                }.bind(this));
-
                 this.$.queryBox.addEventListener("blur", function(){
                     Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
                 }.bind(this));
             },
 
-            _testValues: function() {
-                var data = [
-                    {
-                        "classTag": "Applications",
-                        "iconFaTag": "fa-desktop",
-                        "items": [
-                            {"name": "HiPathia", "id": 0},{"name": "PathVar", "id": 1}
-                        ]
-                    },
+            _search: function(e){
+                var query = e.target.value;
 
-                    {
-                        "classTag": "Pathway",
-                        "iconFaTag": "fa-tag",
-                        "items": [
-                                {"name": "Babelomics", "id": 2},
-                                {"name": "HiPathia", "id": 0},
-                                {"name": "PathVar", "id": 1}
-                        ]
-                    }
-                ]
+                if(query.length >= 3){
+                    var results = {applications: [], keywords: []};
 
-                return data;
+                    this.db.forEach(function(app){
+                        var re = new RegExp(".*" + query + ".*", "gi");
+//                    Matches with app name
+                        if(re.exec(app.name)){
+                            results.applications.push(app.name);
+                        }
+
+//                    Matches by Keyword
+                        if(app.keywords !== undefined){
+                            app.keywords.forEach(function(keyword){
+                                if(re.exec(keyword)){
+                                    if(results.keywords[keyword] !== undefined){
+                                        results.keywords[keyword].push(app.name)
+                                    }else {
+                                        results.keywords[keyword] = [app.name];
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    results = this._prepareResults(results);
+                } else {
+                    results = [];
+                }
+
+                this.results = results;
             },
 
+            _prepareResults: function(results){
+                function getSectionObject(classTag, iconFaTag, items){
+                   return {
+                       "classTag": classTag,
+                       "iconFaTag": iconFaTag,
+                       "items": items
+                   };
+                }
 
-            _search: function(query){
-                var re = new RegExp(".*" + query + ".*", "g");
-                var results = [];
-                db.forEach(function(app){
-                    var reResult = re.exec(app.name);
-                    if(reResult !== null){
-                        result.push(app.name);
-                    }
-                })
-                return results;
+                var finalResults = [];
+                if(results.applications.length !== 0){
+                    finalResults.push(getSectionObject("BY NAME", "fa-desktop", results.applications));
+                }
+
+                Object.keys(results.keywords).forEach(function(keyword){
+                    finalResults.push(getSectionObject(keyword.toUpperCase(), "fa-tag", results.keywords[keyword]));
+                });
+
+                return finalResults;
+            },
+
+            _areResults: function(){
+                this._resultsFound = this.results.length > 0;
+                if(this.results.length > 0){
+                    Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
+                }else {
+                    Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+                }
             }
         });
     </script>

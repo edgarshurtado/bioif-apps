@@ -25,7 +25,7 @@
             "./Babelomics5.jpg"
         ],
 
-        "background": ""
+        "keywords": ["Pathway"]
     },
 
     {
@@ -39,21 +39,24 @@
         "name": "CellBase",
         "shortDescription": "RESTful Web Services for retrieving releant biological information",
         "link": "http://docs.bioinfo.cipf.es/projects/cellbase",
-        "icon": ""
+        "icon": "",
+        "keywords": ["Pathway"]
     },
 
     {
         "name": "GenomeMaps",
         "shortDescription": "Our highly efficient next generation genome viewer (used by the ICGC)",
         "link": "http://www.genomemaps.org/",
-        "icon": ""
+        "icon": "",
+        "keywords": ["Genomics"]
     },
 
     {
         "name": "BiERapp",
         "shortDescription": "Variant/gene prioritzation tool (from VCF to candidates)",
         "link": "http://bierapp.babelomics.org/",
-        "icon": ""
+        "icon": "",
+        "keywords": ["Genomics"]
     },
 
     {
@@ -74,7 +77,8 @@
         "name": "PATHiWays",
         "shortDescription": "Inferring the functional effect of gene expression changes in signaling pathways",
         "link": "http://pathiways.babelomics.org/",
-        "icon": ""
+        "icon": "",
+        "keywords": ["Pathway", "Genomics"]
     },
     {
         "name": "PATHiVar",
