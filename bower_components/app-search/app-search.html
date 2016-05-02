@@ -39,7 +39,7 @@
             }
         </style>
 
-        <input type="text" id="queryBox" value="" on-keyup="_search">
+        <input type="text" id="queryBox" value="" on-keyup="_handleKeyUp">
         <div class="results_box" id="resultsBox" hidden>
             <ul id="resultsList">
                 <template is="dom-repeat" items="{{results}}">
@@ -77,10 +77,12 @@
                 }.bind(this));
             },
 
-            _search: function(e){
-                var query = e.target.value;
+            _handleKeyUp: function(e) {
+                this._search(e.target.value);
+            },
 
-                if(query.length >= 3){
+            _search: function(query){
+                if(query.length >= 2){
                     var results = {applications: [], keywords: []};
 
                     this.db.forEach(function(app){
