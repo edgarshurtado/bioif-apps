@@ -25,27 +25,27 @@
             }
 
 
-            .results_box > ul > li {
+            .results_list > li {
                 padding: 0.5rem;
             }
 
-            .results_box > ul > li.label{
+            .results_list > li.label{
                 background-color: cornflowerblue;
                 color: white;
             }
 
-            .results_box > ul > li:not(.label):hover {
+            .results_list > li:not(.label):hover {
                 background-color: #99ccff;
             }
         </style>
 
-        <input type="text" id="queryBox" value="" on-keyup="_handleKeyUp">
-        <div class="results_box" id="resultsBox" hidden>
-            <ul id="resultsList">
+        <input type="text" id="queryBox" value="" on-blur="_handleBlur" on-keyup="_handleKeyUp">
+        <div class="results_box" id="resultsBox"  hidden>
+            <ul id="resultsList" class="results_list">
                 <template is="dom-repeat" items="{{results}}">
                     <li class="label"><i class$="fa {{item.iconFaTag}}"></i> {{item.classTag}}</li>
                     <template is="dom-repeat" items="{{item.items}}">
-                        <li><i class="fa fa-dot-circle-o"></i> {{item}}</li>
+                        <li><a href="#{{item}}"><i class="fa fa-dot-circle-o"></i> {{item}}</a></li>
                     </template>
                 </template>
             </ul>
@@ -71,10 +71,10 @@
                 }
             },
 
-            ready: function() {
-                this.$.queryBox.addEventListener("blur", function(){
+            _handleBlur: function(e){
+                this.async(function(){
                     Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
-                }.bind(this));
+                }, 200);
             },
 
             _handleKeyUp: function(e) {
@@ -84,9 +84,9 @@
             _search: function(query){
                 if(query.length >= 2){
                     var results = {applications: [], keywords: []};
+                    var re = new RegExp(".*" + query + ".*", "i");
 
                     this.db.forEach(function(app){
-                        var re = new RegExp(".*" + query + ".*", "gi");
 //                    Matches with app name
                         if(re.exec(app.name)){
                             results.applications.push(app.name);

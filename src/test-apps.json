@@ -78,7 +78,7 @@
         "shortDescription": "Inferring the functional effect of gene expression changes in signaling pathways",
         "link": "http://pathiways.babelomics.org/",
         "icon": "",
-        "keywords": ["Pathway", "Genomics"]
+        "keywords": ["Pathway", "Genomics", "Proteomics"]
     },
     {
         "name": "PATHiVar",
