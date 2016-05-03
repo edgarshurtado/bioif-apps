@@ -89,9 +89,11 @@
                                tabindex="-1"
                                route="{{route}}"></bz-collection>
             </div>
+
             <app-info id="appInfo"
-                      on-click-menu=""></app-info>
-            <div class="blocking_div" id="blockingDiv" hidden></div>
+                      on-click-menu="_handleShowMenu"></app-info>
+
+            <div class="blocking_div" id="blockingDiv" on-click="hideMenu" hidden></div>
         </div>
     </template>
     <script>
@@ -111,13 +113,6 @@
                     this.$.bzCollection.appCollectionJson = response;
                     this.data = response;
                 }.bind(this));
-
-                this.$.appInfo.addEventListener("click-menu", function(){
-                    this.$.bzCollection.setAttribute("show", "");
-                    this.$.blockingDiv.removeAttribute("hidden");
-                }.bind(this));
-
-                this.$.blockingDiv.addEventListener("click", this.hideMenu.bind(this));
             },
 
             hideMenu: function(){
@@ -125,7 +120,12 @@
                 Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
             },
 
-            _handleUrl: function(newValue, oldValue){
+            _handleShowMenu: function(){
+                this.$.bzCollection.setAttribute("show", "");
+                this.$.blockingDiv.removeAttribute("hidden");
+            },
+
+            _handleUrl: function(){
                 function searchApp(app){
                     var appOnRoute = this.applicationData.application.toLowerCase();
                     return appOnRoute === app.name.toLowerCase();
@@ -137,9 +137,10 @@
 
 //                Needed to be async because in the first load of the page the data isn't set in time
                 this.async(function(){
+                    this.hideMenu();
                     var app = this.data.find(searchApp, this);
                     this.$.appInfo.appToDisplay = app;
-                    this.hideMenu();
+                    console.log("fire");
                 }, 200);
             }
 
