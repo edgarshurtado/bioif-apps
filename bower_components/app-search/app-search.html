@@ -13,17 +13,11 @@
                 border: 1px solid black;
             }
 
-            .no_results {
-                display: block;
-                padding: 1em;
-            }
-
             .results_box > ul{
                 list-style: none;
                 margin: 0;
                 padding: 0;
             }
-
 
             .results_list > li {
                 padding: 0.5rem;
@@ -36,16 +30,18 @@
 
             .results_list > li:not(.label):hover {
                 background-color: #99ccff;
+                cursor: pointer;
             }
+
         </style>
 
-        <input type="text" id="queryBox" value="" on-blur="_handleBlur" on-keyup="_handleKeyUp">
+        <input type="text" id="queryBox" value="" on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_areResults">
         <div class="results_box" id="resultsBox"  hidden>
             <ul id="resultsList" class="results_list">
                 <template is="dom-repeat" items="{{results}}">
                     <li class="label"><i class$="fa {{item.iconFaTag}}"></i> {{item.classTag}}</li>
                     <template is="dom-repeat" items="{{item.items}}">
-                        <li><a href="#{{item}}"><i class="fa fa-dot-circle-o"></i> {{item}}</a></li>
+                        <li data-name="{{item}}" on-click="_handleClick"><i class="fa fa-dot-circle-o"></i> {{item}}</li>
                     </template>
                 </template>
             </ul>
@@ -81,6 +77,10 @@
                 this._search(e.target.value);
             },
 
+            _handleClick: function(e) {
+                console.log(e.target.dataName);
+            },
+
             _search: function(query){
                 if(query.length >= 2){
                     var results = {applications: [], keywords: []};
@@ -88,14 +88,14 @@
 
                     this.db.forEach(function(app){
 //                    Matches with app name
-                        if(re.exec(app.name)){
+                        if(re.test(app.name)){
                             results.applications.push(app.name);
                         }
 
 //                    Matches by Keyword
                         if(app.keywords !== undefined){
                             app.keywords.forEach(function(keyword){
-                                if(re.exec(keyword)){
+                                if(re.test(keyword)){
                                     if(results.keywords[keyword] !== undefined){
                                         results.keywords[keyword].push(app.name)
                                     }else {
