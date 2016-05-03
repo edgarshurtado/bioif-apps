@@ -1,165 +1,114 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="stylesheet" href="../font-awesome/css/font-awesome.css">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../app-collection/bz-collection.html">
-<link rel="import" href="../app-wrapper/bz-wrapper.html">
 <link rel="import" href="../app-info/app-info.html">
-<link rel="import" href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="bioinfo-apps-main">
     <template>
         <style is="custom-style" include="iron-flex">
 
-            app-info {
-                height:100vh;
+            :root {
+                font-family: Lato;
+            }
+
+
+            .container{
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .menu_wrapper{
+                width: 150px;
+                height: 100%;
+                position: absolute;
+                overflow-x: hidden;
+            }
+
+            bz-collection {
+                display: block;
+                width: 150px;
+                position: absolute;
+                transform: translate(-150px, 0);
+                transition: transform 0.5s;
+
+                padding-right: 40px;
+                height: 100vh;
                 overflow-y: scroll;
                 overflow-x: hidden;
-                position: absolute;
-                left: 130px;
             }
 
-            .menu {
+
+            bz-collection[show] {
+                z-index: 100;
+                transform: translate(0);
+            }
+
+            app-info {
                 position: absolute;
-                left:0;
                 top: 0;
-                width: 130px;
-            }
-
-            .btnToggleMenu {
-                position: absolute;
-                left: 15px;
-                top: 15px;
-                z-index: 5;
-                color: white;
-                font-size: 1.5em;
-            }
-
-            .menu.toggleableMenu {
-                left: -130px;
-                transition: left 0.2s;
-                z-index: 1000;
-            }
-
-            .menu.toggleableMenu[show]{
                 left: 0;
+                transition: left 0.6s;
+                height: 100vh;
+                overflow-y: scroll;
             }
 
-            .blockingDiv {
-                position: absolute;
+            .blocking_div{
                 width: 100%;
                 height: 100%;
-                background-color: black;
-                transition: opacity 5s linear;
-                opacity: 0.2;
+                top: 0;
+                position: fixed;
+
+                background-color: rgba(0,0,0,0.2);
+
+                z-index: 50;
             }
 
+            @media screen and (min-width: 1200px){
+                app-info {
+                    left: 150px;
+                }
+
+                bz-collection {
+                    transform: translate(0);
+                }
+            }
         </style>
 
-        <iron-media-query query="(max-width:1130px) and (min-width:990px)" query-matches="{{_tabletWidth}}"></iron-media-query>
-        <iron-media-query query="(max-width:990px)" query-matches="{{_mobileWidth}}"></iron-media-query>
-        <!--TODO: Delete all references for the media query below-->
-        <iron-media-query query="(max-height:760px)" query-matches="{{short}}"></iron-media-query>
-
-        <bz-collection
-                id="appMenu"
-                class="menu"
-                tabindex="-1"
-                src-json="./src/test-apps.json"
-                on-app-selected="_handleAppSelection">
-        </bz-collection>
-
-       <div id="btnToggleMenu" class="btnToggleMenu" hidden>
-           <i class="fa fa-bars"></i>
-       </div>
-
-        <app-info id="appInfo" class="darker" display-mode="{{_displayType}}"></app-info>
-
-        <div id="blockingDiv" class="blockingDiv" hidden></div>
+        <div class="container">
+            <div class="menu_wrapper">
+                <bz-collection id="bzCollection" tabindex="-1"></bz-collection>
+            </div>
+            <app-info id="appInfo"
+                      on-click-menu=""></app-info>
+            <div class="blocking_div" id="blockingDiv" hidden></div>
+        </div>
     </template>
     <script>
         Polymer({
             is: "bioinfo-apps-main",
 
             ready: function() {
-                var collection = Polymer.dom(this.root).querySelector("bz-collection");
-                var that = this;
-                // Needed to wait until the dom-repeat of `<bz-collection>` is initialized
-                collection.addEventListener("dom-change", function(){
-                    collection.setAppActive(0);
-                });
+                jsonRequest("src/test-apps.json", function(response){
+                    this.$.bzCollection.appCollectionJson = response;
+                    this.$.appInfo.appToDisplay = response[0];
+                }.bind(this));
 
+                this.$.appInfo.addEventListener("click-menu", function(){
+                    this.$.bzCollection.setAttribute("show", "");
+                    this.$.blockingDiv.removeAttribute("hidden");
+                }.bind(this));
 
-                this.$.btnToggleMenu.addEventListener("click", function(){
+                this.$.bzCollection.addEventListener("app-selection", function(e){
+                    this.$.appInfo.appToDisplay = e.detail;
+                    this.hideMenu();
+                }.bind(this));
 
-                    var appMenu = this.$.appMenu;
-                    var blockingDiv = this.$.blockingDiv;
-
-                    appMenu.setAttribute("show","");
-                    appMenu.focus();
-                    Polymer.dom(blockingDiv).removeAttribute("hidden");
-
-                   appMenu.addEventListener("blur", function(){
-                       Polymer.dom(appMenu).removeAttribute("show");
-                       Polymer.dom(blockingDiv).setAttribute("hidden", "");
-
-                    });
-
-                    Polymer.dom(blockingDiv).classList.add("dark");
-
-                }.bind(this))
+                this.$.blockingDiv.addEventListener("click", this.hideMenu);
             },
 
-            properties: {
-                mediumWidth: {
-                    type: Boolean,
-                    observer: "_changedWidth"
-                },
-                _tabletWidth: {
-                    type: Boolean,
-                    observer: "_changedWidth"
-
-                },
-
-                _mobileWidth: {
-                    type: Boolean,
-                    observer: "_changedWidth"
-
-                },
-
-                short: {
-                    type: Boolean,
-                    observer: "_changedHeight"
-                },
-                _displayType: String
+            hideMenu: function(){
+                Polymer.dom(this.$.bzCollection).removeAttribute("show");
+                Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
             },
-
-            _handleAppSelection(e){
-                var a = Polymer.dom(this.root).querySelector("app-info");
-                a.appToDisplay = e.detail;
-            },
-
-            _changedWidth: function() {
-                if(this._tabletWidth || this._mobileWidth){
-                    this.$.appInfo.style.left = "0";
-                    Polymer.dom(this.$.appMenu).classList.add("toggleableMenu");
-                    Polymer.dom(this.$.btnToggleMenu).removeAttribute("hidden");
-
-                    if(this._tabletWidth && !this._mobileWidth){
-                        this._displayType="tablet";
-                    }else if(this._mobileWidth && !this._tabletWidth){
-                        this._displayType="mobile";
-                    }
-                }else {
-                    this._displayType="";
-                    Polymer.dom(this.root).querySelector("app-info").style.left = "130px";
-                    Polymer.dom(this.$.btnToggleMenu).setAttribute("hidden", "");
-                    Polymer.dom(this.$.appMenu).classList.remove("toggleableMenu");
-                }
-            },
-
-            _changedHeight: function() {
-                Polymer.dom(this.root).querySelector("app-info").short = this.short;
-            }
 
         })
     </script>
