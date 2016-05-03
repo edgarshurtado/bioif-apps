@@ -1,0 +1,148 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.css">
+
+<dom-module id="app-search">
+    <template>
+        <style>
+            input{
+                border: black 1px solid;
+                padding: 0.2rem;
+            }
+            .results_box{
+                box-sizing: border-box;
+                border: 1px solid black;
+            }
+
+            .results_box > ul{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .results_list > li {
+                padding: 0.5rem;
+            }
+
+            .results_list > li.label{
+                background-color: cornflowerblue;
+                color: white;
+            }
+
+            .results_list > li:not(.label):hover {
+                background-color: #99ccff;
+                cursor: pointer;
+            }
+
+        </style>
+
+        <input type="text" id="queryBox" value="" on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_areResults">
+        <div class="results_box" id="resultsBox"  hidden>
+            <ul id="resultsList" class="results_list">
+                <template is="dom-repeat" items="{{results}}">
+                    <li class="label"><i class$="fa {{item.iconFaTag}}"></i> {{item.classTag}}</li>
+                    <template is="dom-repeat" items="{{item.items}}">
+                        <li data-name="{{item}}" on-click="_handleClick"><i class="fa fa-dot-circle-o"></i> {{item}}</li>
+                    </template>
+                </template>
+            </ul>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "app-search",
+
+            properties:{
+                db: {
+                    type: Array/Object
+                },
+
+                results: {
+                    type: Array/Object,
+                    observer: "_areResults"
+                },
+
+                _resultsFound: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+
+            _handleBlur: function(e){
+                this.async(function(){
+                    Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+                }, 200);
+            },
+
+            _handleKeyUp: function(e) {
+                this._search(e.target.value);
+            },
+
+            _handleClick: function(e) {
+                console.log(e.target.dataName);
+            },
+
+            _search: function(query){
+                if(query.length >= 2){
+                    var results = {applications: [], keywords: []};
+                    var re = new RegExp(".*" + query + ".*", "i");
+
+                    this.db.forEach(function(app){
+//                    Matches with app name
+                        if(re.test(app.name)){
+                            results.applications.push(app.name);
+                        }
+
+//                    Matches by Keyword
+                        if(app.keywords !== undefined){
+                            app.keywords.forEach(function(keyword){
+                                if(re.test(keyword)){
+                                    if(results.keywords[keyword] !== undefined){
+                                        results.keywords[keyword].push(app.name)
+                                    }else {
+                                        results.keywords[keyword] = [app.name];
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    results = this._prepareResults(results);
+                } else {
+                    results = [];
+                }
+
+                this.results = results;
+            },
+
+            _prepareResults: function(results){
+                function getSectionObject(classTag, iconFaTag, items){
+                   return {
+                       "classTag": classTag,
+                       "iconFaTag": iconFaTag,
+                       "items": items
+                   };
+                }
+
+                var finalResults = [];
+                if(results.applications.length !== 0){
+                    finalResults.push(getSectionObject("BY NAME", "fa-desktop", results.applications));
+                }
+
+                Object.keys(results.keywords).forEach(function(keyword){
+                    finalResults.push(getSectionObject(keyword.toUpperCase(), "fa-tag", results.keywords[keyword]));
+                });
+
+                return finalResults;
+            },
+
+            _areResults: function(){
+                this._resultsFound = this.results.length > 0;
+                if(this.results.length > 0){
+                    Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
+                }else {
+                    Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+                }
+            }
+        });
+    </script>
+</dom-module>
