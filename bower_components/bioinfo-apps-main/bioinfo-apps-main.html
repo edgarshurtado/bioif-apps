@@ -1,7 +1,10 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="stylesheet" href="../font-awesome/css/font-awesome.css">
 <link rel="import" href="../app-collection/bz-collection.html">
+
 <link rel="import" href="../app-info/app-info.html">
+<link rel="import" href="../carbon-route/carbon-location.html">
+<link rel="import" href="../carbon-route/carbon-route.html">
 
 <dom-module id="bioinfo-apps-main">
     <template>
@@ -73,9 +76,18 @@
             }
         </style>
 
+        <carbon-location route="{{route}}"
+                         use-hash-as-path></carbon-location>
+        <carbon-route route="{{route}}"
+                      pattern="/:application"
+                      data="{{applicationData}}"></carbon-route>
+
+
         <div class="container">
             <div class="menu_wrapper">
-                <bz-collection id="bzCollection" tabindex="-1"></bz-collection>
+                <bz-collection id="bzCollection"
+                               tabindex="-1"
+                               route="{{route}}"></bz-collection>
             </div>
             <app-info id="appInfo"
                       on-click-menu=""></app-info>
@@ -86,10 +98,19 @@
         Polymer({
             is: "bioinfo-apps-main",
 
+            properties: {
+                route: {
+                    type: Object,
+                    observer: "_handleUrl"
+                },
+
+                data: Array/Object
+            },
+
             ready: function() {
                 jsonRequest("src/test-apps.json", function(response){
                     this.$.bzCollection.appCollectionJson = response;
-                    this.$.appInfo.appToDisplay = response[0];
+                    this.data = response;
                 }.bind(this));
 
                 this.$.appInfo.addEventListener("click-menu", function(){
@@ -97,18 +118,34 @@
                     this.$.blockingDiv.removeAttribute("hidden");
                 }.bind(this));
 
-                this.$.bzCollection.addEventListener("app-selection", function(e){
-                    this.$.appInfo.appToDisplay = e.detail;
-                    this.hideMenu();
-                }.bind(this));
 
-                this.$.blockingDiv.addEventListener("click", this.hideMenu);
+                this.$.blockingDiv.addEventListener("click", this.hideMenu.bind(this));
+
+
             },
 
             hideMenu: function(){
                 Polymer.dom(this.$.bzCollection).removeAttribute("show");
                 Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
             },
+
+            _handleUrl: function(newValue, oldValue){
+                function searchApp(app){
+                    var appOnRoute = this.applicationData.application;
+                    return appOnRoute === app.name;
+                }
+
+                if(!this.route.path){
+                    this.set("route.path", "/Babelomics");
+                }
+
+//                Needed to be async because in the first load of the page the data isn't set in time
+                this.async(function(){
+                    var app = this.data.find(searchApp, this);
+                    this.$.appInfo.appToDisplay = app;
+                    this.hideMenu();
+                }, 200);
+            }
 
         })
     </script>

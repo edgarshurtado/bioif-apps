@@ -36,7 +36,9 @@
                 activeObject: {
                     type:Object,
                     value: undefined
-                }
+                },
+
+                route: Object
             },
 
             _handleActivation: function(e){
@@ -44,7 +46,7 @@
                     this.activeObject.activated = false;
                 }
                 this.activeObject = Polymer.dom(e).rootTarget;
-                this.fire("app-selection", this.activeObject.appInfo);
+                this.set("route.path", "/" + e.target.appInfo.name);
             },
 
             setAppActive: function(position) {
