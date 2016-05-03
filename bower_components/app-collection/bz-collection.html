@@ -46,7 +46,7 @@
                     this.activeObject.activated = false;
                 }
                 this.activeObject = Polymer.dom(e).rootTarget;
-                this.set("route.path", "/" + e.target.appInfo.name);
+                this.set("route.path", "/" + e.target.appInfo.name.toLocaleLowerCase());
             },
 
             setAppActive: function(position) {

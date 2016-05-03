@@ -103,7 +103,6 @@
                     type: Object,
                     observer: "_handleUrl"
                 },
-
                 data: Array/Object
             },
 
@@ -118,10 +117,7 @@
                     this.$.blockingDiv.removeAttribute("hidden");
                 }.bind(this));
 
-
                 this.$.blockingDiv.addEventListener("click", this.hideMenu.bind(this));
-
-
             },
 
             hideMenu: function(){
@@ -131,12 +127,12 @@
 
             _handleUrl: function(newValue, oldValue){
                 function searchApp(app){
-                    var appOnRoute = this.applicationData.application;
-                    return appOnRoute === app.name;
+                    var appOnRoute = this.applicationData.application.toLowerCase();
+                    return appOnRoute === app.name.toLowerCase();
                 }
 
                 if(!this.route.path){
-                    this.set("route.path", "/Babelomics");
+                    this.set("route.path", "/babelomics");
                 }
 
 //                Needed to be async because in the first load of the page the data isn't set in time
