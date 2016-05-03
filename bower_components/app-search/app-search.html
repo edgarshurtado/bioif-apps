@@ -21,6 +21,7 @@
 
             .results_list > li {
                 padding: 0.5rem;
+                background-color: white;
             }
 
             .results_list > li.label{
@@ -78,7 +79,7 @@
             },
 
             _handleClick: function(e) {
-                console.log(e.target.dataName);
+                window.location.href = "#/" + e.target.dataName.toLowerCase();
             },
 
             _search: function(query){
