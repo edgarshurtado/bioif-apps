@@ -9,123 +9,20 @@
     <!-- Dependencies -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="bower_components/jsUtils/jsonCall.js"></script>
-    <link rel="import" href="bower_components/app-info/app-info.html">
-    <link rel="import" href="bower_components/app-collection/bz-collection.html">
+
+    <link rel="import" href="bower_components/bioinfo-apps-main/bioinfo-apps-main.html">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="fonts/fonts.css">
-
-    <style is="custom-style">
-        body {
-            margin: 0;
-        }
-        :root {
-            font-family: Lato;
-        }
-
-
-        .container{
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .menu_wrapper{
-            width: 150px;
-            height: 100%;
-            position: absolute;
-            overflow-x: hidden;
-        }
-
-        bz-collection {
-            display: block;
-            width: 150px;
-            position: absolute;
-            transform: translate(-150px, 0);
-            transition: transform 0.5s;
-
-            padding-right: 40px;
-            height: 100vh;
-            overflow-y: scroll;
-            overflow-x: hidden;
-        }
-
-
-        bz-collection[show] {
-            z-index: 100;
-            transform: translate(0);
-        }
-
-        app-info {
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: left 0.6s;
-            height: 100vh;
-            overflow-y: scroll;
-        }
-
-        .blocking_div{
-            width: 100%;
-            height: 100%;
-            top: 0;
-            position: fixed;
-
-            background-color: rgba(0,0,0,0.2);
-
-            z-index: 50;
-        }
-
-        @media screen and (min-width: 1200px){
-            app-info {
-                left: 150px;
-            }
-
-            bz-collection {
-                transform: translate(0);
-            }
-        }
-
-    </style>
 </head>
+
+<style>
+    body{
+        margin: 0;
+    }
+</style>
+
 <body>
-    <div class="container">
-        <div class="menu_wrapper">
-            <bz-collection tabindex="-1"></bz-collection>
-        </div>
-        <app-info></app-info>
-        <div class="blocking_div" hidden></div>
-    </div>
-
-    <script>
-        var bzCollection = document.querySelector("bz-collection");
-        var appInfo = document.querySelector("app-info");
-        var blockingDiv = document.querySelector(".blocking_div");
-        var jsUtils = {
-            jsonRequest: jsonRequest
-        };
-
-
-        function hideMenu() {
-            bzCollection.removeAttribute("show");
-            blockingDiv.setAttribute("hidden", "");
-        }
-
-        jsUtils.jsonRequest("src/test-apps.json", function(response){
-                document.querySelector("bz-collection").appCollectionJson = response;
-                appInfo.appToDisplay = response[0];
-        });
-
-        appInfo.addEventListener("click-menu", function(){
-            bzCollection.setAttribute("show", "");
-            blockingDiv.removeAttribute("hidden");
-        });
-
-        bzCollection.addEventListener("app-selection", function(e){
-            appInfo.appToDisplay = e.detail;
-            hideMenu();
-        });
-
-        blockingDiv.addEventListener("click", hideMenu);
-
-    </script>
+    <bioinfo-apps-main></bioinfo-apps-main>
 </body>
 </html>
