@@ -20,6 +20,9 @@
                 height: 100%;
             }
 
+            ::-webkit-scrollbar{
+                display: none;
+            }
 
             .container{
                 width: 100vw;
@@ -29,8 +32,16 @@
             .menu_wrapper{
                 width: 150px;
                 height: 100%;
+                z-index: 100;
                 position: absolute;
                 overflow-x: hidden;
+                transform: translate(-150px, 0);
+                transition: transform 0.5s;
+                box-sizing: border-box;
+            }
+
+            .menu_wrapper[show]{
+                transform: translate(0);
             }
 
             .search_box {
@@ -43,20 +54,10 @@
             bz-collection {
                 display: block;
                 width: 150px;
-                position: absolute;
-                transform: translate(-150px, 0);
-                transition: transform 0.5s;
-
                 padding-right: 40px;
                 height: 100vh;
                 overflow-y: scroll;
                 overflow-x: hidden;
-            }
-
-
-            bz-collection[show] {
-                z-index: 100;
-                transform: translate(0);
             }
 
             .app_info_container {
@@ -88,7 +89,7 @@
                     margin-left: 150px;
                 }
 
-                bz-collection {
+                .menu_wrapper {
                     transform: translate(0);
                 }
             }
@@ -102,7 +103,7 @@
 
 
         <div class="container">
-            <div class="menu_wrapper">
+            <div class="menu_wrapper" id="menuWrapper">
                 <bz-collection id="bzCollection"
                                tabindex="-1"
                                route="{{route}}"></bz-collection>
@@ -148,12 +149,12 @@
 
 
             _handleHideMenu: function(){
-                Polymer.dom(this.$.bzCollection).removeAttribute("show");
+                Polymer.dom(this.$.menuWrapper).removeAttribute("show");
                 Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
             },
 
             _handleShowMenu: function(){
-                this.$.bzCollection.setAttribute("show", "");
+                this.$.menuWrapper.setAttribute("show", "");
                 this.$.blockingDiv.removeAttribute("hidden");
             },
 
