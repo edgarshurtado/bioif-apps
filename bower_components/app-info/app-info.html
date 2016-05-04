@@ -53,8 +53,29 @@
         * Header
         */
 
-        header .site-nav {
+        .site-nav {
             padding: 1rem;
+            background-color: #435f7a;
+            box-sizing: border-box;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(0, -100%)
+            }
+
+            to {
+                transform: translate(0);
+            }
+
+        }
+
+        .site-nav[sticky]{
+            position: fixed;
+            width: inherit;
+            animation: slideDown;
+            animation-duration: 1s;
+            z-index: 99;
         }
 
         header .site-container {
@@ -331,8 +352,10 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
-            <div class="site-nav layout horizontal justified">
-                <content></content>
+            <div class="site-nav " >
+                <div class="layout horizontal justified">
+                    <content></content>
+                </div>
             </div>
             <div class="site-container">
                 <h1>{{appToDisplay.name}}</h1>
@@ -467,11 +490,24 @@
                 }
             },
 
+            ready: function(){
+                document.addEventListener("scroll", this._stickyBannerHandler.bind(this));
+            },
+
             _handleInfo: function(){
                 var desc = this.appToDisplay.completeDescription;
                 Polymer.dom(this.$.description).innerHTML = desc;
                 Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
                 this.publications = this.appToDisplay.publications;
+            },
+
+            _stickyBannerHandler: function(){
+                var siteNav = this.$$(".site-nav");
+                if(document.body.scrollTop > 458){
+                    siteNav.setAttribute("sticky", "");
+                }else if(document.body.scrollTop === 0){
+                    siteNav.removeAttribute("sticky");
+                }
             },
 
             _fireToggleMenu: function() {
