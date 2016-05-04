@@ -44,6 +44,10 @@
                 transform: translate(0);
             }
 
+            .search_box {
+                float: right;
+            }
+
             bz-collection {
                 display: block;
                 width: 150px;
@@ -83,6 +87,14 @@
                 .menu_wrapper {
                     transform: translate(0);
                 }
+
+                .menu_burguer {
+                    display: none;
+                }
+
+                .search_box {
+                    float: right;
+                }
             }
         </style>
 
@@ -103,8 +115,8 @@
             <div class="app_info_container">
 
                 <app-info id="appInfo" on-click-menu="_handleShowMenu">
-                    <i class="fa fa-bars" on-click="_handleShowMenu"></i>
-                    <app-search class="search_box" id="searchBox"></app-search>
+                        <i class="fa fa-bars menu_burguer" on-click="_handleShowMenu"></i>
+                        <app-search class="search_box" id="searchBox"></app-search>
                 </app-info>
             </div>
 
