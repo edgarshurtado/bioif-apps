@@ -44,13 +44,6 @@
                 transform: translate(0);
             }
 
-            .search_box {
-                position: absolute;
-                right: 2em;
-                top: 2em;
-                z-index: 2;
-            }
-
             bz-collection {
                 display: block;
                 width: 150px;
@@ -110,10 +103,11 @@
             </div>
 
             <div class="app_info_container">
-                <app-search class="search_box" id="searchBox"></app-search>
 
-                <app-info id="appInfo"
-                          on-click-menu="_handleShowMenu"></app-info>
+                <app-info id="appInfo" on-click-menu="_handleShowMenu">
+                    <i class="fa fa-bars" on-click="_handleShowMenu"></i>
+                    <app-search class="search_box" id="searchBox"></app-search>
+                </app-info>
             </div>
 
             <div class="blocking_div" id="blockingDiv" on-click="_handleHideMenu" hidden></div>
