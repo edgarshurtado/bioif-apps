@@ -2,7 +2,7 @@
     {
         "name": "Babelomics",
         "shortDescription": "A program suite for advanced functional genomic data analysis",
-        "launch-link" :  "http://www.babelomics.org/",
+        "launch-launch-link" :  "http://www.babelomics.org/",
         "links": [
             {
                 "text": "Source",
@@ -43,14 +43,14 @@
     {
         "name": "VARIANT",
         "shortDescription": "Fast and accurate functional characterization of variants in VCF files",
-        "link": "http://variant.bioinfo.cipf.es/",
+        "launch-link": "http://variant.bioinfo.cipf.es/",
         "icon": ""
     },
 
     {
         "name": "CellBase",
         "shortDescription": "RESTful Web Services for retrieving releant biological information",
-        "link": "http://docs.bioinfo.cipf.es/projects/cellbase",
+        "launch-link": "http://docs.bioinfo.cipf.es/projects/cellbase",
         "icon": "",
         "keywords": ["Pathway"]
     },
@@ -58,7 +58,7 @@
     {
         "name": "GenomeMaps",
         "shortDescription": "Our highly efficient next generation genome viewer (used by the ICGC)",
-        "link": "http://www.genomemaps.org/",
+        "launch-link": "http://www.genomemaps.org/",
         "icon": "",
         "keywords": ["Genomics", "Proteomics"]
     },
@@ -66,7 +66,7 @@
     {
         "name": "BiERapp",
         "shortDescription": "Variant/gene prioritzation tool (from VCF to candidates)",
-        "link": "http://bierapp.babelomics.org/",
+        "launch-link": "http://bierapp.babelomics.org/",
         "icon": "",
         "keywords": ["Genomics"]
     },
@@ -74,28 +74,28 @@
     {
         "name": "TEAM",
         "shortDescription": "",
-        "link": "http://team.babelomics.org/",
+        "launch-link": "http://team.babelomics.org/",
         "icon": ""
     },
 
     {
         "name": "RENATO",
         "shortDescription": "",
-        "link": "http://renato.bioinfo.cipf.es/",
+        "launch-link": "http://renato.bioinfo.cipf.es/",
         "icon": ""
     },
 
     {
         "name": "PATHiWays",
         "shortDescription": "Inferring the functional effect of gene expression changes in signaling pathways",
-        "link": "http://pathiways.babelomics.org/",
+        "launch-link": "http://pathiways.babelomics.org/",
         "icon": "",
         "keywords": ["Pathway", "Genomics", "Proteomics"]
     },
     {
         "name": "PATHiVar",
         "shortDescription": "Assessing the impact of mutations found in next generation sequencing data over human signaling pathways",
-        "link": "http://pathivar.babelomics.org/",
+        "launch-link": "http://pathivar.babelomics.org/",
         "icon": "http://pathivar.babelomics.org/images/pathiways-logo.svg",
         "completeDescription": "<p>Modern sequencing technologies produce increasingly detailed data on genomic variation. However, conventional methods for relating either individual variants or mutated genes to phenotypes present known limitations given the complex, multigenic nature of many diseases or traits. Here we present PATHiVar, a web-based tool that integrates genomic variation data with gene expression tissue information. PATHiVar constitutes a new generation of genomic data analysis methods that allow studying variants found in next-generation sequencing experiment in the context of signaling pathways. Simple Boolean models of pathways provide detailed descriptions of the impact of mutations in cell functionality so as, recurrences in functionality failures can easily be related to diseases, even if they are produced by mutations in different genes. Patterns of changes in signal transmission circuits, often unpredictable from individual genes mutated, correspond to patterns of affected functionalities that can be related to complex traits such as disease progression, drug response, etc.&nbsp;</p>",
         "publications": [
@@ -114,31 +114,31 @@
     {
         "name": "Phylemon",
         "shortDescription": "Evolution, phylogenetics, phylogenomics",
-        "link": "http://phylemon.bioinfo.cipf.es/",
+        "launch-link": "http://phylemon.bioinfo.cipf.es/",
         "icon": "http://phylemon.bioinfo.cipf.es/css/phylemon_title.png"
     },
     {
         "name": "PTMCode",
         "shortDescription": "The database of post-translational modifications within and between proteins",
-        "link": "http://ptmcode.embl.de/",
+        "launch-link": "http://ptmcode.embl.de/",
         "icon": ""
     },
     {
         "name": "SNPeffect",
         "shortDescription": "on-line prediction of effects of protein-coding variants",
-        "link": "http://snpeffect.switchlab.org/",
+        "launch-link": "http://snpeffect.switchlab.org/",
         "icon": "http://snpeffect.switchlab.org/sites/all/themes/rubik/cube/images/snpeffect.png"
     },
     {
         "name": "DBAli",
         "shortDescription": "Pairwise and multiple protein structure alignments",
-        "link": "http://salilab.org/DBAli/",
+        "launch-link": "http://salilab.org/DBAli/",
         "icon": ""
     },
     {
         "name": "SARA",
         "shortDescription": "Functional annotation of RNA structures",
-        "link": "http://structure.biofold.org/sara/",
+        "launch-link": "http://structure.biofold.org/sara/",
         "icon": "http://structure.biofold.org/sara/images/logo.png"
     }
 ]
