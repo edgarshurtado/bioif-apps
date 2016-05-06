@@ -169,9 +169,9 @@
             color: #3cb0fd;
         }
 
-/*        .link-icons a[href=""] li, .link-icons a:not([href]) li {
+        .link-icons a[href=""]{
             display: none;
-        }*/
+        }
 
 
         /*
@@ -373,11 +373,10 @@
             </div>
 
             <div class="link-icons">
-                <ul class="layout horizontal wrap">
-                    <li><a href="{{_computeLinkIcon(appToDisplay.links.source)}}"><i class="fa fa-github"></i><span> Source</span></a></li>
-                    <li><a href="{{_computeLinkIcon(appToDisplay.links.docs)}}"><i class="fa fa-file-text-o"></i><span> Docs</span></a></li>
-                    <li><a href="{{_computeLinkIcon(appToDisplay.links.tutorial)}}"><i class="fa fa-youtube-square"></i><span> Tutorial</span></a></li>
-                    <li><a href="{{_computeLinkIcon(appToDisplay.links.usageStats)}}"><i class="fa fa-bar-chart"></i><span> Usage Stats</span></a></li>
+                <ul class="layout horizontal justified wrap">
+                    <template is="dom-repeat" items="[[appToDisplay.links]]">
+                        <li><a href="[[item.link]]" target="_blank"><i class$="fa [[item.faIcon]]"></i><span> {{item.text}}</span></a></li>
+                    </template>
                 </ul>
             </div>
         </header>
@@ -516,18 +515,6 @@
                 }
             },
 
-            _fireToggleMenu: function() {
-                this.fire("click-menu");
-            },
-
-            _computeLinkIcon: function(link){
-                if(link === undefined){
-                    return "";
-                }else {
-                    return link;
-                }
-            },
-
             _setSliderSize: function(){
                 if(this._smallSlider){
                     this._currentSliderSize = this._sliderSizes.small;
@@ -548,7 +535,7 @@
 
             _selectThumbnails: function(ssArray){
                 return ssArray.splice(1);
-            },
+            }
 
         })
     </script>
