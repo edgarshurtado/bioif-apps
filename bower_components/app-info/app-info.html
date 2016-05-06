@@ -212,9 +212,6 @@
             width:100%;
         }
 
-        .slideshow_container{
-            width: 100%;
-        }
 
         .publications_list > li {
             border-bottom: black solid 1px;
@@ -260,7 +257,10 @@
             overflow: hidden;
             margin-left: auto;
             margin-right: auto;
-            padding: 2rem;
+        }
+        
+        .slideshow_container{
+            width: 100%;
         }
 
         polymer-slide > img {
@@ -536,12 +536,6 @@
                 }else {
                     this._currentSliderSize = this._sliderSizes.default;
                 }
-
-                var slideshowContainer = Polymer.dom(this.root).querySelector(".slideshow_container");
-                var slideshow = Polymer.dom(this.root).querySelector("polymer-slideshow");
-
-                Polymer.dom(slideshowContainer).removeChild(slideshow);
-                Polymer.dom(slideshowContainer).appendChild(slideshow);
             },
 
             _selectMainSS: function(ssArray){
