@@ -114,7 +114,7 @@
                                route="{{route}}"></bz-collection>
             </div>
 
-            <div class="app_info_container" on-scroll="_handleScroll">
+            <div class="app_info_container" id="appInfoContainer" on-scroll="_handleScroll">
                 <app-info id="appInfo" on-click-menu="_handleShowMenu">
                         <i class="fa fa-bars banner_item menu_burguer left" on-click="_handleShowMenu"></i>
                         <app-search class="search_box banner_item right" id="searchBox"></app-search>
@@ -186,6 +186,7 @@
                     this._handleHideMenu();
                     var app = this.data.find(searchApp, this);
                     this.$.appInfo.appToDisplay = app;
+                    this.$.appInfoContainer.scrollTop = 0; // Default scroll position
                 }, 200);
             }
 
