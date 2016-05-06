@@ -39,9 +39,16 @@
                 cursor: pointer;
             }
 
+            #queryBox {
+                background-image: url("../app-search/magnifying_glass.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position:right;
+            }
+
         </style>
 
-        <input type="text" id="queryBox" value="" on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_areResults">
+        <input type="text" id="queryBox" placeholder="Search..." on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_areResults">
         <div class="results_box" id="resultsBox"  hidden>
             <ul id="resultsList" class="results_list">
                 <template is="dom-repeat" items="{{results}}">
