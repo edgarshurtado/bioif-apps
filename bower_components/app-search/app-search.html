@@ -32,11 +32,11 @@
 
             .results_list > li:not(.label){
                 color: black;
+                cursor: pointer;
             }
 
-            .results_list > li:not(.label):hover {
+            .results_list > li:not(.label):hover, li:not(.label)[hover] {
                 background-color: #99ccff;
-                cursor: pointer;
             }
 
             #queryBox {
@@ -87,7 +87,63 @@
             },
 
             _handleKeyUp: function(e) {
-                this._search(e.target.value);
+
+                switch(e.keyCode){
+                    case 13: break;
+                    // left
+                    case 37: break;
+                    // right
+                    case 39: break;
+                    // up
+                    case 38:
+                    // down
+                    case 40:
+                        this._handleUpDownArrow(e.keyCode);
+                        break;
+                    default: this._search(e.target.value)
+                }
+            },
+
+            _handleUpDownArrow(code) {
+                var polDom = Polymer.dom(this.root);
+                var elements = polDom.querySelectorAll("li:not(.label)");
+                var currentElement = polDom.querySelector("li[hover]");
+
+                if(currentElement){
+                    var indexCurrentSelected = -1;
+
+                    elements.forEach(function(el, i){
+                        if(el.hasAttribute("hover")){
+                            indexCurrentSelected = i;
+                        }
+                    });
+
+                    console.log(indexCurrentSelected);
+
+                    Polymer.dom(currentElement).removeAttribute("hover");
+
+                    switch(code){
+                        case 38:
+                                if(indexCurrentSelected > 0){
+                                    var prevEl = elements[indexCurrentSelected - 1];
+                                    prevEl.setAttribute("hover", "");
+                                }
+                            break;
+                        case 40:
+                                var nextEl;
+                                if(indexCurrentSelected < elements.length - 1){
+                                    nextEl = elements[indexCurrentSelected + 1];
+                                }else {
+                                    nextEl = elements[indexCurrentSelected];
+                                }
+
+                                Polymer.dom(nextEl).setAttribute("hover", "");
+                            break;
+                        default:
+                    }
+                }else if(code === 40){
+                    elements[0].setAttribute("hover", "");
+                }
             },
 
             _handleClick: function(e) {
