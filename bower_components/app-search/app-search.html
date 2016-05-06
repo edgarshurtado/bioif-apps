@@ -92,6 +92,8 @@
 
             _handleClick: function(e) {
                 window.location.href = "#/" + e.target.dataName.toLowerCase();
+                this.$.queryBox.value = "";
+                this.results = [];
             },
 
             _search: function(query){
