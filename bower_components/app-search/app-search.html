@@ -89,7 +89,10 @@
             _handleKeyUp: function(e) {
 
                 switch(e.keyCode){
-                    case 13: break;
+                    // enter key
+                    case 13:
+                        this._handleEnterPress();
+                        break;
                     // left
                     case 37: break;
                     // right
@@ -143,6 +146,13 @@
                     }
                 }else if(code === 40){
                     elements[0].setAttribute("hover", "");
+                }
+            },
+
+            _handleEnterPress: function(){
+                var element = Polymer.dom(this.root).querySelector("li:not(.label)[hover]");
+                if(element){
+                    element.click();
                 }
             },
 
