@@ -56,16 +56,12 @@
 
         .site-nav {
             padding: 1rem;
-            background-color: transparent;
+            background-color: #435f7a;
             box-sizing: border-box;
             position: fixed;
             right: 0; /*To don't push the search-box out of the body*/
             left: 0;
             z-index: 99;
-        }
-
-        :host[scrolled] .site-nav {
-            background-color: #435f7a;
         }
 
         :host:not([scrolled]) .banner_title{
@@ -277,6 +273,10 @@
 
         @media screen and (max-width: 425px){
             polymer-slideshow{
+                display: none;
+            }
+
+            .banner_title{
                 display: none;
             }
 
