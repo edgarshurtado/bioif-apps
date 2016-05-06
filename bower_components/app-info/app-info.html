@@ -539,7 +539,11 @@
             },
 
             _selectMainSS: function(ssArray){
-                return ssArray[0];
+                if(ssArray) {
+                    return ssArray[0];
+                }
+                
+                return "";
             },
 
             _selectThumbnails: function(ssArray){
