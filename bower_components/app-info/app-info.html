@@ -56,7 +56,7 @@
 
         .site-nav {
             padding: 1rem;
-            background-color: #435f7a;
+            background-color: transparent;
             box-sizing: border-box;
             position: fixed;
             right: 0; /*To don't push the search-box out of the body*/
@@ -64,8 +64,18 @@
             z-index: 99;
         }
 
-        .no_background {
-            background-color: transparent;
+        :host[scrolled] .site-nav {
+            background-color: #435f7a;
+        }
+
+        :host:not([scrolled]) .banner_title{
+            display: none;
+        }
+
+        .banner_title{
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
         }
 
         header .site-container {
@@ -347,7 +357,7 @@
                 <div class="menu_button">
                     <content select=".banner_item.left"></content>
                 </div>
-                <span class="banner_title" id="bannerTitle" hidden>{{appToDisplay.name}}</span>
+                <span class="banner_title" id="bannerTitle">{{appToDisplay.name}}</span>
                 <content select=".banner_item.right"></content>
             </div>
             <div class="site-container">

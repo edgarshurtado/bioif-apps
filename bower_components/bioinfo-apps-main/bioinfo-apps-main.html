@@ -56,6 +56,8 @@
             .app_info_container {
                 position: relative;
                 transition: left 0.6s;
+                height: 100vh;
+                overflow-y: scroll;
             }
 
             app-info {
@@ -112,8 +114,7 @@
                                route="{{route}}"></bz-collection>
             </div>
 
-            <div class="app_info_container">
-
+            <div class="app_info_container" on-scroll="_handleScroll">
                 <app-info id="appInfo" on-click-menu="_handleShowMenu">
                         <i class="fa fa-bars banner_item menu_burguer left" on-click="_handleShowMenu"></i>
                         <app-search class="search_box banner_item right" id="searchBox"></app-search>
@@ -151,6 +152,14 @@
             },
 
 
+            _handleScroll: function(e){
+                var scrolledElement = e.target;
+                if(scrolledElement.scrollTop > 115){
+                    this.$.appInfo.setAttribute("scrolled", "");
+                } else {
+                    this.$.appInfo.removeAttribute("scrolled");
+                }
+            },
 
             _handleHideMenu: function(){
                 Polymer.dom(this.$.menuWrapper).removeAttribute("show");
