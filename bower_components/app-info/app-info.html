@@ -8,6 +8,10 @@
 <dom-module id="app-info">
     <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
 
+        /*
+        * General Settings
+        */
+
         :host {
             font-family: SansSerif;
         }
@@ -31,9 +35,6 @@
             display: block;
         }
 
-        /*
-        * Font general Settings
-        */
 
         :host {
             color: #647276;
@@ -57,26 +58,14 @@
             padding: 1rem;
             background-color: #435f7a;
             box-sizing: border-box;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translate(0, -100%)
-            }
-
-            to {
-                transform: translate(0);
-            }
-
-        }
-
-        .site-nav[sticky]{
             position: fixed;
             right: 0; /*To don't push the search-box out of the body*/
-            width: inherit;
-            animation: slideDown;
-            animation-duration: 1s;
+            left: 0;
             z-index: 99;
+        }
+
+        .no_background {
+            background-color: transparent;
         }
 
         header .site-container {
@@ -314,13 +303,10 @@
         }
 
         @media screen and (min-width: 1200px){
-            /*.site-nav {*/
-                /*display: none;*/
-            /*}*/
-            /**/
-            /*.menu_burguer {*/
-                /*opacity: 0;*/
-            /*}*/
+            .site-nav {
+                left: 150px;
+                right: 0;
+            }
         }
 
         @media screen and (min-width: 1400px) {
@@ -357,9 +343,12 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
-            <div class="site-nav">
-                    <content></content>
+            <div class="site-nav layout horizontal justified">
+                <div class="menu_button">
+                    <content select=".banner_item.left"></content>
                 </div>
+                <span class="banner_title" id="bannerTitle" hidden>{{appToDisplay.name}}</span>
+                <content select=".banner_item.right"></content>
             </div>
             <div class="site-container">
                 <h1>{{appToDisplay.name}}</h1>
@@ -507,10 +496,13 @@
 
             _stickyBannerHandler: function(){
                 var siteNav = this.$$(".site-nav");
-                if(document.body.scrollTop > 458){
-                    siteNav.setAttribute("sticky", "");
-                }else if(document.body.scrollTop === 0){
-                    siteNav.removeAttribute("sticky");
+                var bannerTitle = this.$.bannerTitle;
+                if(document.body.scrollTop > 115){
+                    bannerTitle.removeAttribute("hidden");
+                    siteNav.classList.remove("no_background");
+                }else if(document.body.scrollTop < 115){
+                    bannerTitle.setAttribute("hidden", "");
+                    siteNav.classList.add("no_background");
                 }
             },
 
