@@ -89,12 +89,14 @@ Polymer({
     width: {
       type: Number,
       value: 350,
-      reflectToAttribute: true
+      reflectToAttribute: true,
+      observer: "_handleChangeSize"
     },
     height: {
       type: Number,
       value: 250,
-      reflectToAttribute: true
+      reflectToAttribute: true,
+      observer: "_handleChangeSize"
     },
     auto: {
       type: Boolean,
@@ -157,6 +159,10 @@ Polymer({
     }
     this.currentSlide = (this.currentSlide - 1) % this.slides.length;
     return this.slides[this.currentSlide];
+  },
+  _handleChangeSize: function() {
+    this.style.height = this.height + "px";
+    this.style.width = this.width+ "px";
   }
 });
 </script>

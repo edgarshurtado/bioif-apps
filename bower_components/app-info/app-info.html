@@ -536,12 +536,6 @@
                 }else {
                     this._currentSliderSize = this._sliderSizes.default;
                 }
-
-                var slideshowContainer = Polymer.dom(this.root).querySelector(".slideshow_container");
-                var slideshow = Polymer.dom(this.root).querySelector("polymer-slideshow");
-
-                Polymer.dom(slideshowContainer).removeChild(slideshow);
-                Polymer.dom(slideshowContainer).appendChild(slideshow);
             },
 
             _selectMainSS: function(ssArray){
