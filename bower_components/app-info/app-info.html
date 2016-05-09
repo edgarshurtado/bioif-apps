@@ -14,6 +14,7 @@
 
         :host {
             font-family: SansSerif;
+            color: #647276;
         }
 
         a {
@@ -33,11 +34,6 @@
             margin: 0 auto;
             padding: 0;
             display: block;
-        }
-
-
-        :host {
-            color: #647276;
         }
 
         h1, h2 {
@@ -78,22 +74,22 @@
             float: left;
         }
 
-        header .site-container {
+        .site-container {
             text-align: center;
             padding: 3rem 0;
         }
-        header .site-container > h1 {
+        .site-container > h1 {
             color: #FBFBF9;
         }
 
-        header .site-container > h1 {
+        .site-container > h1 {
             font-family: "Copperplate";
             text-shadow: 2px 2px black;
             margin: 0;
             font-size: 3em;
         }
 
-        header .site-container > p {
+        .site-container > p {
             text-align: center;
             width: 90%;
             margin-left: auto;
@@ -141,39 +137,36 @@
 
         /* Link icons */
         header .link-icons {
-            padding-top: 10px;
-            padding-bottom: 10px;
             background-color: rgba(0,0,0,0.1);
         }
 
         .link-icons{
             width: 100%;
             font-size: 1.2em;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         .link-icons > ul {
             width: 90%;
         }
 
-        .link-icons > ul > li {
-            padding: 1.25rem;
-        }
-
-        .link-icons  a {
+        .link-icons .link{
             display: block;
+            padding: 1.25rem;
             margin-right: 15px;
             color: white;
         }
 
-        .link-icons  a  i {
+        .link-icons .link  i {
             color: #3cb0fd;
         }
 
-        .link-icons  a:hover {
+        .link-icons .link:hover {
             color: #3cb0fd;
         }
 
-        .link-icons a[href=""]{
+        .link-icons .link[href=""]{
             display: none;
         }
 
@@ -380,7 +373,7 @@
             <div class="link-icons">
                 <ul class="layout horizontal justified wrap">
                     <template is="dom-repeat" items="[[appToDisplay.links]]">
-                        <li><a href="[[item.link]]" target="_blank"><i class$="fa [[item.faIcon]]"></i><span> {{item.text}}</span></a></li>
+                        <li><a class="link" href="[[item.link]]" target="_blank"><i class$="fa [[item.faIcon]]"></i><span> {{item.text}}</span></a></li>
                     </template>
                 </ul>
             </div>
@@ -431,13 +424,11 @@
             <br>
             <div class="link-icons footer-container">
                 <ul class="layout horizontal around-justified">
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a class="link" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="link" href="#"><i class="fa fa-envelope-o"></i></a></li>
                 </ul>
             </div>
         </footer>
-
-
     </template>
     <script>
         Polymer({
