@@ -65,8 +65,9 @@
             is: "app-search",
 
             properties:{
-                db: {
-                    type: Array/Object
+                data: {
+                    type: Array/Object,
+                    reflectOnAttribute: true
                 },
 
                 results: {
@@ -165,7 +166,7 @@
                     var results = {applications: [], keywords: []};
                     var re = new RegExp(".*" + query + ".*", "i");
 
-                    this.db.forEach(function(app){
+                    this.data.forEach(function(app){
 //                    Matches with app name
                         if(re.test(app.name)){
                             results.applications.push(app.name);

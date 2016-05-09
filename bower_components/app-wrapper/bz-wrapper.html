@@ -16,6 +16,7 @@
                 padding-top: 10px;
                 padding-bottom: 10px;
                 width: 100%;
+                box-sizing: border-box;
             }
 
             .container[active]{
@@ -25,7 +26,11 @@
 
             .container:hover:not([active]){
                 background-color: rgba(255,255,255, 0.2);
-                border: rgba(255,255,255, 0.2) solid 1px;
+                border: rgba(255,255,255, 0.4) solid 1px;
+            }
+
+            .container:hover:not([active]) .iconHolder, .container[active] .iconHolder{
+                background-color: hsla(220, 100%, 50%, 1);
             }
 
             img, svg {
@@ -49,11 +54,6 @@
             }
 
 
-            .container:hover:not([active]) .iconHolder, .container[active] .iconHolder{
-                background-color: hsla(220, 100%, 50%, 1);
-            }
-
-
         </style>
 
         <div id="container" class="container">
@@ -61,7 +61,7 @@
                 <template is="dom-if" if="[[_hasIcon(appInfo.icon)]]">
                     <img id="iconTag" src="[[appInfo.icon]]" alt="">
                 </template>
-                <template is="dom-if" if="{{!_hasIcon(appInfo.icon)}}">
+                <template is="dom-if" if="[[!_hasIcon(appInfo.icon)]]">
                     <svg class="icon"
                          viewBox="0 0 1000 1000"
                          sodipodi:docname="default.svg"><path
@@ -86,16 +86,12 @@
                             inkscape:connector-curvature="0" /></svg>
                 </template>
             </div>
-            <span id="appName">{{appInfo.name}}</span>
+            <span id="appName">[[appInfo.name]]</span>
         </div>
     </template>
     <script>
         Polymer({
             is: "bz-wrapper",
-            ready: function(){
-                this.addEventListener("click", function(){this.activated = true}.bind(this));
-            },
-
             properties: {
                 appInfo: Object,
                 activated: {
@@ -103,12 +99,13 @@
                     value: false,
                     reflectToAttribute: true,
                     observer: "_handleActivate"
-                },
-                displayMode : {
-                    type: String,
-                    reflectToAttribute: true
                 }
             },
+
+            ready: function(){
+                this.addEventListener("click", function(){this.activated = true}.bind(this));
+            },
+
 
             _hasIcon: function(url) {
               return url !== "";

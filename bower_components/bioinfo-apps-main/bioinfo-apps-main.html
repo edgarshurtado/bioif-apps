@@ -86,15 +86,11 @@
                     transform: translate(0);
                 }
 
-/*                .menu_burguer {
-                    display: none;
-                }*/
-
                 .search_box {
                     float: right;
                 }
                 /* Made with opacity instead of display: none because of no affecting the Flex layout*/
-                .banner_item.menu_burguer {
+                .banner_item.menu_burger {
                     opacity: 0;
                 }
             }
@@ -117,13 +113,14 @@
             <div class="menu_wrapper" id="menuWrapper">
                 <bz-collection id="bzCollection"
                                tabindex="-1"
-                               route="{{route}}"></bz-collection>
+                               route="{{route}}"
+                                data="[[appCollection]]"></bz-collection>
             </div>
 
             <div class="app_info_container" id="appInfoContainer" on-scroll="_handleScroll">
                 <app-info id="appInfo" on-click-menu="_handleShowMenu">
-                        <i class="fa fa-bars banner_item menu_burguer left" on-click="_handleShowMenu"></i>
-                        <app-search class="search_box banner_item right" id="searchBox"></app-search>
+                        <i class="fa fa-bars menu_burger banner_item left" on-click="_handleShowMenu"></i>
+                        <app-search class="search_box banner_item right" id="searchBox" data="[[appCollection]]"></app-search>
                 </app-info>
             </div>
 
@@ -139,7 +136,7 @@
                     type: Object,
                     observer: "_handleUrl"
                 },
-                data: Array/Object,
+                appCollection: Array/Object,
                 /**
                  * Url for the json which contains the apps information
                  */
@@ -151,9 +148,7 @@
 
             ready: function() {
                 jsonUtils.jsonRequest(this._jsonSrc, function(response){
-                    this.$.bzCollection.appCollectionJson = response;
-                    this.data = response;
-                    this.$.searchBox.db = response;
+                    this.appCollection = response;
                 }.bind(this));
             },
 
@@ -187,10 +182,10 @@
                     this.set("route.path", "/babelomics");
                 }
 
-//                Needed to be async because in the first load of the page the data isn't set in time
+//                Needed to be async because in the first load of the page appCollection isn't set in time
                 this.async(function(){
                     this._handleHideMenu();
-                    var app = this.data.find(searchApp, this);
+                    var app = this.appCollection.find(searchApp, this);
                     this.$.appInfo.appToDisplay = app;
                     this.$.appInfoContainer.scrollTop = 0; // Default scroll position
                 }, 200);

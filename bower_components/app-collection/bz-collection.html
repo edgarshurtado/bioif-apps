@@ -20,7 +20,7 @@
 
         </style>
         <div class="container">
-            <template id="appCollectionDom" is="dom-repeat" items="{{appCollectionJson}}">
+            <template id="appCollectionDom" is="dom-repeat" items="{{data}}">
                 <bz-wrapper app-info="{{item}}" on-change-active="_handleActivation"></bz-wrapper>
             </template>
         </div>
@@ -30,8 +30,9 @@
             is: "bz-collection",
 
             properties:{
-                appCollectionJson: {
-                    type: Array/Object
+                data: {
+                    type: Array/Object,
+                    reflectOnAttribute: true
                 },
                 activeObject: {
                     type:Object,
