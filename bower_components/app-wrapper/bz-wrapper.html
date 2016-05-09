@@ -4,7 +4,7 @@
 
 <dom-module id="bz-wrapper">
     <template>
-        <style is= "custom-style" include=" iron-flex iron-flex-alignment">
+        <style>
 
             :host {
                 color: white;
@@ -12,11 +12,11 @@
 
             .container{
                 border: transparent solid 1px;
-                text-align: center;
                 padding-top: 10px;
                 padding-bottom: 10px;
                 width: 100%;
                 box-sizing: border-box;
+                position: relative;
             }
 
             .container[active]{
@@ -42,26 +42,32 @@
                 background-color: hsla(212, 100%, 60%, 1);
                 border-radius: 15%;
                 position: relative;
+                height: 70px;
+                width: 70px;
                 left: 50%;
                 transform: translate(-50%, 0);
-                overflow: hidden;
                 transition: background-color 1s;
             }
 
-            .iconHolder {
-                height: 70px;
-                width: 70px;
+            .iconHolder > img, .iconHolder > svg{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
 
-
+            .app_name_holder {
+                text-align: center;
+            }
         </style>
 
         <div id="container" class="container">
-            <div class="iconHolder layout vertical center center-justified">
-                <template is="dom-if" if="[[_hasIcon(appInfo.icon)]]">
-                    <img id="iconTag" src="[[appInfo.icon]]" alt="">
+            <div class="iconHolder">
+                <template is="dom-if" if="[[_hasIcon(iconSrc)]]">
+                    <img id="iconTag" src="[[iconSrc]]" alt="">
                 </template>
-                <template is="dom-if" if="[[!_hasIcon(appInfo.icon)]]">
+                <template is="dom-if" if="[[!_hasIcon(iconSrc)]]">
+                    <!-- Default icon if no available icon supplied for the user -->
                     <svg class="icon"
                          viewBox="0 0 1000 1000"
                          sodipodi:docname="default.svg"><path
@@ -86,14 +92,17 @@
                             inkscape:connector-curvature="0" /></svg>
                 </template>
             </div>
-            <span id="appName">[[appInfo.name]]</span>
+            <div class="app_name_holder">
+                <span id="appName">[[title]]</span>
+            </div>
         </div>
     </template>
     <script>
         Polymer({
             is: "bz-wrapper",
             properties: {
-                appInfo: Object,
+                title: String,
+                iconSrc: String,
                 activated: {
                     type: Boolean,
                     value: false,
