@@ -381,9 +381,9 @@
             <section class="light description">
                     <h2>Description</h2>
                     <div class="layout horizontal wrap content-text">
-                        <div id="description" class="description_text"></div>
+                        <div id="description" class="description_text" inner-h-t-m-l="[[description]]"></div>
                         <div class="slideshow_container">
-                            <polymer-slideshow height="{{_currentSliderSize.height}}" width="{{_currentSliderSize.width}}" auto="false">
+                            <polymer-slideshow height="{{_slider.currentSliderSize.height}}" width="{{_slider.currentSliderSize.width}}">
                                 <polymer-slide>
                                     <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
                                 </polymer-slide>
@@ -399,7 +399,7 @@
             <section class="dark_background citation">
                 <div class="section_container">
                     <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
-                    <div id="citation" class="content-text"></div>
+                    <div id="citation" class="content-text" inner-h-t-m-l="[[citation]]"></div>
                 </div>
             </section>
 
@@ -416,7 +416,7 @@
             </section>
         </main>
         <footer>
-            <a href="{{appToDisplay.link}}">{{appToDisplay.name}}</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
+            <a href="{{appToDisplay.link}}">{{appName}}</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
             <br>
             Principe Felipe Research Center
             <br>
@@ -438,17 +438,37 @@
                     type: Object,
                     observer: "_handleInfo"
                 },
+
+                appName: String,
+
+                citation: {
+                    type: String,
+                },
+
                 publications:{
                     type: Array
                 },
 
-                _screenShotDisplay: {
-                    type: Object
-                },
+                description: String,
 
                 route: {
                     type: String,
                     observer: "_handleRoute"
+                },
+
+                _slider: {
+                    type: Object,
+                    observer: "_setSliderSize",
+                    value: function(){
+                        return {
+                            sliderSizes : {
+                                "default": {height: 300, width: 500},
+                                "big": {height: 500, width: 700},
+                                "small": {height: 300, width: 400}
+                            },
+                            currentSliderSize:{}
+                        }
+                    }
                 },
 
                 _smallSlider: {
@@ -459,19 +479,6 @@
                 _bigSlider: {
                     type: Boolean,
                     observer: "_setSliderSize"
-                },
-
-                _sliderSizes: {
-                    type: Object,
-                    value: {
-                        "default": {height: 300, width: 500},
-                        "big": {height: 500, width: 700},
-                        "small": {height: 300, width: 400},
-                    }
-                },
-
-                _currentSliderSize: {
-                    type: Object
                 }
             },
 
@@ -481,8 +488,8 @@
 
             _handleInfo: function(){
                 var desc = this.appToDisplay.completeDescription;
-                Polymer.dom(this.$.description).innerHTML = desc;
-                Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
+//                Polymer.dom(this.$.description).innerHTML = desc;
+//                Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
                 this.publications = this.appToDisplay.publications;
             },
 
@@ -500,12 +507,15 @@
 
             _setSliderSize: function(){
                 if(this._smallSlider){
-                    this._currentSliderSize = this._sliderSizes.small;
+                    this._slider.currentSliderSize = this._slider.sliderSizes.small;
                 }else if(this._bigSlider){
-                    this._currentSliderSize = this._sliderSizes.big;
+                    this._slider.currentSliderSize = this._slider.sliderSizes.big;
                 }else {
-                    this._currentSliderSize = this._sliderSizes.default;
+                    this._slider.currentSliderSize = this._slider.sliderSizes.default;
                 }
+
+                // Notify polymer that the subproperty has been updated
+                this.notifyPath("_slider.currentSliderSize", this._slider.currentSliderSize);
             },
 
             _selectMainSS: function(ssArray){
@@ -518,7 +528,7 @@
 
             _selectThumbnails: function(ssArray){
                 return ssArray.splice(1);
-            }
+            },
 
         })
     </script>

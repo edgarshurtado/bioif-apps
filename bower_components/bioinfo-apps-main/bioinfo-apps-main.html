@@ -118,7 +118,10 @@
             </div>
 
             <div class="app_info_container" id="appInfoContainer" on-scroll="_handleScroll">
-                <app-info id="appInfo" on-click-menu="_handleShowMenu">
+                <app-info id="appInfo" on-click-menu="_handleShowMenu"
+                          app-name="[[selectedApp.name]]"
+                          citation="[[selectedApp.citation]]"
+                          description="[[selectedApp.completeDescription]]">
                         <i class="fa fa-bars menu_burger banner_item left" on-click="_handleShowMenu"></i>
                         <app-search class="search_box banner_item right" id="searchBox" data="[[appCollection]]"></app-search>
                 </app-info>
@@ -143,7 +146,10 @@
                 _jsonSrc: {
                     type: String,
                     value: "src/test-apps.json"
-                }
+                },
+
+                selectedApp:  Object
+
             },
 
             ready: function() {
@@ -187,6 +193,7 @@
                     this._handleHideMenu();
                     var app = this.appCollection.find(searchApp, this);
                     this.$.appInfo.appToDisplay = app;
+                    this.selectedApp = app;
                     this.$.appInfoContainer.scrollTop = 0; // Default scroll position
                 }, 200);
             }
