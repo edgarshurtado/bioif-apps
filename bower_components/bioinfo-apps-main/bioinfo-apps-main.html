@@ -120,10 +120,13 @@
             <div class="app_info_container" id="appInfoContainer" on-scroll="_handleScroll">
                 <app-info id="appInfo" on-click-menu="_handleShowMenu"
                           app-name="[[selectedApp.name]]"
+                          short-description="[[selectedApp.shortDescription]]"
                           citation="[[selectedApp.citation]]"
-                          description="[[selectedApp.completeDescription]]">
-                        <i class="fa fa-bars menu_burger banner_item left" on-click="_handleShowMenu"></i>
-                        <app-search class="search_box banner_item right" id="searchBox" data="[[appCollection]]"></app-search>
+                          description="[[selectedApp.completeDescription]]"
+                          publications="[[selectedApp.publications]]">
+                    <!-- Banner content -->
+                        <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_handleShowMenu"></i>
+                        <app-search class="search_box banner_item banner_right" id="searchBox" data="[[appCollection]]"></app-search>
                 </app-info>
             </div>
 

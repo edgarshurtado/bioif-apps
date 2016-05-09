@@ -351,14 +351,14 @@
         <header id="header">
             <div class="site-nav layout horizontal justified">
                 <div class="menu_button">
-                    <content select=".banner_item.left"></content>
+                    <content select=".banner_item.banner_left"></content>
                 </div>
                 <span class="banner_title" id="bannerTitle">{{appToDisplay.name}}</span>
-                <content select=".banner_item.right"></content>
+                <content select=".banner_item.banner_right"></content>
             </div>
             <div class="site-container">
-                <h1>{{appToDisplay.name}}</h1>
-                <p>{{appToDisplay.shortDescription}}</p>
+                <h1>[[appName]]</h1>
+                <p>[[shortDescription]]</p>
                 <div class="launch_btn_holder">
                         <div class="launch-button">
                             <a href="{{appToDisplay.launch-link}}"  target="_blank">
@@ -381,7 +381,7 @@
             <section class="light description">
                     <h2>Description</h2>
                     <div class="layout horizontal wrap content-text">
-                        <div id="description" class="description_text" inner-h-t-m-l="[[description]]"></div>
+                        <div id="description" class="description_text"></div>
                         <div class="slideshow_container">
                             <polymer-slideshow height="{{_slider.currentSliderSize.height}}" width="{{_slider.currentSliderSize.width}}">
                                 <polymer-slide>
@@ -399,7 +399,7 @@
             <section class="dark_background citation">
                 <div class="section_container">
                     <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
-                    <div id="citation" class="content-text" inner-h-t-m-l="[[citation]]"></div>
+                    <div id="citation" class="content-text"></div>
                 </div>
             </section>
 
@@ -416,7 +416,7 @@
             </section>
         </main>
         <footer>
-            <a href="{{appToDisplay.link}}">{{appName}}</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
+            <a href="{{appToDisplay.link}}">[[appName]]</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
             <br>
             Principe Felipe Research Center
             <br>
@@ -449,7 +449,9 @@
                     type: Array
                 },
 
-                description: String,
+                description: {
+                    type: String,
+                },
 
                 route: {
                     type: String,
@@ -482,15 +484,11 @@
                 }
             },
 
-            ready: function(){
-                document.addEventListener("scroll", this._stickyBannerHandler.bind(this));
-            },
+            observers: ["_insertHTML(description, citation)"],
 
-            _handleInfo: function(){
-                var desc = this.appToDisplay.completeDescription;
-//                Polymer.dom(this.$.description).innerHTML = desc;
-//                Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
-                this.publications = this.appToDisplay.publications;
+            _insertHTML: function(description, citation) {
+                Polymer.dom(this.$.citation).innerHTML = citation;
+                Polymer.dom(this.$.description).innerHTML = description;
             },
 
             _stickyBannerHandler: function(){
