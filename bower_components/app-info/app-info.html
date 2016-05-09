@@ -64,14 +64,18 @@
             z-index: 99;
         }
 
-        :host:not([scrolled]) .banner_title{
-            display: none;
-        }
-
         .banner_title{
             position: absolute;
             left:50%;
             transform: translateX(-50%);
+        }
+
+        .banner_right{
+            float: right;
+        }
+
+        .banner_left{
+            float: left;
         }
 
         header .site-container {
@@ -309,6 +313,7 @@
         }
 
         @media screen and (min-width: 1200px){
+            /*To make the banner as width as the screen width - 150px */
             .site-nav {
                 left: 150px;
                 right: 0;
@@ -349,12 +354,16 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
-            <div class="site-nav layout horizontal justified">
-                <div class="menu_button">
+            <div class="site-nav">
+                <div class="banner_left">
                     <content select=".banner_item.banner_left"></content>
                 </div>
-                <span class="banner_title" id="bannerTitle">{{appToDisplay.name}}</span>
-                <content select=".banner_item.banner_right"></content>
+                <div class="banner_title">
+                    <content select=".banner_item.banner_name"></content>
+                </div>
+                <div class="banner_right">
+                    <content select=".banner_item.banner_right"></content>
+                </div>
             </div>
             <div class="site-container">
                 <h1>[[appName]]</h1>
