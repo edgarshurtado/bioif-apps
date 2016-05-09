@@ -93,9 +93,15 @@
                 .search_box {
                     float: right;
                 }
-
+                /* Made with opacity instead of display: none because of no affecting the Flex layout*/
                 .banner_item.menu_burguer {
                     opacity: 0;
+                }
+            }
+
+            @media screen and (max-height: 530px), screen and (max-width: 400px){
+                .search_box {
+                    display: none;
                 }
             }
         </style>
@@ -144,7 +150,7 @@
             },
 
             ready: function() {
-                jsonRequest(this._jsonSrc, function(response){
+                jsonUtils.jsonRequest(this._jsonSrc, function(response){
                     this.$.bzCollection.appCollectionJson = response;
                     this.data = response;
                     this.$.searchBox.db = response;
