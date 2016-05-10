@@ -410,15 +410,15 @@
                 <h2>Publications</h2>
                 <div id="publications">
                     <ol class="content-text publications_list">
-                        <template is="dom-repeat" items="{{publications}}">
-                            <li>{{item}}</li>
+                        <template is="dom-repeat" items="[[publications]]">
+                            <li>[[item]]</li>
                         </template>
                     </ol>
                 </div>
             </section>
         </main>
         <footer>
-            <a href="{{appToDisplay.link}}">[[appName]]</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
+            <a href="[[appToDisplay.link]]">[[appName]]</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
             <br>
             Principe Felipe Research Center
             <br>
@@ -441,17 +441,11 @@
 
                 appName: String,
 
-                citation: {
-                    type: String,
-                },
+                citation: String,
 
-                publications:{
-                    type: Array
-                },
+                publications: Array,
 
-                description: {
-                    type: String,
-                },
+                description: String,
 
                 route: {
                     type: String,
@@ -523,11 +517,6 @@
 
                 return "";
             },
-
-            _selectThumbnails: function(ssArray){
-                return ssArray.splice(1);
-            },
-
         })
     </script>
 </dom-module>
