@@ -2,7 +2,8 @@
 <link rel="import" href="../app-collection/bz-collection.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../font-awesome/css/font-awesome.min.css">
-<link rel="import" href="../polymer-slideshow/polymer-slideshow.html">
+<!--<link rel="import" href="../polymer-slideshow/polymer-slideshow.html">-->
+<link rel="import" href="../img-slider/img-slider.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="app-info">
@@ -385,14 +386,15 @@
                     <div class="layout horizontal wrap content-text">
                         <div id="description" class="description_text"></div>
                         <div class="slideshow_container">
-                            <polymer-slideshow height="{{_slider.currentSliderSize.height}}" width="{{_slider.currentSliderSize.width}}">
+<!--                            <polymer-slideshow height="{{_slider.currentSliderSize.height}}" width="{{_slider.currentSliderSize.width}}">
                                 <polymer-slide>
                                     <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
                                 </polymer-slide>
                                 <polymer-slide>
                                     <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
                                 </polymer-slide>
-                            </polymer-slideshow>
+                            </polymer-slideshow>-->
+                                <img-slider id="slider" img-url-array="[[screenshots]]"></img-slider>
                         </div>
                     </div>
             </section>
@@ -435,8 +437,7 @@
             is: "app-info",
             properties: {
                 appToDisplay: {
-                    type: Object,
-                    observer: "_handleInfo"
+                    type: Object
                 },
 
                 appName: String,
@@ -446,6 +447,8 @@
                 publications: Array,
 
                 description: String,
+
+                screenshots: Array,
 
                 route: {
                     type: String,
