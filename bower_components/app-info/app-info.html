@@ -350,7 +350,7 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
-            <template is="dom-if" if="{{!maintained}}">
+            <template is="dom-if" if="{{!_isMaintained(maintained)}}">
                 <badge-element bottom right style="bottom: 82px; right: 0">
                     <span>Deprecated</span>
                 </badge-element>
@@ -453,8 +453,7 @@
                 screenshots: Array,
 
                 maintained: {
-                    type: Boolean,
-                    value: true
+                    type: String
                 },
 
                 route: {
@@ -527,6 +526,10 @@
 
                 return "";
             },
+
+            _isMaintained(maintained){
+                return maintained === "true";
+            }
         })
     </script>
 </dom-module>
