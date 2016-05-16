@@ -4,6 +4,7 @@
 <link rel="import" href="../font-awesome/css/font-awesome.min.css">
 <!--<link rel="import" href="../polymer-slideshow/polymer-slideshow.html">-->
 <link rel="import" href="../img-slider/img-slider.html">
+<link rel="import" href="../badge-element/badge-element.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="app-info">
@@ -348,6 +349,9 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
+            <badge-element style="top: 53px">
+                <span>Deprecated</span>
+            </badge-element>
             <div class="site-nav">
                 <div class="banner_left">
                     <content select=".banner_item.banner_left"></content>
