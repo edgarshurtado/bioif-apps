@@ -13,7 +13,7 @@
         */
 
         :host {
-            font-family: SansSerif;
+            color: #647276;
         }
 
         a {
@@ -33,11 +33,6 @@
             margin: 0 auto;
             padding: 0;
             display: block;
-        }
-
-
-        :host {
-            color: #647276;
         }
 
         h1, h2 {
@@ -64,32 +59,36 @@
             z-index: 99;
         }
 
-        :host:not([scrolled]) .banner_title{
-            display: none;
-        }
-
         .banner_title{
             position: absolute;
             left:50%;
             transform: translateX(-50%);
         }
 
-        header .site-container {
+        .banner_right{
+            float: right;
+        }
+
+        .banner_left{
+            float: left;
+        }
+
+        .site-container {
             text-align: center;
             padding: 3rem 0;
         }
-        header .site-container > h1 {
+        .site-container > h1 {
             color: #FBFBF9;
         }
 
-        header .site-container > h1 {
+        .site-container > h1 {
             font-family: "Copperplate";
             text-shadow: 2px 2px black;
             margin: 0;
             font-size: 3em;
         }
 
-        header .site-container > p {
+        .site-container > p {
             text-align: center;
             width: 90%;
             margin-left: auto;
@@ -137,39 +136,36 @@
 
         /* Link icons */
         header .link-icons {
-            padding-top: 10px;
-            padding-bottom: 10px;
             background-color: rgba(0,0,0,0.1);
         }
 
         .link-icons{
             width: 100%;
             font-size: 1.2em;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         .link-icons > ul {
             width: 90%;
         }
 
-        .link-icons > ul > li {
-            padding: 1.25rem;
-        }
-
-        .link-icons  a {
+        .link-icons .link{
             display: block;
+            padding: 1.25rem;
             margin-right: 15px;
             color: white;
         }
 
-        .link-icons  a  i {
+        .link-icons .link  i {
             color: #3cb0fd;
         }
 
-        .link-icons  a:hover {
+        .link-icons .link:hover {
             color: #3cb0fd;
         }
 
-        .link-icons a[href=""]{
+        .link-icons .link[href=""]{
             display: none;
         }
 
@@ -255,6 +251,7 @@
 
         polymer-slideshow {
             overflow: hidden;
+            margin-top: 1em;
             margin-left: auto;
             margin-right: auto;
         }
@@ -309,6 +306,7 @@
         }
 
         @media screen and (min-width: 1200px){
+            /*To make the banner as width as the screen width - 150px */
             .site-nav {
                 left: 150px;
                 right: 0;
@@ -349,16 +347,20 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
-            <div class="site-nav layout horizontal justified">
-                <div class="menu_button">
-                    <content select=".banner_item.left"></content>
+            <div class="site-nav">
+                <div class="banner_left">
+                    <content select=".banner_item.banner_left"></content>
                 </div>
-                <span class="banner_title" id="bannerTitle">{{appToDisplay.name}}</span>
-                <content select=".banner_item.right"></content>
+                <div class="banner_title">
+                    <content select=".banner_item.banner_name"></content>
+                </div>
+                <div class="banner_right">
+                    <content select=".banner_item.banner_right"></content>
+                </div>
             </div>
             <div class="site-container">
-                <h1>{{appToDisplay.name}}</h1>
-                <p>{{appToDisplay.shortDescription}}</p>
+                <h1>[[appName]]</h1>
+                <p>[[shortDescription]]</p>
                 <div class="launch_btn_holder">
                         <div class="launch-button">
                             <a href="{{appToDisplay.launch-link}}"  target="_blank">
@@ -371,7 +373,7 @@
             <div class="link-icons">
                 <ul class="layout horizontal justified wrap">
                     <template is="dom-repeat" items="[[appToDisplay.links]]">
-                        <li><a href="[[item.link]]" target="_blank"><i class$="fa [[item.faIcon]]"></i><span> {{item.text}}</span></a></li>
+                        <li><a class="link" href="[[item.link]]" target="_blank"><i class$="fa [[item.faIcon]]"></i><span> {{item.text}}</span></a></li>
                     </template>
                 </ul>
             </div>
@@ -383,7 +385,7 @@
                     <div class="layout horizontal wrap content-text">
                         <div id="description" class="description_text"></div>
                         <div class="slideshow_container">
-                            <polymer-slideshow height="{{_currentSliderSize.height}}" width="{{_currentSliderSize.width}}" auto="false">
+                            <polymer-slideshow height="{{_slider.currentSliderSize.height}}" width="{{_slider.currentSliderSize.width}}">
                                 <polymer-slide>
                                     <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
                                 </polymer-slide>
@@ -408,27 +410,25 @@
                 <h2>Publications</h2>
                 <div id="publications">
                     <ol class="content-text publications_list">
-                        <template is="dom-repeat" items="{{publications}}">
-                            <li>{{item}}</li>
+                        <template is="dom-repeat" items="[[publications]]">
+                            <li>[[item]]</li>
                         </template>
                     </ol>
                 </div>
             </section>
         </main>
         <footer>
-            <a href="{{appToDisplay.link}}">{{appToDisplay.name}}</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
+            <a href="[[appToDisplay.link]]">[[appName]]</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
             <br>
             Principe Felipe Research Center
             <br>
             <div class="link-icons footer-container">
                 <ul class="layout horizontal around-justified">
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a class="link" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="link" href="#"><i class="fa fa-envelope-o"></i></a></li>
                 </ul>
             </div>
         </footer>
-
-
     </template>
     <script>
         Polymer({
@@ -438,30 +438,33 @@
                     type: Object,
                     observer: "_handleInfo"
                 },
-                publications:{
-                    type: Array
-                },
 
-                mediumWidth : Boolean,
+                appName: String,
 
-                short: {
-                    type: Boolean,
-                    reflectToAttribute: true
-                },
+                citation: String,
 
-                _screenShotDisplay: {
-                    type: Object
-                },
+                publications: Array,
 
-                displayMode: {
-                    type: String,
-                    reflectToAttribute: true,
-                    observer: "_setLayout"
-                },
+                description: String,
 
                 route: {
                     type: String,
                     observer: "_handleRoute"
+                },
+
+                _slider: {
+                    type: Object,
+                    observer: "_setSliderSize",
+                    value: function(){
+                        return {
+                            sliderSizes : {
+                                "default": {height: 300, width: 500},
+                                "big": {height: 500, width: 700},
+                                "small": {height: 300, width: 400}
+                            },
+                            currentSliderSize:{}
+                        }
+                    }
                 },
 
                 _smallSlider: {
@@ -472,31 +475,14 @@
                 _bigSlider: {
                     type: Boolean,
                     observer: "_setSliderSize"
-                },
-
-                _sliderSizes: {
-                    type: Object,
-                    value: {
-                        "default": {height: 300, width: 500},
-                        "big": {height: 500, width: 700},
-                        "small": {height: 300, width: 400},
-                    }
-                },
-
-                _currentSliderSize: {
-                    type: Object
                 }
             },
 
-            ready: function(){
-                document.addEventListener("scroll", this._stickyBannerHandler.bind(this));
-            },
+            observers: ["_insertHTML(description, citation)"],
 
-            _handleInfo: function(){
-                var desc = this.appToDisplay.completeDescription;
-                Polymer.dom(this.$.description).innerHTML = desc;
-                Polymer.dom(this.$.citation).innerHTML = this.appToDisplay.citation;
-                this.publications = this.appToDisplay.publications;
+            _insertHTML: function(description, citation) {
+                Polymer.dom(this.$.citation).innerHTML = citation;
+                Polymer.dom(this.$.description).innerHTML = description;
             },
 
             _stickyBannerHandler: function(){
@@ -513,12 +499,15 @@
 
             _setSliderSize: function(){
                 if(this._smallSlider){
-                    this._currentSliderSize = this._sliderSizes.small;
+                    this._slider.currentSliderSize = this._slider.sliderSizes.small;
                 }else if(this._bigSlider){
-                    this._currentSliderSize = this._sliderSizes.big;
+                    this._slider.currentSliderSize = this._slider.sliderSizes.big;
                 }else {
-                    this._currentSliderSize = this._sliderSizes.default;
+                    this._slider.currentSliderSize = this._slider.sliderSizes.default;
                 }
+
+                // Notify polymer that the subproperty has been updated
+                this.notifyPath("_slider.currentSliderSize", this._slider.currentSliderSize);
             },
 
             _selectMainSS: function(ssArray){
@@ -528,11 +517,6 @@
 
                 return "";
             },
-
-            _selectThumbnails: function(ssArray){
-                return ssArray.splice(1);
-            }
-
         })
     </script>
 </dom-module>

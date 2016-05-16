@@ -53,17 +53,13 @@
                 overflow-x: hidden;
             }
 
-            .app_info_container {
-                position: relative;
+            app-info {
+                position: absolute;
+                top: 0;
+                left: 0;
                 transition: left 0.6s;
                 height: 100vh;
                 overflow-y: scroll;
-            }
-
-            app-info {
-                width: 100%;
-                top: 0;
-                left: 0;
             }
 
             .blocking_div{
@@ -78,7 +74,7 @@
             }
 
             @media screen and (min-width: 1200px){
-                .app_info_container {
+                app-info {
                     margin-left: 150px;
                 }
 
@@ -86,12 +82,9 @@
                     transform: translate(0);
                 }
 
-                .search_box {
-                    float: right;
-                }
                 /* Made with opacity instead of display: none because of no affecting the Flex layout*/
                 .banner_item.menu_burger {
-                    opacity: 0;
+                    display: none;
                 }
             }
 
@@ -117,12 +110,17 @@
                                 data="[[appCollection]]"></bz-collection>
             </div>
 
-            <div class="app_info_container" id="appInfoContainer" on-scroll="_handleScroll">
-                <app-info id="appInfo" on-click-menu="_handleShowMenu">
-                        <i class="fa fa-bars menu_burger banner_item left" on-click="_handleShowMenu"></i>
-                        <app-search class="search_box banner_item right" id="searchBox" data="[[appCollection]]"></app-search>
+                <app-info id="appInfo" on-click-menu="_handleShowMenu"
+                          app-name="[[selectedApp.name]]"
+                          short-description="[[selectedApp.shortDescription]]"
+                          citation="[[selectedApp.citation]]"
+                          description="[[selectedApp.completeDescription]]"
+                          publications="[[selectedApp.publications]]">
+                    <!-- Banner content -->
+                        <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_handleShowMenu"></i>
+                        <span class="banner_item banner banner_name">[[selectedApp.name]]</span>
+                        <app-search class="search_box banner_item banner_right" id="searchBox" data="[[appCollection]]"></app-search>
                 </app-info>
-            </div>
 
             <div class="blocking_div" id="blockingDiv" on-click="_handleHideMenu" hidden></div>
         </div>
@@ -143,7 +141,10 @@
                 _jsonSrc: {
                     type: String,
                     value: "src/test-apps.json"
-                }
+                },
+
+                selectedApp:  Object
+
             },
 
             ready: function() {
@@ -187,6 +188,7 @@
                     this._handleHideMenu();
                     var app = this.appCollection.find(searchApp, this);
                     this.$.appInfo.appToDisplay = app;
+                    this.selectedApp = app;
                     this.$.appInfoContainer.scrollTop = 0; // Default scroll position
                 }, 200);
             }
