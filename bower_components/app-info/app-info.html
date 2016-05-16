@@ -4,6 +4,7 @@
 <link rel="import" href="../font-awesome/css/font-awesome.min.css">
 <!--<link rel="import" href="../polymer-slideshow/polymer-slideshow.html">-->
 <link rel="import" href="../img-slider/img-slider.html">
+<link rel="import" href="../badge-element/badge-element.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="app-info">
@@ -26,6 +27,7 @@
         }
 
         header, footer{
+            position: relative;
             background-color: #435f7a;
         }
 
@@ -138,6 +140,8 @@
         /* Link icons */
         header .link-icons {
             background-color: rgba(0,0,0,0.1);
+            min-height: 86px;
+            box-sizing: border-box;
         }
 
         .link-icons{
@@ -348,6 +352,11 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
+            <template is="dom-if" if="{{!_isMaintained(maintained)}}">
+                <badge-element bottom right style="bottom: 82px; right: 0">
+                    <span>Deprecated</span>
+                </badge-element>
+            </template>
             <div class="site-nav">
                 <div class="banner_left">
                     <content select=".banner_item.banner_left"></content>
@@ -406,11 +415,7 @@
             <section>
                 <h2>Publications</h2>
                 <div id="publications">
-                    <ol class="content-text publications_list">
-                        <template is="dom-repeat" items="[[publications]]">
-                            <li>[[item]]</li>
-                        </template>
-                    </ol>
+                    <ol class="content-text publications_list"></ol>
                 </div>
             </section>
         </main>
@@ -445,6 +450,10 @@
 
                 screenshots: Array,
 
+                maintained: {
+                    type: String
+                },
+
                 route: {
                     type: String,
                     observer: "_handleRoute"
@@ -476,11 +485,21 @@
                 }
             },
 
-            observers: ["_insertHTML(description, citation)"],
+            observers: ["_insertHTML(description, citation, publications)"],
 
-            _insertHTML: function(description, citation) {
+            _insertHTML: function(description, citation, publications) {
                 Polymer.dom(this.$.citation).innerHTML = citation;
                 Polymer.dom(this.$.description).innerHTML = description;
+                this._insertArrayHTML(publications, this.$$('.publications_list'));
+            },
+
+            _insertArrayHTML: function(collection, target){
+                target.innerHTML = "";
+                collection.forEach(function(text){
+                    var li = document.createElement("li");
+                    Polymer.dom(li).innerHTML = text;
+                    Polymer.dom(target).appendChild(li);
+                });
             },
 
             _stickyBannerHandler: function(){
@@ -515,6 +534,10 @@
 
                 return "";
             },
+
+            _isMaintained(maintained){
+                return maintained === "true";
+            }
         })
     </script>
 </dom-module>
