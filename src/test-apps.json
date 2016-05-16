@@ -45,7 +45,8 @@
         "name": "VARIANT",
         "shortDescription": "Fast and accurate functional characterization of variants in VCF files",
         "launch-link": "http://variant.bioinfo.cipf.es/",
-        "icon": ""
+        "icon": "",
+        "maintained": "false"
     },
 
     {
@@ -53,7 +54,8 @@
         "shortDescription": "RESTful Web Services for retrieving releant biological information",
         "launch-link": "http://docs.bioinfo.cipf.es/projects/cellbase",
         "icon": "",
-        "keywords": ["Pathway"]
+        "keywords": ["Pathway"],
+        "maintained": "true"
     },
 
     {
@@ -61,7 +63,8 @@
         "shortDescription": "Our highly efficient next generation genome viewer (used by the ICGC)",
         "launch-link": "http://www.genomemaps.org/",
         "icon": "",
-        "keywords": ["Genomics", "Proteomics"]
+        "keywords": ["Genomics", "Proteomics"],
+        "maintained": "true"
     },
 
     {
@@ -69,7 +72,8 @@
         "shortDescription": "Variant/gene prioritzation tool (from VCF to candidates)",
         "launch-link": "http://bierapp.babelomics.org/",
         "icon": "",
-        "keywords": ["Genomics"]
+        "keywords": ["Genomics"],
+        "maintained": "true"
     },
 
     {
@@ -83,7 +87,8 @@
         "name": "RENATO",
         "shortDescription": "",
         "launch-link": "http://renato.bioinfo.cipf.es/",
-        "icon": ""
+        "icon": "",
+        "maintained": "true"
     },
 
     {
@@ -91,6 +96,7 @@
         "shortDescription": "Inferring the functional effect of gene expression changes in signaling pathways",
         "launch-link": "http://pathiways.babelomics.org/",
         "icon": "",
+        "maintained": "true",
         "keywords": ["Pathway", "Genomics", "Proteomics"]
     },
     {
@@ -110,36 +116,15 @@
 
         "background": "",
 
-        "citation": "Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments. Nucleic Acids Res. 34:W472-W476"
+        "citation": "Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments. Nucleic Acids Res. 34:W472-W476",
+
+        "maintained": "true"
     },
     {
         "name": "Phylemon",
         "shortDescription": "Evolution, phylogenetics, phylogenomics",
         "launch-link": "http://phylemon.bioinfo.cipf.es/",
-        "icon": "http://phylemon.bioinfo.cipf.es/css/phylemon_title.png"
-    },
-    {
-        "name": "PTMCode",
-        "shortDescription": "The database of post-translational modifications within and between proteins",
-        "launch-link": "http://ptmcode.embl.de/",
-        "icon": ""
-    },
-    {
-        "name": "SNPeffect",
-        "shortDescription": "on-line prediction of effects of protein-coding variants",
-        "launch-link": "http://snpeffect.switchlab.org/",
-        "icon": "http://snpeffect.switchlab.org/sites/all/themes/rubik/cube/images/snpeffect.png"
-    },
-    {
-        "name": "DBAli",
-        "shortDescription": "Pairwise and multiple protein structure alignments",
-        "launch-link": "http://salilab.org/DBAli/",
-        "icon": ""
-    },
-    {
-        "name": "SARA",
-        "shortDescription": "Functional annotation of RNA structures",
-        "launch-link": "http://structure.biofold.org/sara/",
-        "icon": "http://structure.biofold.org/sara/images/logo.png"
+        "icon": "http://phylemon.bioinfo.cipf.es/css/phylemon_title.png",
+        "maintained": "false"
     }
 ]
