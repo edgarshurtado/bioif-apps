@@ -415,11 +415,7 @@
             <section>
                 <h2>Publications</h2>
                 <div id="publications">
-                    <ol class="content-text publications_list">
-                        <template is="dom-repeat" items="[[publications]]">
-                            <li>[[item]]</li>
-                        </template>
-                    </ol>
+                    <ol class="content-text publications_list"></ol>
                 </div>
             </section>
         </main>
@@ -489,11 +485,21 @@
                 }
             },
 
-            observers: ["_insertHTML(description, citation)"],
+            observers: ["_insertHTML(description, citation, publications)"],
 
-            _insertHTML: function(description, citation) {
+            _insertHTML: function(description, citation, publications) {
                 Polymer.dom(this.$.citation).innerHTML = citation;
                 Polymer.dom(this.$.description).innerHTML = description;
+                this._insertArrayHTML(publications, this.$$('.publications_list'));
+            },
+
+            _insertArrayHTML: function(collection, target){
+                target.innerHTML = "";
+                collection.forEach(function(text){
+                    var li = document.createElement("li");
+                    Polymer.dom(li).innerHTML = text;
+                    Polymer.dom(target).appendChild(li);
+                });
             },
 
             _stickyBannerHandler: function(){
