@@ -386,17 +386,10 @@
                     <div class="layout horizontal wrap content-text">
                         <div id="description" class="description_text"></div>
                         <div class="slideshow_container">
-<!--                            <polymer-slideshow height="{{_slider.currentSliderSize.height}}" width="{{_slider.currentSliderSize.width}}">
-                                <polymer-slide>
-                                    <img class="screenshot main" src="{{_selectMainSS(appToDisplay.screenshots)}}" alt="">
-                                </polymer-slide>
-                                <polymer-slide>
-                                    <img src="https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx" alt="">
-                                </polymer-slide>
-                            </polymer-slideshow>-->
                                 <img-slider id="slider" img-url-array="[[screenshots]]"
                                                         height="[[_slider.currentSliderSize.height]]"
-                                                        width="[[_slider.currentSliderSize.width]]"></img-slider>
+                                                        width="[[_slider.currentSliderSize.width]]"
+                                                        interval="2000"></img-slider>
                         </div>
                     </div>
             </section>
@@ -463,7 +456,7 @@
                     value: function(){
                         return {
                             sliderSizes : {
-                                "default": {height: 300, width: 500},
+                                "default": {height: 400, width: 500},
                                 "big": {height: 500, width: 700},
                                 "small": {height: 300, width: 400}
                             },
