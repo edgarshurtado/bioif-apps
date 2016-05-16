@@ -350,9 +350,11 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
-            <badge-element bottom right style="bottom: 82px; right: 0">
-                <span>Deprecated</span>
-            </badge-element>
+            <template is="dom-if" if="{{!maintained}}">
+                <badge-element bottom right style="bottom: 82px; right: 0">
+                    <span>Deprecated</span>
+                </badge-element>
+            </template>
             <div class="site-nav">
                 <div class="banner_left">
                     <content select=".banner_item.banner_left"></content>
@@ -449,6 +451,11 @@
                 description: String,
 
                 screenshots: Array,
+
+                maintained: {
+                    type: Boolean,
+                    value: true
+                },
 
                 route: {
                     type: String,
