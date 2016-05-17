@@ -59,6 +59,7 @@
             }
         ],
         "icon": "",
+        "citation": "",
         "publications": [
            "<p>Medina I, De Maria A, Bleda M, Salavert F, Alonso R, Gonzalez CY, Dopazo J. 2012 <a href='http://nar.oxfordjournals.org/content/40/W1/W54.long'>VARIANT: Command Line, Web service and Web interface for fast and accurate functional characterization of variants found by Next-Generation Sequencing</a>. Nucleic Acids Res. 40(Web Server issue):W54-8.</p>"
         ],
