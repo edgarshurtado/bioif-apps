@@ -16,7 +16,7 @@
         }
 
         bz-collection {
-            width: 100%;
+            width: 300px;
         }
 
     </style>
@@ -27,8 +27,8 @@
 
 
     <script>
-        jsonRequest("../../../src/test-apps.json", function(response){
-            document.querySelector("bz-collection").appCollectionJson = response;
+        jsonUtils.jsonRequest("../../../src/test-apps.json", function(response){
+            document.querySelector("bz-collection").data = response;
         })
     </script>
 </div>
