@@ -6,10 +6,21 @@
     <template>
         <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
 
-           .container {
-               background-color: var(--menu-background, #435F7A);
-               width: inherit;
-           }
+            .scrollbar_hidder {
+                width: inherit;
+                overflow-x: hidden;
+                position: fixed;
+                height: 100vh;
+            }
+
+            .container{
+                background-color: var(--menu-background, #435F7A);
+                width: 100%;
+                padding-right: 40px;
+                height: 100%;
+                z-index: 100;
+                overflow-y: scroll;
+            }
 
            .bz_wrapper {
                width: 100%;
@@ -19,10 +30,12 @@
            }
 
         </style>
-        <div class="container">
-            <template id="appCollectionDom" is="dom-repeat" items="[[data]]">
-                <bz-wrapper class="bz_wrapper" title="[[item.name]]" icon-src="[[item.icon]]" on-change-active="_handleActivation"></bz-wrapper>
-            </template>
+        <div class="scrollbar_hidder">
+            <div class="container">
+                <template id="appCollectionDom" is="dom-repeat" items="[[data]]">
+                    <bz-wrapper class="bz_wrapper" title="[[item.name]]" icon-src="[[item.icon]]" on-change-active="_handleActivation"></bz-wrapper>
+                </template>
+            </div>
         </div>
     </template>
     <script>
