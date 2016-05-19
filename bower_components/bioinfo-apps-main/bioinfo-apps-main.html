@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="stylesheet" href="../font-awesome/css/font-awesome.css">
-<link rel="import" href="../app-collection/bz-collection.html">
+<link rel="import" href="../bz-sidebar/bz-collection.html">
 
 <link rel="import" href="../app-info/app-info.html">
 <link rel="import" href="../carbon-route/carbon-location.html">
@@ -29,12 +29,10 @@
                 -webkit-overflow-scrolling: touch;
             }
 
+            /* Sidebar styles */
             .menu_wrapper{
-                width: 150px;
-                height: 100%;
                 z-index: 100;
                 position: fixed;
-                overflow-x: hidden;
                 transform: translate(-150px, 0);
                 transition: transform 0.5s;
                 box-sizing: border-box;
@@ -45,12 +43,7 @@
             }
 
             bz-collection {
-                display: block;
                 width: 150px;
-                padding-right: 40px;
-                height: 100vh;
-                overflow-y: scroll;
-                overflow-x: hidden;
             }
 
             app-info {
@@ -193,6 +186,7 @@
                     this.$.appInfo.appToDisplay = app;
                     this.selectedApp = app;
                     this.$.appInfo.scrollTop = 0; // Default scroll position
+                    this.$.bzCollection.setAppActiveByName(this.applicationData.application);
                 }, 200);
             }
 
