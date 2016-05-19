@@ -186,6 +186,7 @@
                     this.$.appInfo.appToDisplay = app;
                     this.selectedApp = app;
                     this.$.appInfo.scrollTop = 0; // Default scroll position
+                    this.$.bzCollection.setAppActiveByName(this.applicationData.application);
                 }, 200);
             }
 
