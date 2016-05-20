@@ -112,7 +112,7 @@
                     case 40:
                         this._handleUpDownArrow(e.keyCode);
                         break;
-                    default: this._search(e.target.value)
+                    default: this.results = this._search(e.target.value)
                 }
             },
 
@@ -219,7 +219,7 @@
                     results = [];
                 }
 
-                this.results = results;
+                return results;
             },
 
             _prepareResults: function(results){
