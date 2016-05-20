@@ -50,7 +50,7 @@
 
         <input type="text" id="queryBox" placeholder="Search..." on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_toggleResultsBox">
         <div class="results_box" id="resultsBox"  hidden>
-            <ul id="resultsList" class="results_list">
+            <ul id="resultsList" class="results_list" on-mouseenter="_removeHoverAttr">
                 <template is="dom-repeat" items="{{results}}">
                     <li class="label"><i class$="fa {{item.iconFaTag}}"></i> {{item.classTag}}</li>
                     <template is="dom-repeat" items="{{item.items}}">
@@ -126,26 +126,25 @@
              * @private
              */
             _handleUpDownArrow(code) {
+                /**
+                 * Helper function to use in array.findIndex
+                 */
+                function findHover(el){
+                    return el.hasAttribute("hover")
+                }
+
                 var polDom = Polymer.dom(this.root);
                 var elements = polDom.querySelectorAll("li:not(.label)");
-                var currentElement = polDom.querySelector("li[hover]");
+                var indexCurrentSelected = elements.findIndex(findHover);
 
-                if(currentElement){ // If there's an element highlighted already
-                    var indexCurrentSelected = -1;
-
-                    elements.forEach(function(el, i){
-                        if(el.hasAttribute("hover")){
-                            indexCurrentSelected = i;
-                        }
-                    });
-
-                    Polymer.dom(currentElement).removeAttribute("hover");
+                if(indexCurrentSelected > -1){ // If there's an element highlighted already
+                    this._removeHoverAttr(); // Remove current hovered
 
                     switch(code){
                         case 38: // Up arrow key
                                 if(indexCurrentSelected > 0){
                                     var prevEl = elements[indexCurrentSelected - 1];
-                                    prevEl.setAttribute("hover", "");
+                                    Polymer.dom(prevEl).setAttribute("hover", "");
                                 }
                             break;
                         case 40: // Down arrow key
@@ -186,6 +185,10 @@
                 // Clear input and results for better UX
                 this.$.queryBox.value = "";
                 this.results = [];
+            },
+
+            _removeHoverAttr: function(e) {
+                Polymer.dom(this.root).querySelector('li[hover]').removeAttribute("hover");
             },
 
             /**
