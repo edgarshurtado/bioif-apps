@@ -48,7 +48,7 @@
 
         </style>
 
-        <input type="text" id="queryBox" placeholder="Search..." on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_areResults">
+        <input type="text" id="queryBox" placeholder="Search..." on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_toggleResultsBox">
         <div class="results_box" id="resultsBox"  hidden>
             <ul id="resultsList" class="results_list">
                 <template is="dom-repeat" items="{{results}}">
@@ -65,19 +65,21 @@
             is: "app-search",
 
             properties:{
+                /**
+                 * Copy of the data where the `app-search` is going to look at.
+                 * @type Array<Object>
+                 */
                 data: {
                     type: Array/Object,
                     reflectOnAttribute: true
                 },
 
+                /**
+                 * Storage for the results of the current query prepared to be rendered by `dom-repeat`
+                 */
                 results: {
                     type: Array/Object,
-                    observer: "_areResults"
-                },
-
-                _resultsFound: {
-                    type: Boolean,
-                    value: false
+                    observer: "_toggleResultsBox"
                 }
             },
 
@@ -127,7 +129,7 @@
                 var elements = polDom.querySelectorAll("li:not(.label)");
                 var currentElement = polDom.querySelector("li[hover]");
 
-                if(currentElement){
+                if(currentElement){ // If there's an element highlighted already
                     var indexCurrentSelected = -1;
 
                     elements.forEach(function(el, i){
@@ -139,13 +141,13 @@
                     Polymer.dom(currentElement).removeAttribute("hover");
 
                     switch(code){
-                        case 38:
+                        case 38: // Up arrow key
                                 if(indexCurrentSelected > 0){
                                     var prevEl = elements[indexCurrentSelected - 1];
                                     prevEl.setAttribute("hover", "");
                                 }
                             break;
-                        case 40:
+                        case 40: // Down arrow key
                                 var nextEl;
                                 if(indexCurrentSelected < elements.length - 1){
                                     nextEl = elements[indexCurrentSelected + 1];
@@ -157,7 +159,7 @@
                             break;
                         default:
                     }
-                }else if(code === 40){
+                }else if(code === 40){ // If there's no any result item highlighted yet
                     elements[0].setAttribute("hover", "");
                 }
             },
@@ -180,13 +182,16 @@
              */
             _handleClick: function(e) {
                 window.location.href = "#/" + e.target.dataName.toLowerCase();
+                // Clear input and results for better UX
                 this.$.queryBox.value = "";
                 this.results = [];
             },
 
             /**
-             * Function that searches in `this.data` object. Specifically in the keys *name* and *keywords*.
+             * Function that searches in `this.data` object. Specifically in the keys *name* and *keywords*. Returns an
+             * object with the results. Ready to be rendered by the dom template.
              * @param query
+             * @return Array<Object>
              * @private
              */
             _search: function(query){
@@ -194,7 +199,7 @@
                     var results = {applications: [], keywords: []};
                     var re = new RegExp(".*" + query + ".*", "i");
 
-                    this.data.forEach(function(app){
+                    this.data.forEach(function(app){ // Iterate over every element(app) of the `data` object
 //                    Matches with app name
                         if(re.test(app.name)){
                             results.applications.push(app.name);
@@ -214,7 +219,7 @@
                         }
                     });
 
-                    results = this._prepareResults(results);
+                    results = this._prepareResults(results); // Prepare results for dom-if template
                 } else {
                     results = [];
                 }
@@ -222,6 +227,15 @@
                 return results;
             },
 
+            /**
+             * Helper method that parses the results from `_search` to dom-if template ready. The array returned has one
+             * object per section. The sections created are a **NAME** section for the apps that match the query by name
+             * and then a section for each keyword that matches. The keywords sections gather all the applications that
+             * have a keyword that matches with the query.
+             * @param results
+             * @returns {Array}
+             * @private
+             */
             _prepareResults: function(results){
                 function getSectionObject(classTag, iconFaTag, items){
                    return {
@@ -243,8 +257,11 @@
                 return finalResults;
             },
 
-            _areResults: function(){
-                this._resultsFound = this.results.length > 0;
+            /**
+             * Event handler. If there are results shows the results box
+             * @private
+             */
+            _toggleResultsBox: function(){
                 if(this.results.length > 0){
                     Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
                 }else {
