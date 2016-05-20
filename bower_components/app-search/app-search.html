@@ -87,6 +87,14 @@
                 }, 200);
             },
 
+//            Key press Handlers
+
+            /**
+             * This is a switcher helper that when receives a key press event decides into which envent handler it
+             * passes de keyCode
+             * @param e The on-keyup event
+             * @private
+             */
             _handleKeyUp: function(e) {
 
                 switch(e.keyCode){
@@ -108,6 +116,12 @@
                 }
             },
 
+            /**
+             * Logic to allow the navigation through the search results using the arrow keys. This function should only
+             * receive the code for either the up arrow or down arrow.
+             * @param code Code for the key
+             * @private
+             */
             _handleUpDownArrow(code) {
                 var polDom = Polymer.dom(this.root);
                 var elements = polDom.querySelectorAll("li:not(.label)");
@@ -148,6 +162,10 @@
                 }
             },
 
+            /**
+             * Triggers a click event on the currently selected search resault
+             * @private
+             */
             _handleEnterPress: function(){
                 var element = Polymer.dom(this.root).querySelector("li:not(.label)[hover]");
                 if(element){
@@ -155,12 +173,22 @@
                 }
             },
 
+            /**
+             * Logic for the selection of a search result.
+             * @param e The click event
+             * @private
+             */
             _handleClick: function(e) {
                 window.location.href = "#/" + e.target.dataName.toLowerCase();
                 this.$.queryBox.value = "";
                 this.results = [];
             },
 
+            /**
+             * Function that searches in `this.data` object. Specifically in the keys *name* and *keywords*.
+             * @param query
+             * @private
+             */
             _search: function(query){
                 if(query.length >= 2){
                     var results = {applications: [], keywords: []};
