@@ -79,6 +79,7 @@
                  */
                 results: {
                     type: Array/Object,
+                    value: [],
                     observer: "_toggleResultsBox"
                 }
             },
@@ -261,11 +262,13 @@
              * Event handler. If there are results shows the results box
              * @private
              */
-            _toggleResultsBox: function(){
-                if(this.results.length > 0){
-                    Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
-                }else {
-                    Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+            _toggleResultsBox: function(newValue, oldValue){
+                if(oldValue !== undefined){
+                    if(this.results.length > 0){
+                        Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
+                    }else {
+                        Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+                    }
                 }
             }
         });
