@@ -334,11 +334,12 @@
 
     </style>
     <template>
-
+        <!-- Media queries to set the size of the slider -->
         <iron-media-query query="(max-width: 530px)" query-matches="{{_smallSlider}}"></iron-media-query>
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
+            <!-- Badge for deprecated apps -->
             <template is="dom-if" if="{{!maintained}}">
                 <badge-element bottom right style="bottom: 82px; right: 0">
                     <span>Deprecated</span>
@@ -359,11 +360,9 @@
                 <h1>[[appName]]</h1>
                 <p>[[shortDescription]]</p>
                 <div class="launch_btn_holder">
-                        <div class="launch-button">
-                            <a href="{{appToDisplay.launch-link}}"  target="_blank">
-                                Launch
-                            </a>
-                        </div>
+                    <div class="launch-button">
+                        <a href="{{appToDisplay.launch-link}}"  target="_blank">Launch</a>
+                    </div>
                 </div>
             </div>
 
@@ -381,12 +380,14 @@
             <section class="light description">
                     <h2>Description</h2>
                     <div class="layout horizontal wrap content-text">
+                        <!-- App description -->
                         <div id="description" class="description_text"></div>
+                        <!-- Img slider -->
                         <div class="slideshow_container">
                                 <img-slider id="slider" img-url-array="[[screenshots]]"
                                                         height="[[_slider.currentSliderSize.height]]"
                                                         width="[[_slider.currentSliderSize.width]]"
-                                                        interval="2000"></img-slider>
+                                                        interval="5000"></img-slider>
                         </div>
                     </div>
             </section>
@@ -451,7 +452,7 @@
                     value: function(){
                         return {
                             sliderSizes : {
-                                "default": {height: 400, width: 500},
+                                "default": {height: 600, width: 800},
                                 "big": {height: 500, width: 700},
                                 "small": {height: 300, width: 400}
                             },
