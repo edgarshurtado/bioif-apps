@@ -339,7 +339,7 @@
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
-            <template is="dom-if" if="{{!_isMaintained(maintained)}}">
+            <template is="dom-if" if="{{!maintained}}">
                 <badge-element bottom right style="bottom: 82px; right: 0">
                     <span>Deprecated</span>
                 </badge-element>
@@ -438,9 +438,7 @@
 
                 screenshots: Array,
 
-                maintained: {
-                    type: String
-                },
+                maintained: Boolean,
 
                 route: {
                     type: String,
@@ -503,6 +501,10 @@
                 });
             },
 
+            /**
+             * Set the size for the slider according to the values set by iron-media-query
+             * @private
+             */
             _setSliderSize: function(){
                 if(this._smallSlider){
                     this._slider.currentSliderSize = this._slider.sliderSizes.small;
@@ -514,10 +516,6 @@
 
                 // Notify polymer that the subproperty has been updated
                 this.notifyPath("_slider.currentSliderSize", this._slider.currentSliderSize);
-            },
-
-            _isMaintained(maintained){
-                return maintained === "true";
             }
         })
     </script>

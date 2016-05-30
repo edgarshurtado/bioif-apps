@@ -39,7 +39,7 @@
             "https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx"
         ],
 
-        "maintained": "true",
+        "maintained": true,
 
         "keywords": ["Pathway"]
     },
@@ -71,12 +71,12 @@
             "./img/variant.jpg"
         ],
 
-        "maintained": "false"
+        "maintained": false
     },
 
     {
         "name": "CellBase",
-        "maintained": "true",
+        "maintained": true,
         "icon": "",
         "shortDescription": "RESTful Web Services for retrieving relevant biological information",
         "launch-link": "http://docs.bioinfo.cipf.es/projects/cellbase",
@@ -97,7 +97,7 @@
 
     {
         "name": "GenomeMaps",
-        "maintained": "true",
+        "maintained": true,
         "shortDescription": "Our highly efficient next generation genome viewer (used by the ICGC)",
         "launch-link": "http://www.genomemaps.org/",
         "icon": "",
@@ -128,7 +128,7 @@
         "launch-link": "http://bierapp.babelomics.org/",
         "icon": "",
         "keywords": ["Genomics"],
-        "maintained": "true"
+        "maintained": true
     },
 
     {
@@ -143,7 +143,7 @@
         "shortDescription": "",
         "launch-link": "http://renato.bioinfo.cipf.es/",
         "icon": "",
-        "maintained": "true"
+        "maintained": true
     },
 
     {
@@ -151,7 +151,7 @@
         "shortDescription": "Inferring the functional effect of gene expression changes in signaling pathways",
         "launch-link": "http://pathiways.babelomics.org/",
         "icon": "",
-        "maintained": "true",
+        "maintained": true,
         "keywords": ["Pathway", "Genomics", "Proteomics"]
     },
     {
@@ -173,13 +173,13 @@
 
         "citation": "Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments. Nucleic Acids Res. 34:W472-W476",
 
-        "maintained": "true"
+        "maintained": true
     },
     {
         "name": "Phylemon",
         "shortDescription": "Evolution, phylogenetics, phylogenomics",
         "launch-link": "http://phylemon.bioinfo.cipf.es/",
         "icon": "http://phylemon.bioinfo.cipf.es/css/phylemon_title.png",
-        "maintained": "false"
+        "maintained": false
     }
 ]
