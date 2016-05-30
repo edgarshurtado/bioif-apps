@@ -128,7 +128,12 @@
         "launch-link": "http://bierapp.babelomics.org/",
         "icon": "",
         "keywords": ["Genomics"],
-        "maintained": true
+        "maintained": true,
+        "screenshots": [
+            "./img/bierapp1.png",
+            "./img/bierapp2.png",
+            "./img/bierapp3.png"
+        ]
     },
 
     {
