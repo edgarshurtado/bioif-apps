@@ -139,25 +139,18 @@
                     value: "src/test-apps.json"
                 },
 
+                /**
+                 * Placeholder for all the information about an app to pass to the different components
+                 */
                 selectedApp:  Object
-
             },
 
             ready: function() {
-                jsonUtils.jsonRequest(this._jsonSrc, function(response){
+                jsonUtils.jsonRequest(this._jsonSrc, function(response){ // Load the apps info from json file
                     this.appCollection = response;
                 }.bind(this));
             },
 
-
-            _handleScroll: function(e){
-                var scrolledElement = e.target;
-                if(scrolledElement.scrollTop > 115){
-                    this.$.appInfo.setAttribute("scrolled", "");
-                } else {
-                    this.$.appInfo.removeAttribute("scrolled");
-                }
-            },
 
             _handleHideMenu: function(){
                 Polymer.dom(this.$.menuWrapper).removeAttribute("show");
