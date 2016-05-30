@@ -100,10 +100,11 @@
                 <bz-collection id="bzCollection"
                                tabindex="-1"
                                route="{{route}}"
-                                data="[[appCollection]]"></bz-collection>
+                                data="[[appCollection]]"
+                                on-click="_toggleMenu"></bz-collection>
             </div>
 
-                <app-info id="appInfo" on-click-menu="_handleShowMenu"
+                <app-info id="appInfo" on-click-menu="_toogleMenu"
                           app-name="[[selectedApp.name]]"
                           short-description="[[selectedApp.shortDescription]]"
                           citation="[[selectedApp.citation]]"
@@ -113,12 +114,12 @@
                           maintained="[[selectedApp.maintained]]">
 
                     <!-- Banner content -->
-                        <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_handleShowMenu"></i>
+                        <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_toggleMenu"></i>
                         <span class="banner_item banner banner_name">[[selectedApp.name]]</span>
                         <app-search class="search_box banner_item banner_right" id="searchBox" data="[[appCollection]]"></app-search>
                 </app-info>
 
-            <div class="blocking_div" id="blockingDiv" on-click="_handleHideMenu" hidden></div>
+            <div class="blocking_div" id="blockingDiv" on-click="_toggleMenu" hidden></div>
         </div>
     </template>
     <script>
@@ -151,38 +152,45 @@
                 }.bind(this));
             },
 
-
-            _handleHideMenu: function(){
-                Polymer.dom(this.$.menuWrapper).removeAttribute("show");
-                Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
-            },
-
-            _handleShowMenu: function(){
-                this.$.menuWrapper.setAttribute("show", "");
-                this.$.blockingDiv.removeAttribute("hidden");
-            },
-
-            _handleUrl: function(){
-                function searchApp(app){
-                    var appOnRoute = this.applicationData.application.toLowerCase();
-                    return appOnRoute === app.name.toLowerCase();
+            /**
+             * Every time called, manages to hide or show the menu
+             * @private
+             */
+            _toggleMenu: function(){
+                if(this.$.menuWrapper.hasAttribute("show")){
+                    Polymer.dom(this.$.menuWrapper).removeAttribute("show");
+                    Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
+                } else {
+                    this.$.menuWrapper.setAttribute("show", "");
+                    this.$.blockingDiv.removeAttribute("hidden");
                 }
+            },
 
+            /**
+             * Looks for the app requested in the url and set it to the `selectedApp`
+             * @private
+             */
+            _handleUrl: function(){
                 if(!this.route.path){
                     this.set("route.path", "/babelomics");
                 }
-
-//                Needed to be async because in the first load of the page appCollection isn't set in time
+                // Needed to be async because in the first load of the page appCollection isn't set yet
                 this.async(function(){
-                    this._handleHideMenu();
+//                    this._toggleMenu();
                     var app = this.appCollection.find(searchApp, this);
                     this.$.appInfo.appToDisplay = app;
                     this.selectedApp = app;
                     this.$.appInfo.scrollTop = 0; // Default scroll position
                     this.$.bzCollection.setAppActiveByName(this.applicationData.application);
+                    this._toggleMenu(); // Hack to avoid the menu being shown when the page loads
                 }, 200);
-            }
 
+                // Helper inner function to use with find() method.
+                function searchApp(app){
+                    var appOnRoute = this.applicationData.application.toLowerCase();
+                    return appOnRoute === app.name.toLowerCase();
+                }
+            }
         })
     </script>
 </dom-module>
