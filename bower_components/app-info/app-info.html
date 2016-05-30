@@ -475,12 +475,25 @@
 
             observers: ["_insertHTML(description, citation, publications)"],
 
+            /**
+             * Inserts the strings from description, citation and publications as html on its correspondent containers
+             * @param description
+             * @param citation
+             * @param publications
+             * @private
+             */
             _insertHTML: function(description, citation, publications) {
                 Polymer.dom(this.$.citation).innerHTML = citation;
                 Polymer.dom(this.$.description).innerHTML = description;
                 this._insertArrayHTML(publications, this.$$('.publications_list'));
             },
 
+            /**
+             * Help funtion for the case in which we want to insert as html an array of strings
+             * @param collection
+             * @param target
+             * @private
+             */
             _insertArrayHTML: function(collection, target){
                 target.innerHTML = "";
                 collection.forEach(function(text){
@@ -488,18 +501,6 @@
                     Polymer.dom(li).innerHTML = text;
                     Polymer.dom(target).appendChild(li);
                 });
-            },
-
-            _stickyBannerHandler: function(){
-                var siteNav = this.$$(".site-nav");
-                var bannerTitle = this.$.bannerTitle;
-                if(document.body.scrollTop > 115){
-                    bannerTitle.removeAttribute("hidden");
-                    siteNav.classList.remove("no_background");
-                }else if(document.body.scrollTop < 115){
-                    bannerTitle.setAttribute("hidden", "");
-                    siteNav.classList.add("no_background");
-                }
             },
 
             _setSliderSize: function(){
@@ -513,14 +514,6 @@
 
                 // Notify polymer that the subproperty has been updated
                 this.notifyPath("_slider.currentSliderSize", this._slider.currentSliderSize);
-            },
-
-            _selectMainSS: function(ssArray){
-                if(ssArray) {
-                    return ssArray[0];
-                }
-
-                return "";
             },
 
             _isMaintained(maintained){
