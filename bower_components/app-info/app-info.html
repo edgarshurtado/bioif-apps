@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../font-awesome/css/font-awesome.min.css">
-<!--<link rel="import" href="../polymer-slideshow/polymer-slideshow.html">-->
 <link rel="import" href="../img-slider/img-slider.html">
 <link rel="import" href="../badge-element/badge-element.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
@@ -328,7 +327,7 @@
     <template>
         <!-- Media queries to set the size of the slider -->
         <iron-media-query query="(max-width: 760px)" query-matches="{{_smallSlider}}"></iron-media-query>
-        <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
+        <iron-media-query query="(min-width: 1250px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
             <!-- Badge for deprecated apps -->
@@ -476,9 +475,9 @@
             observers: ["_insertHTML(description, citation, publications)"],
 
             ready: function(){
-                this.$.publicationsTemplate.addEventListener("dom-change", function(){
+                this.$.publicationsTemplate.addEventListener("dom-change", function listener(){
                     this._insertArrayHTML(this.publications, this.$$('.publications_list'));
-                    this.$.publicationsTemplate.removeEventListener("dom-change");
+                    this.$.publicationsTemplate.removeEventListener("dom-change", listener);
                 }.bind(this));
             },
 
