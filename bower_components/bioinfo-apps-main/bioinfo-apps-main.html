@@ -101,10 +101,10 @@
                                tabindex="-1"
                                route="{{route}}"
                                 data="[[appCollection]]"
-                                on-click="_toggleMenu"></bz-collection>
+                                on-click="_handleHideMenu"></bz-collection>
             </div>
 
-                <app-info id="appInfo" on-click-menu="_toogleMenu"
+                <app-info id="appInfo" on-click-menu="_handleHideMenu"
                           app-name="[[selectedApp.name]]"
                           short-description="[[selectedApp.shortDescription]]"
                           citation="[[selectedApp.citation]]"
@@ -115,12 +115,12 @@
                           img-root-dir="./img/">
 
                     <!-- Banner content -->
-                        <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_toggleMenu"></i>
+                        <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_handleShowMenu"></i>
                         <span class="banner_item banner banner_name">[[selectedApp.name]]</span>
                         <app-search class="search_box banner_item banner_right" id="searchBox" data="[[appCollection]]"></app-search>
                 </app-info>
 
-            <div class="blocking_div" id="blockingDiv" on-click="_toggleMenu" hidden></div>
+            <div class="blocking_div" id="blockingDiv" on-click="_handleHideMenu" hidden></div>
         </div>
     </template>
     <script>
@@ -157,14 +157,14 @@
              * Every time called, manages to hide or show the menu
              * @private
              */
-            _toggleMenu: function(){
-                if(this.$.menuWrapper.hasAttribute("show")){
-                    Polymer.dom(this.$.menuWrapper).removeAttribute("show");
-                    Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
-                } else {
-                    this.$.menuWrapper.setAttribute("show", "");
-                    this.$.blockingDiv.removeAttribute("hidden");
-                }
+            _handleHideMenu: function(){
+                Polymer.dom(this.$.menuWrapper).removeAttribute("show");
+                Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
+            },
+
+            _handleShowMenu: function(){
+                this.$.menuWrapper.setAttribute("show", "");
+                this.$.blockingDiv.removeAttribute("hidden");
             },
 
             /**
@@ -177,13 +177,11 @@
                 }
                 // Needed to be async because in the first load of the page appCollection isn't set yet
                 this.async(function(){
-//                    this._toggleMenu();
                     var app = this.appCollection.find(searchApp, this);
                     this.$.appInfo.appToDisplay = app;
                     this.selectedApp = app;
                     this.$.appInfo.scrollTop = 0; // Default scroll position
                     this.$.bzCollection.setAppActiveByName(this.applicationData.application);
-                    this._toggleMenu(); // Hack to avoid the menu being shown when the page loads
                 }, 200);
 
                 // Helper inner function to use with find() method.
