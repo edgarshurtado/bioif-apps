@@ -26,7 +26,6 @@
                 "link": "http://bioinfo.cipf.es/webstats/babelomics4/awstats.babelomics4.bioinfo.cipf.es.html"
             }
         ] ,
-        "citation": "Alonso R, Salavert F, Garcia-garcia F, et al. Babelomics 5.0: functional interpretation for new generations of genomic data. Nucleic Acids Res. 2015;43(W1):W117-21.",
         "icon": "http://bioinfo.cipf.es/apps-beta/babelomics/produccion/images/logoBabelomics_negative.svg",
         "publications": [
             "Alonso R, Salavert F, Garcia-Garcia F, Carbonell-Caballero J, Bleda M, Garcia-Alonso L, Sanchis-Juan A, Perez-Gil D, Marin-Garcia P, Sanchez R, Cubuk C, Hidalgo MR, Amadoz A, Hernansaiz-Ballesteros RD, Alemán A, Tarraga J, Montaner D, Medina I, Dopazo J. 2015. <a href='http://nar.oxfordjournals.org/content/43/W1/W117' target='_blank'>Babelomics 5.0: functional interpretation for new generations of genomic data</a>. Nucleic Acids Res. 43:W117-W121",
@@ -65,7 +64,6 @@
             }
         ],
         "icon": "",
-        "citation": "Medina I, De maria A, Bleda M, et al. VARIANT: Command Line, Web service and Web interface for fast and accurate functional characterization of variants found by Next-Generation Sequencing. Nucleic Acids Res. 2012;40(Web Server issue):W54-8.",
         "publications": [
            "<p>Medina I, De Maria A, Bleda M, Salavert F, Alonso R, Gonzalez CY, Dopazo J. 2012 <a href='http://nar.oxfordjournals.org/content/40/W1/W54.long'>VARIANT: Command Line, Web service and Web interface for fast and accurate functional characterization of variants found by Next-Generation Sequencing</a>. Nucleic Acids Res. 40(Web Server issue):W54-8.</p>"
         ],
@@ -91,7 +89,6 @@
                 "link": "http://docs.bioinfo.cipf.es/projects/cellbase"
             }
         ],
-        "citation": "Bleda M, Tarraga J, De maria A, et al. CellBase, a comprehensive collection of RESTful web services for retrieving relevant biological information from heterogeneous sources. Nucleic Acids Res. 2012;40(Web Server issue):W609-14.",
         "publications": [
             "<p>Bleda M, Tarraga J, De Maria A, Salavert F, Garcia-Alonso L, Celma M, Martin A, Dopazo J, Medina I. <a href='http://nar.oxfordjournals.org/content/40/W1/W609.long' target='_blank'>CellBase, a comprehensive collection of RESTful web services for retrieving relevant biological information from heterogeneous sources</a>. Nucleic Acids Res. 40(Web Server issue):W609-W614<p>"
         ],
@@ -122,7 +119,6 @@
                 "link": "https://github.com/opencb/genome-maps/wiki"
             }
         ],
-        "citation":"Medina I, Salavert F, Sanchez R, et al. Genome Maps, a new generation genome browser. Nucleic Acids Res. 2013;41(Web Server issue):W41-6.",
         "publications": [
             "Medina I, Salavert F, Sanchez R, De Maria A, Alonso R, Escobar P, Bleda M, Dopazo J. <a href='http://nar.oxfordjournals.org/content/41/W1/W41'>Genome Maps, a new generation genome browser</a>. Nucleic Acids Res. 2013;41(Web Server issue):W41-6."
         ],
@@ -155,7 +151,6 @@
                 "link": "https://github.com/babelomics/bierapp/wiki/Tutorial"
             }
         ],
-        "citation": "Alemán A, Garcia-garcia F, Salavert F, Medina I, Dopazo J. A web-based interactive framework to assist in the prioritization of disease candidate genes in whole-exome sequencing studies. Nucleic Acids Res. 2014;42(Web Server issue):W88-93.",
         "publications": ["<p>Alemán A, Garcia-Garcia F, Salavert F, Medina I, Dopazo J. A web-based interactive framework to assist in the prioritization of disease candidate genes in whole-exome sequencing studies. Nucleic Acids Res. 2014 Jul;42(Web Server issue):W88-93. doi: 10.1093/nar/gku407. <a href='http://www.ncbi.nlm.nih.gov/pubmed/24803668'>PubMed</a> <a href='http://nar.oxfordjournals.org/content/42/W1/W88.long'>NAR</a> <a href='http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4086071/'>PMC</a></p>"],
         "keywords": ["Genomics"],
         "maintained": true,
@@ -190,7 +185,6 @@
                 "link": "https://github.com/babelomics/team/wiki/Tutorial"
             }
         ],
-        "citation": "Alemán A, Garcia-garcia F, Medina I, Dopazo J. A web tool for the design and management of panels of genes for targeted enrichment and massive sequencing for clinical applications. Nucleic Acids Res. 2014;42(Web Server issue):W83-7.",
         "publications": [
            "<p>Alemán A, Garcia-Garcia F, Medina I, Dopazo J. 2014. <a href='http://nar.oxfordjournals.org/content/42/W1/W83.long'>A web tool for the design and management of panels of genes for targeted enrichment and massive sequencing for clinical applications.</a> Nucleic Acids Res. 42:W83-W87</p>"
         ],
@@ -221,7 +215,6 @@
                 "link": "http://bioinfo.cipf.es/docs/renato/tutorial"
             }
         ],
-        "citation":"Bleda M, Medina I, Alonso R, De maria A, Salavert F, Dopazo J. Inferring the regulatory network behind a gene expression experiment. Nucleic Acids Res. 2012;40(Web Server issue):W168-72.",
         "maintained": true,
         "publications": [
             "Bleda M, Medina I, Alonso R, De maria A, Salavert F, Dopazo J. <a href='http://nar.oxfordjournals.org/content/40/W1/W168.long' target='_blank'>Inferring the regulatory network behind a gene expression experiment</a>. Nucleic Acids Res. 2012;40(Web Server issue):W168-72."
@@ -248,7 +241,6 @@
                 "link": "http://bioinfo.cipf.es/pathiways/tutorial"
             }
         ],
-        "citation": "Sebastián-león P, Carbonell J, Salavert F, Sanchez R, Medina I, Dopazo J. Inferring the functional effect of gene expression changes in signaling pathways. Nucleic Acids Res. 2013;41(Web Server issue):W213-7.",
         "publications": [
             "Sebastián-León P, Carbonell J, Salavert F, Sanchez R, Medina I, Dopazo J. <a href='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' class='urlextern' title='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' rel='nofollow'>Inferring the functional effect of gene expression changes in signaling pathways</a>. Nucleic Acids Res. 2013;41:W213-W217</a>"
         ],
@@ -291,8 +283,6 @@
             "PathyVar.jpg"
         ],
 
-        "citation": "Hernansaiz-ballesteros RD, Salavert F, Sebastián-león P, Alemán A, Medina I, Dopazo J. Assessing the impact of mutations found in next generation sequencing data over human signaling pathways. Nucleic Acids Res. 2015;43(W1):W270-5.",
-
         "publications": [
            "Hernansaiz-Ballesteros RD, Salavert F, Sebastián-León P, Alemán A, Medina I, Dopazo J. 2015. <a href='http://nar.oxfordjournals.org/content/43/W1/W270'>Assessing the impact of mutations found in next generation sequencing data over human signaling pathways</a>. Nucleic Acids Res.&nbsp;43 (W1): W270-W275."
         ],
@@ -317,7 +307,6 @@
             }
         ],
         "icon": "http://phylemon.bioinfo.cipf.es/css/phylemon_title.png",
-        "citation": "Sánchez R, Serra F, Tárraga J, et al. Phylemon 2.0: a suite of web-tools for molecular evolution, phylogenetics, phylogenomics and hypotheses testing. Nucleic Acids Res. 2011;39(Web Server issue):W470-4.",
         "publications": [
            "Sánchez R, Serra F, Tárraga J, Medina I, Carbonell, J, Pulido L, De Maria A, Capella-Gutíerrez S, Huerta-Cepas J, Gabaldón T, Dopazo J, Dopazo H. <a href='http://nar.oxfordjournals.org/content/early/2011/06/06/nar.gkr408.full' targer='_blank'>Phylemon 2.0: a suite of web-tools for molecular evolution, phylogenetics, phylogenomics and hypotheses testing</a>. Nucleic Acids Res. 2011;39(Web Server issue):W470-4."
         ],
