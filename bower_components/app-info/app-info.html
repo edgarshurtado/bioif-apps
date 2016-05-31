@@ -394,7 +394,7 @@
             </section>
 
             <!-- PUBLICATIONS -->
-            <template is="dom-if" if="[[_validArray(publications)]]" id="publicationsTemplate">
+            <template is="dom-if" if="[[_arrayGreaterThan(publications,1)]]" id="publicationsTemplate">
                 <section>
                     <h2>Publications</h2>
                     <div id="publications">
@@ -470,7 +470,7 @@
                 }
             },
 
-            observers: ["_insertHTML(description, citation, publications)"],
+            observers: ["_insertHTML(description, publications)"],
 
             ready: function(){
                 this.$.publicationsTemplate.addEventListener("dom-change", function listener(){
@@ -486,8 +486,8 @@
              * @param publications
              * @private
              */
-            _insertHTML: function(description, citation) {
-                Polymer.dom(this.$.citation).innerHTML = citation;
+            _insertHTML: function(description, publications) {
+                Polymer.dom(this.$.citation).innerHTML = publications[0];
                 Polymer.dom(this.$.description).innerHTML = description;
             },
 
@@ -498,8 +498,9 @@
              * @private
              */
             _insertArrayHTML: function(collection, target){
-                if(this._validArray(collection)){
+                if(this._arrayGreaterThan(collection, 1)){
                     target.innerHTML = "";
+                    collection = collection.slice(1);
                     collection.forEach(function(text){
                         var li = document.createElement("li");
                         Polymer.dom(li).innerHTML = text;
@@ -550,6 +551,10 @@
 
             _validArray(array){
                 return array !== undefined && array.length > 0;
+            },
+
+            _arrayGreaterThan: function(array, num){
+                return array.length > num;
             }
         })
     </script>
