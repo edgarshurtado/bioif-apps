@@ -374,14 +374,16 @@
                     <div class="content-text">
                         <!-- App description -->
                         <div id="description" class="description_text"></div>
-                        <!-- Img slider -->
-                        <div class="slideshow_container">
-                                <img-slider id="slider" img-url-array="[[_addImgRoute(screenshots)]]"
-                                                        height="[[_slider.currentSliderSize.height]]"
-                                                        width="[[_slider.currentSliderSize.width]]"
-                                                        interval="5000"></img-slider>
-                        </div>
                     </div>
+                    <!-- Img slider -->
+                    <template is="dom-if" if="[[_validArray(screenshots)]]">
+                        <div class="slideshow_container">
+                            <img-slider id="slider" img-url-array="[[_addImgRoute(screenshots)]]"
+                                        height="[[_slider.currentSliderSize.height]]"
+                                        width="[[_slider.currentSliderSize.width]]"
+                                        interval="5000"></img-slider>
+                        </div>
+                    </template>
             </section>
 
             <!--CITATION-->
@@ -393,12 +395,14 @@
             </section>
 
             <!-- PUBLICATIONS -->
-            <section>
-                <h2>Publications</h2>
-                <div id="publications">
-                    <ol class="content-text publications_list"></ol>
-                </div>
-            </section>
+            <template is="dom-if" if="[[_validArray(publications)]]" id="publicationsTemplate">
+                <section>
+                    <h2>Publications</h2>
+                    <div id="publications">
+                        <ol class="content-text publications_list"></ol>
+                    </div>
+                </section>
+            </template>
         </main>
         <footer>
             <a href="[[appToDisplay.link]]">[[appName]]</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
@@ -425,7 +429,10 @@
 
                 citation: String,
 
-                publications: Array,
+                publications: {
+                    type: Array,
+                    observer: "_handleChangePublications"
+                },
 
                 description: String,
 
@@ -468,6 +475,13 @@
 
             observers: ["_insertHTML(description, citation, publications)"],
 
+            ready: function(){
+                this.$.publicationsTemplate.addEventListener("dom-change", function(){
+                    this._insertArrayHTML(this.publications, this.$$('.publications_list'));
+                    this.$.publicationsTemplate.removeEventListener("dom-change");
+                }.bind(this));
+            },
+
             /**
              * Inserts the strings from description, citation and publications as html on its correspondent containers
              * @param description
@@ -475,10 +489,9 @@
              * @param publications
              * @private
              */
-            _insertHTML: function(description, citation, publications) {
+            _insertHTML: function(description, citation) {
                 Polymer.dom(this.$.citation).innerHTML = citation;
                 Polymer.dom(this.$.description).innerHTML = description;
-                this._insertArrayHTML(publications, this.$$('.publications_list'));
             },
 
             /**
@@ -488,13 +501,22 @@
              * @private
              */
             _insertArrayHTML: function(collection, target){
-                target.innerHTML = "";
-                collection.forEach(function(text){
-                    var li = document.createElement("li");
-                    Polymer.dom(li).innerHTML = text;
-                    Polymer.dom(target).appendChild(li);
-                });
+                if(this._validArray(collection)){
+                    target.innerHTML = "";
+                    collection.forEach(function(text){
+                        var li = document.createElement("li");
+                        Polymer.dom(li).innerHTML = text;
+                        Polymer.dom(target).appendChild(li);
+                    });
+                }
             },
+
+            _handleChangePublications: function(newValue, oldValue){
+                if(oldValue !== undefined){
+                    this._insertArrayHTML(this.publications, this.$$('.publications_list'));
+                }
+            },
+
 
             /**
              * Set the size for the slider according to the values set by iron-media-query
@@ -520,9 +542,17 @@
              * @private
              */
             _addImgRoute: function(imgUrlArray){
-                return imgUrlArray.map(function(url){
-                    return (this.imgRootDir || "") + url;
-                }, this);
+                if(this._validArray(imgUrlArray)){
+                    return imgUrlArray.map(function(url){
+                        return (this.imgRootDir || "") + url;
+                    }, this);
+                }else {
+                    return []
+                }
+            },
+
+            _validArray(array){
+                return array !== undefined && array.length > 0;
             }
         })
     </script>

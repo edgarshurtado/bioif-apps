@@ -56,7 +56,7 @@
             },
             {
                 "text": "Tutorial",
-                "faIcon": "fa-gears",
+                "faIcon": "fa-compass",
                 "link": "http://docs.bioinfo.cipf.es/projects/variant/wiki/Tutorial"
             }
         ],
@@ -147,7 +147,7 @@
             },
             {
                 "text": "Tutorial",
-                "faIcon": "fa-file-text",
+                "faIcon": "fa-compass",
                 "link": "https://github.com/babelomics/bierapp"
             }
         ],
@@ -183,7 +183,7 @@
             },
             {
                 "text": "Tutorial",
-                "faIcon":"fa-file-text",
+                "faIcon":"fa-compass",
                 "link": "https://github.com/babelomics/team/wiki/Tutorial"
             }
         ],
@@ -211,7 +211,7 @@
             },
             {
                 "text": "Tutorial",
-                "faIcon": "fa-file-text-o",
+                "faIcon": "fa-compass",
                 "link": "http://bioinfo.cipf.es/docs/renato/tutorial"
             }
         ],
