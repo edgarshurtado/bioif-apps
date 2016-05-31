@@ -376,7 +376,7 @@
                         <div id="description" class="description_text"></div>
                         <!-- Img slider -->
                         <div class="slideshow_container">
-                                <img-slider id="slider" img-url-array="[[screenshots]]"
+                                <img-slider id="slider" img-url-array="[[_addImgRoute(screenshots)]]"
                                                         height="[[_slider.currentSliderSize.height]]"
                                                         width="[[_slider.currentSliderSize.width]]"
                                                         interval="5000"></img-slider>
@@ -432,6 +432,8 @@
                 screenshots: Array,
 
                 maintained: Boolean,
+
+                imgRootDir: String,
 
                 route: {
                     type: String,
@@ -509,6 +511,18 @@
 
                 // Notify polymer that the subproperty has been updated
                 this.notifyPath("_slider.currentSliderSize", this._slider.currentSliderSize);
+            },
+
+            /**
+             * Add the `imgRootDir` to the array `imgUrlArray`
+             * @param imgUrlArray
+             * @returns {*}
+             * @private
+             */
+            _addImgRoute: function(imgUrlArray){
+                return imgUrlArray.map(function(url){
+                    return (this.imgRootDir || "") + url;
+                }, this);
             }
         })
     </script>

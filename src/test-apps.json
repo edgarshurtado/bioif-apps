@@ -35,8 +35,7 @@
         ],
 
         "screenshots": [
-            "./img/Babelomics5.jpg",
-            "https://www.royalcanin.com/~/media/Royal-Canin/Product-Categories/cat-adult-landing-hero.ashx"
+            "Babelomics5.jpg"
         ],
 
         "maintained": true,
@@ -68,7 +67,7 @@
         ],
 
         "screenshots": [
-            "./img/variant.jpg"
+            "variant.jpg"
         ],
 
         "maintained": false
@@ -159,9 +158,9 @@
         "keywords": ["Genomics"],
         "maintained": true,
         "screenshots": [
-            "./img/bierapp1.png",
-            "./img/bierapp2.png",
-            "./img/bierapp3.png"
+            "bierapp1.png",
+            "bierapp2.png",
+            "bierapp3.png"
         ]
     },
 
@@ -280,7 +279,7 @@
         ],
 
         "screenshots": [
-            "./img/PathyVar.jpg"
+            "PathyVar.jpg"
         ],
 
         "citation": "Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments. Nucleic Acids Res. 34:W472-W476",
