@@ -106,6 +106,7 @@
 
                 <app-info id="appInfo" on-click-menu="_handleHideMenu"
                           app-name="[[selectedApp.name]]"
+                          links="[[selectedApp.links]]"
                           short-description="[[selectedApp.shortDescription]]"
                           citation="[[selectedApp.citation]]"
                           description="[[selectedApp.completeDescription]]"
@@ -178,7 +179,6 @@
                 // Needed to be async because in the first load of the page appCollection isn't set yet
                 this.async(function(){
                     var app = this.appCollection.find(searchApp, this);
-                    this.$.appInfo.appToDisplay = app;
                     this.selectedApp = app;
                     this.$.appInfo.scrollTop = 0; // Default scroll position
                     this.$.bzCollection.setAppActiveByName(this.applicationData.application);

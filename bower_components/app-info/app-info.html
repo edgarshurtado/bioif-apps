@@ -359,7 +359,7 @@
 
             <div class="link-icons">
                 <ul class="layout horizontal justified wrap">
-                    <template is="dom-repeat" items="[[appToDisplay.links]]">
+                    <template is="dom-repeat" items="[[links]]">
                         <li><a class="link" href="[[item.link]]" target="_blank"><i class$="fa [[item.faIcon]]"></i><span> {{item.text}}</span></a></li>
                     </template>
                 </ul>
@@ -420,11 +420,9 @@
         Polymer({
             is: "app-info",
             properties: {
-                appToDisplay: {
-                    type: Object
-                },
-
                 appName: String,
+
+                links: Array,
 
                 citation: String,
 
