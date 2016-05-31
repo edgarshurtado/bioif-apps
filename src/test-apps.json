@@ -2,6 +2,7 @@
     {
         "name": "Babelomics",
         "shortDescription": "A program suite for advanced functional genomic data analysis",
+        "completeDescription": "<p>Babelomics has been running for more than one decade offering a user-friendly interface for the functional analysis of gene expression and genomic data. Here we present its fifth release, which includes support for Next Generation Sequencing data including gene expression (RNA-seq), exome or genome resequencing. Babelomics has simplified its interface, being now more intuitive. Improved visualization options, such as a genome viewer as well as an interactive network viewer, have been implemented. New technical enhancements at both, client and server sides, makes the user experience faster and more dynamic. Babelomics offers user-friendly access to a full range of methods that cover: (i) primary data analysis, (ii) a variety of tests for different experimental designs and (iii) different enrichment and network analysis algorithms for the interpretation of the results of such tests in the proper functional context.</p> <p>Babelomics contains one of the most cited tools in the field of functional enrichment analysis, the FatiGO. See quotation in <a href=\"http://sciencewatch.com/dr/erf/2010/10feberf/10feberfDopa/\" target='_blank'>ScienceWatch</a>.</p>",
         "launch-link" :  "http://www.babelomics.org/",
         "links": [
             {
@@ -15,23 +16,26 @@
                 "link": "https://github.com/babelomics/babelomics/wiki"
             },
             {
+                "text": "Tutorial",
+                "faIcon": "fa-compass",
+                "link": "https://github.com/babelomics/babelomics/wiki/Tutorial"
+            },
+            {
                 "text": "Stats",
                 "faIcon": "fa-bar-chart",
                 "link": "http://bioinfo.cipf.es/webstats/babelomics4/awstats.babelomics4.bioinfo.cipf.es.html"
             }
         ] ,
-        "citation": "Al-shahrour F, Minguez P, Vaquerizas JM, Conde L, Dopazo J. BABELOMICS: a suite of web tools for functional annotation and analysis of groups of genes in high-throughput experiments. Nucleic Acids Res. 2005;33(Web Server issue):W460-4.",
+        "citation": "Alonso R, Salavert F, Garcia-garcia F, et al. Babelomics 5.0: functional interpretation for new generations of genomic data. Nucleic Acids Res. 2015;43(W1):W117-21.",
         "icon": "http://bioinfo.cipf.es/apps-beta/babelomics/produccion/images/logoBabelomics_negative.svg",
-        "completeDescription": "<p>Babelomics has been running for more than one decade offering a user-friendly interface for the functional analysis of gene expression and genomic data. Here we present its fifth release, which includes support for Next Generation Sequencing data including gene expression (RNA-seq), exome or genome resequencing. Babelomics has simplified its interface, being now more intuitive. Improved visualization options, such as a genome viewer as well as an interactive network viewer, have been implemented. New technical enhancements at both, client and server sides, makes the user experience faster and more dynamic. Babelomics offers user-friendly access to a full range of methods that cover: (i) primary data analysis, (ii) a variety of tests for different experimental designs and (iii) different enrichment and network analysis algorithms for the interpretation of the results of such tests in the proper functional context.</p> <p>Babelomics contains one of the most cited tools in the field of functional enrichment analysis, the FatiGO. See quotation in <a href=\"http://sciencewatch.com/dr/erf/2010/10feberf/10feberfDopa/\" target='_blank'>ScienceWatch</a>.</p>",
         "publications": [
-            "<p>Al-Shahrour F., Minguez P., Vaquerizas J.M., Conde L., Dopazo J. 2005.&nbsp;<a href='http://nar.oxfordjournals.org/content/33/suppl_2/W460.long' target='_blank'>BABELOMICS: a suite of web tools for functional annotation and analysis of groups of genes in high-throughput experiments</a>. Nucleic Acids Res. 33:W460-W464</p>",
-            "<p class='rtecenter' style='text-align: left;'>Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. <a href='http://nar.oxfordjournals.org/content/34/suppl_2/W472.long' target='_blank'>BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments</a>. Nucleic Acids Res. 34:W472-W476</p>",
-            "<p class='rtecenter' style='text-align: left;'>Al-Shahrour F, Carbonell J, Minguez P, Goetz S, Conesa A, Tarraga J, Medina I, Alloza E, Montaner D, Dopazo J. &nbsp;2008. <a href='http://nar.oxfordjournals.org/content/36/suppl_2/W341.long' target='_blank'>Babelomics: advanced functional profiling of transcriptomics, proteomics and genomics experiments</a>. Nucleic Acids Res. 36:W341-346</p>",
-            "<p class='rtecenter' style='text-align: left;'>Medina I, Carbonell J, Pulido L, Madeira SC, Goetz S, Conesa A, Tárraga J, Pascual-Montano A, Nogales-Cadenas R, Santoyo J, García F, Marbà M, Montaner D, Dopazo J. 2010 <a href='http://nar.oxfordjournals.org/content/38/suppl_2/W210.full' target='_blank'>Babelomics: an integrative platform for the analysis of transcriptomics, proteomics and genomic data with advanced functional profiling</a>. Nucleic Acids Research. 38:W210-W213.</p>",
-            "<p class='rtecenter' style='text-align: left;'>Alonso R, Salavert F, Garcia-Garcia F, Carbonell-Caballero J, Bleda M, Garcia-Alonso L, Sanchis-Juan A, Perez-Gil D, Marin-Garcia P, Sanchez R, Cubuk C, Hidalgo MR, Amadoz A, Hernansaiz-Ballesteros RD, Alemán A, Tarraga J, Montaner D, Medina I, Dopazo J. 2015. <a href='http://nar.oxfordjournals.org/content/43/W1/W117' target='_blank'>Babelomics 5.0: functional interpretation for new generations of genomic data</a>. Nucleic Acids Res. 43:W117-W121</p>",
-            "<p class='rtecenter' style='text-align: left;'>Al-Shahrour F, Díaz-Uriarte R, and Dopazo J, 2004,&nbsp;<a href='http://bioinformatics.oxfordjournals.org/content/20/4/578.abstract' target='_blank'>FatiGO: a web tool for finding significant associations of Gene Ontology terms with groups of genes</a>. Bioinformatics&nbsp;20(4): 578-580.</p>",
-            "<p class='rtecenter' style='text-align: left;'>Al-Shahrour F, Díaz-Uriarte R, and Dopazo J, 2004,&nbsp;<a href='http://bioinformatics.oxfordjournals.org/content/20/4/578.abstract' target='_blank'>FatiGO: a web tool for finding significant associations of Gene Ontology terms with groups of genes</a>. Bioinformatics&nbsp;20(4): 578-580.</p>",
-            "<p class='rtecenter' style='text-align: left;'>Al-Shahrour F, Minguez P, Tarraga&nbsp;J, Medina I, Alloza E, Montaner D and Dopazo J. 2007.<a href='http://nar.oxfordjournals.org/content/35/suppl_2/W91.long' target='_blank'> FatiGO +: a functional profiling tool for genomic data. Integration of functional annotation, regulatory motifs and interaction data with microarray experiments</a>.&nbsp;Nucl. Acids Res. 35: W91-W96.</p>"
+            "Alonso R, Salavert F, Garcia-Garcia F, Carbonell-Caballero J, Bleda M, Garcia-Alonso L, Sanchis-Juan A, Perez-Gil D, Marin-Garcia P, Sanchez R, Cubuk C, Hidalgo MR, Amadoz A, Hernansaiz-Ballesteros RD, Alemán A, Tarraga J, Montaner D, Medina I, Dopazo J. 2015. <a href='http://nar.oxfordjournals.org/content/43/W1/W117' target='_blank'>Babelomics 5.0: functional interpretation for new generations of genomic data</a>. Nucleic Acids Res. 43:W117-W121",
+            "Medina I, Carbonell J, Pulido L, Madeira SC, Goetz S, Conesa A, Tárraga J, Pascual-Montano A, Nogales-Cadenas R, Santoyo J, García F, Marbà M, Montaner D, Dopazo J. 2010 <a href='http://nar.oxfordjournals.org/content/38/suppl_2/W210.full' target='_blank'>Babelomics: an integrative platform for the analysis of transcriptomics, proteomics and genomic data with advanced functional profiling</a>. Nucleic Acids Research. 38:W210-W213.",
+            "Al-Shahrour F, Carbonell J, Minguez P, Goetz S, Conesa A, Tarraga J, Medina I, Alloza E, Montaner D, Dopazo J. &nbsp;2008. <a href='http://nar.oxfordjournals.org/content/36/suppl_2/W341.long' target='_blank'>Babelomics: advanced functional profiling of transcriptomics, proteomics and genomics experiments</a>. Nucleic Acids Res. 36:W341-346",
+            "Al-Shahrour F, Minguez P, Tarraga&nbsp;J, Medina I, Alloza E, Montaner D and Dopazo J. 2007.<a href='http://nar.oxfordjournals.org/content/35/suppl_2/W91.long' target='_blank'> FatiGO +: a functional profiling tool for genomic data. Integration of functional annotation, regulatory motifs and interaction data with microarray experiments</a>.&nbsp;Nucl. Acids Res. 35: W91-W96.",
+            "Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. <a href='http://nar.oxfordjournals.org/content/34/suppl_2/W472.long' target='_blank'>BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments</a>. Nucleic Acids Res. 34:W472-W476",
+            "Al-Shahrour F., Minguez P., Vaquerizas J.M., Conde L., Dopazo J. 2005.&nbsp;<a href='http://nar.oxfordjournals.org/content/33/suppl_2/W460.long' target='_blank'>BABELOMICS: a suite of web tools for functional annotation and analysis of groups of genes in high-throughput experiments</a>. Nucleic Acids Res. 33:W460-W464",
+            "Al-Shahrour F, Díaz-Uriarte R, and Dopazo J, 2004,&nbsp;<a href='http://bioinformatics.oxfordjournals.org/content/20/4/578.abstract' target='_blank'>FatiGO: a web tool for finding significant associations of Gene Ontology terms with groups of genes</a>. Bioinformatics&nbsp;20(4): 578-580."
         ],
 
         "screenshots": [
@@ -89,7 +93,7 @@
         ],
         "citation": "Bleda M, Tarraga J, De maria A, et al. CellBase, a comprehensive collection of RESTful web services for retrieving relevant biological information from heterogeneous sources. Nucleic Acids Res. 2012;40(Web Server issue):W609-14.",
         "publications": [
-            "<p>Bleda M, Tarraga J, De Maria A, Salavert F, Garcia-Alonso L, Celma M, Martin A, Dopazo J, Medina I. CellBase, a comprehensive collection of RESTful web services for retrieving relevant biological information from heterogeneous sources. Nucleic Acids Res. 40(Web Server issue):W609-W614<p>"
+            "<p>Bleda M, Tarraga J, De Maria A, Salavert F, Garcia-Alonso L, Celma M, Martin A, Dopazo J, Medina I. <a href='http://nar.oxfordjournals.org/content/40/W1/W609.long' target='_blank'>CellBase, a comprehensive collection of RESTful web services for retrieving relevant biological information from heterogeneous sources</a>. Nucleic Acids Res. 40(Web Server issue):W609-W614<p>"
         ],
 
         "screenshots": [
@@ -120,7 +124,7 @@
         ],
         "citation":"Medina I, Salavert F, Sanchez R, et al. Genome Maps, a new generation genome browser. Nucleic Acids Res. 2013;41(Web Server issue):W41-6.",
         "publications": [
-            "Medina I, Salavert F, Sanchez R, et al. <a href='http://nar.oxfordjournals.org/content/41/W1/W41'>Genome Maps, a new generation genome browser</a>. Nucleic Acids Res. 2013;41(Web Server issue):W41-6."
+            "Medina I, Salavert F, Sanchez R, De Maria A, Alonso R, Escobar P, Bleda M, Dopazo J. <a href='http://nar.oxfordjournals.org/content/41/W1/W41'>Genome Maps, a new generation genome browser</a>. Nucleic Acids Res. 2013;41(Web Server issue):W41-6."
         ],
         "screenshots": [
             "genomemaps1.jpg"
@@ -148,19 +152,18 @@
             {
                 "text": "Tutorial",
                 "faIcon": "fa-compass",
-                "link": "https://github.com/babelomics/bierapp"
+                "link": "https://github.com/babelomics/bierapp/wiki/Tutorial"
             }
         ],
-        "citation": "<p>Alemán A, Garcia-Garcia F, Salavert F, Medina I, Dopazo J. A web-based interactive framework to assist in the prioritization of disease candidate genes in whole-exome sequencing studies. Nucleic Acids Res. 2014 Jul;42(Web Server issue):W88-93. doi: 10.1093/nar/gku407. <a href='http://www.ncbi.nlm.nih.gov/pubmed/24803668'>PubMed</a> <a href='http://nar.oxfordjournals.org/content/42/W1/W88.long'>NAR</a> <a href='http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4086071/'>PMC</a></p>",
-        "publications": [
-           "<p>Alemán A, Garcia-Garcia F, Salavert F, Medina I, Dopazo J. 2014. <a href='http://nar.oxfordjournals.org/content/early/2014/05/06/nar.gku407.long'>A web-based interactive framework to assist in the prioritization of disease candidate genes in whole-exome sequencing studies</a>. &nbsp;Nucleic Acids Res.&nbsp;42:W88-W93</p>"
-        ],
+        "citation": "Alemán A, Garcia-garcia F, Salavert F, Medina I, Dopazo J. A web-based interactive framework to assist in the prioritization of disease candidate genes in whole-exome sequencing studies. Nucleic Acids Res. 2014;42(Web Server issue):W88-93.",
+        "publications": ["<p>Alemán A, Garcia-Garcia F, Salavert F, Medina I, Dopazo J. A web-based interactive framework to assist in the prioritization of disease candidate genes in whole-exome sequencing studies. Nucleic Acids Res. 2014 Jul;42(Web Server issue):W88-93. doi: 10.1093/nar/gku407. <a href='http://www.ncbi.nlm.nih.gov/pubmed/24803668'>PubMed</a> <a href='http://nar.oxfordjournals.org/content/42/W1/W88.long'>NAR</a> <a href='http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4086071/'>PMC</a></p>"],
         "keywords": ["Genomics"],
         "maintained": true,
         "screenshots": [
-            "bierapp1.png",
+            "bierapp1.jpg",
             "bierapp2.png",
-            "bierapp3.png"
+            "bierapp3.png",
+            "bierapp4.png"
         ]
     },
 
@@ -187,7 +190,10 @@
                 "link": "https://github.com/babelomics/team/wiki/Tutorial"
             }
         ],
-        "citation": "<p>Alemán A, Garcia-Garcia F, Medina I, Dopazo J. A web tool for the design and management of panels of genes for targeted enrichment and massive sequencing for clinical applications. Nucleic Acids Res. 2014 Jul;42(Web Server issue):W83-7. doi: 10.1093/nar/gku472 <a href='http://www.ncbi.nlm.nih.gov/pubmed/24861626'>PubMed</a> <a href='http://nar.oxfordjournals.org/content/42/W1/W83.long'>NAR</a> <a href='http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4086136/'>PMC</a></p>",
+        "citation": "Alemán A, Garcia-garcia F, Medina I, Dopazo J. A web tool for the design and management of panels of genes for targeted enrichment and massive sequencing for clinical applications. Nucleic Acids Res. 2014;42(Web Server issue):W83-7.",
+        "publications": [
+           "<p>Alemán A, Garcia-Garcia F, Medina I, Dopazo J. 2014. <a href='http://nar.oxfordjournals.org/content/42/W1/W83.long'>A web tool for the design and management of panels of genes for targeted enrichment and massive sequencing for clinical applications.</a> Nucleic Acids Res. 42:W83-W87</p>"
+        ],
         "maintained": true,
         "screenshots": [
             "Team1.png",
@@ -215,8 +221,11 @@
                 "link": "http://bioinfo.cipf.es/docs/renato/tutorial"
             }
         ],
-        "citation":"<p>Marta Bleda, Ignacio Medina, Roberto Alonso, Alejandro De Maria, Francisco Salavert and Joaquin Dopazo. <strong>Inferring the regulatory network behind a gene expression experiment.</strong> <em>Nucleic Acids Research (Web Server issue)</em> June 11, 2012. <a href='http://nar.oxfordjournals.org/content/40/W1/W168.full' class='urlextern' title='http://nar.oxfordjournals.org/content/40/W1/W168.full' rel='nofollow'>Link to article</a></p>",
+        "citation":"Bleda M, Medina I, Alonso R, De maria A, Salavert F, Dopazo J. Inferring the regulatory network behind a gene expression experiment. Nucleic Acids Res. 2012;40(Web Server issue):W168-72.",
         "maintained": true,
+        "publications": [
+            "Bleda M, Medina I, Alonso R, De maria A, Salavert F, Dopazo J. <a href='http://nar.oxfordjournals.org/content/40/W1/W168.long' target='_blank'>Inferring the regulatory network behind a gene expression experiment</a>. Nucleic Acids Res. 2012;40(Web Server issue):W168-72."
+        ],
         "screenshots": [
             "renato1.jpg"
         ]
@@ -239,9 +248,9 @@
                 "link": "http://bioinfo.cipf.es/pathiways/tutorial"
             }
         ],
-        "citation": "<p>Sebastián-León P, Carbonell J, Salavert F, Sanchez R, Medina I, Dopazo J. Inferring the functional effect of gene expression changes in signaling pathways. Nucleic Acids Res. 2013;41:W213-W217 <a href='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' class='urlextern' title='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' rel='nofollow'>link to the article</a></p>",
+        "citation": "Sebastián-león P, Carbonell J, Salavert F, Sanchez R, Medina I, Dopazo J. Inferring the functional effect of gene expression changes in signaling pathways. Nucleic Acids Res. 2013;41(Web Server issue):W213-7.",
         "publications": [
-            "<p>Sebastián-León P, Carbonell J, Salavert F, Sanchez R, Medina I, Dopazo J. Inferring the functional effect of gene expression changes in signaling pathways. Nucleic Acids Res. 2013;41:W213-W217 <a href='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' class='urlextern' title='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' rel='nofollow'>link to the article</a> </p>"
+            "Sebastián-León P, Carbonell J, Salavert F, Sanchez R, Medina I, Dopazo J. <a href='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' class='urlextern' title='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' rel='nofollow'>Inferring the functional effect of gene expression changes in signaling pathways</a>. Nucleic Acids Res. 2013;41:W213-W217</a>"
         ],
         "maintained": true,
         "keywords": ["Pathway", "Genomics", "Proteomics"],
@@ -282,9 +291,11 @@
             "PathyVar.jpg"
         ],
 
-        "citation": "Al-Shahrour F., Minguez P., Tarraga J., Montaner D., Alloza E., Vaquerizas J.M., Conde L., Blaschke C., Vera J., Dopazo J. 2006. BABELOMICS: a systems biology perspective in the functional annotation of genome-scale experiments. Nucleic Acids Res. 34:W472-W476",
+        "citation": "Hernansaiz-ballesteros RD, Salavert F, Sebastián-león P, Alemán A, Medina I, Dopazo J. Assessing the impact of mutations found in next generation sequencing data over human signaling pathways. Nucleic Acids Res. 2015;43(W1):W270-5.",
 
-        "publications": [],
+        "publications": [
+           "Hernansaiz-Ballesteros RD, Salavert F, Sebastián-León P, Alemán A, Medina I, Dopazo J. 2015. <a href='http://nar.oxfordjournals.org/content/43/W1/W270'>Assessing the impact of mutations found in next generation sequencing data over human signaling pathways</a>. Nucleic Acids Res.&nbsp;43 (W1): W270-W275."
+        ],
 
         "maintained": true
     },
@@ -306,6 +317,10 @@
             }
         ],
         "icon": "http://phylemon.bioinfo.cipf.es/css/phylemon_title.png",
+        "citation": "Sánchez R, Serra F, Tárraga J, et al. Phylemon 2.0: a suite of web-tools for molecular evolution, phylogenetics, phylogenomics and hypotheses testing. Nucleic Acids Res. 2011;39(Web Server issue):W470-4.",
+        "publications": [
+           "Sánchez R, Serra F, Tárraga J, Medina I, Carbonell, J, Pulido L, De Maria A, Capella-Gutíerrez S, Huerta-Cepas J, Gabaldón T, Dopazo J, Dopazo H. <a href='http://nar.oxfordjournals.org/content/early/2011/06/06/nar.gkr408.full' targer='_blank'>Phylemon 2.0: a suite of web-tools for molecular evolution, phylogenetics, phylogenomics and hypotheses testing</a>. Nucleic Acids Res. 2011;39(Web Server issue):W470-4."
+        ],
         "maintained": false
     }
 ]
