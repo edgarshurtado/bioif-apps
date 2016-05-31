@@ -327,7 +327,7 @@
     </style>
     <template>
         <!-- Media queries to set the size of the slider -->
-        <iron-media-query query="(max-width: 530px)" query-matches="{{_smallSlider}}"></iron-media-query>
+        <iron-media-query query="(max-width: 760px)" query-matches="{{_smallSlider}}"></iron-media-query>
         <iron-media-query query="(min-width: 1700px)" query-matches="{{_bigSlider}}"></iron-media-query>
 
         <header id="header">
@@ -446,8 +446,8 @@
                     value: function(){
                         return {
                             sliderSizes : {
-                                "default": {height: 400, width: 800},
-                                "big": {height: 500, width: 700},
+                                "default": {height: 600, width: 700},
+                                "big": {height: 700, width: 900},
                                 "small": {height: 300, width: 400}
                             },
                             currentSliderSize:{}
