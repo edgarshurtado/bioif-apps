@@ -38,7 +38,9 @@
         ],
 
         "screenshots": [
-            "Babelomics5.jpg"
+            "Babelomics5.jpg",
+            "babelomics5_2.png",
+            "babelomics5_3.png"
         ],
 
         "maintained": true,
@@ -69,7 +71,9 @@
         ],
 
         "screenshots": [
-            "variant.jpg"
+            "variant.jpg",
+            "variant2.png",
+            "variant3.png"
         ],
 
         "maintained": false
@@ -123,7 +127,8 @@
             "Medina I, Salavert F, Sanchez R, De Maria A, Alonso R, Escobar P, Bleda M, Dopazo J. <a href='http://nar.oxfordjournals.org/content/41/W1/W41'>Genome Maps, a new generation genome browser</a>. Nucleic Acids Res. 2013;41(Web Server issue):W41-6."
         ],
         "screenshots": [
-            "genomemaps1.jpg"
+            "genomemaps1.jpg",
+            "genomemaps2.png"
         ],
         "keywords": ["Genomics", "Proteomics"]
     },
@@ -220,7 +225,8 @@
             "Bleda M, Medina I, Alonso R, De maria A, Salavert F, Dopazo J. <a href='http://nar.oxfordjournals.org/content/40/W1/W168.long' target='_blank'>Inferring the regulatory network behind a gene expression experiment</a>. Nucleic Acids Res. 2012;40(Web Server issue):W168-72."
         ],
         "screenshots": [
-            "renato1.jpg"
+            "renato1.jpg",
+            "renato2.png"
         ]
     },
     {
@@ -247,7 +253,9 @@
         "maintained": true,
         "keywords": ["Pathway", "Genomics", "Proteomics"],
         "screenshots": [
-            "pathiways1.jpg"
+            "pathiways1.jpg",
+            "pathiways2.png",
+            "pathiways3.png"
         ]
     },
     {
@@ -280,7 +288,9 @@
         ],
 
         "screenshots": [
-            "PathyVar.jpg"
+            "PathyVar.jpg",
+            "pathivar2.png",
+            "pathivar3.png"
         ],
 
         "publications": [
