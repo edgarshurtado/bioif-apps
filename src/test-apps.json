@@ -321,6 +321,9 @@
            "Sánchez R, Serra F, Tárraga J, Medina I, Carbonell, J, Pulido L, De Maria A, Capella-Gutíerrez S, Huerta-Cepas J, Gabaldón T, Dopazo J, Dopazo H. <a href='http://nar.oxfordjournals.org/content/early/2011/06/06/nar.gkr408.full' targer='_blank'>Phylemon 2.0: a suite of web-tools for molecular evolution, phylogenetics, phylogenomics and hypotheses testing</a>. Nucleic Acids Res. 2011;39(Web Server issue):W470-4."
         ],
         "maintained": false,
+        "screenshots": [
+            "phylemon2.jpg"
+        ],
         "keywords": ["Molecular evolution", "Phylogenetics", "Phylogenomics"]
     }
 ]

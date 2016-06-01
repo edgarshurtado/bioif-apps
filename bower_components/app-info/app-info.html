@@ -352,7 +352,7 @@
                 <p>[[shortDescription]]</p>
                 <div class="launch_btn_holder">
                     <div class="launch-button">
-                        <a href="{{appToDisplay.launch-link}}"  target="_blank">Launch</a>
+                        <a href="{{launchLink}}"  target="_blank">Launch</a>
                     </div>
                 </div>
             </div>
@@ -439,6 +439,8 @@
                 maintained: Boolean,
 
                 imgRootDir: String,
+
+                launchLink: String,
 
                 route: {
                     type: String,
