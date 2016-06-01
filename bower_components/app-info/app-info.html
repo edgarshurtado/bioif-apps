@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../font-awesome/css/font-awesome.min.css">
 <link rel="import" href="../img-slider/img-slider.html">
 <link rel="import" href="../badge-element/badge-element.html">
 <link rel="import" href="../iron-media-query/iron-media-query.html">
@@ -555,11 +556,14 @@
             },
 
             _validArray(array){
-                return array !== undefined && array.length > 0;
+                return array !== undefined && array.length > 0 || false;
             },
 
             _arrayGreaterThan: function(array, num){
-                return array.length > num;
+                if(array !== undefined){
+                    return array.length > num;
+                }
+                return false; // Executed in case array is undefined
             }
         })
     </script>
