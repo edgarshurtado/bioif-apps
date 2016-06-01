@@ -45,7 +45,7 @@
 
         "maintained": true,
 
-        "keywords": ["Pathway"]
+        "keywords": ["gene expression", "NGS", "RNA-seq", "genome viewer", "network viewer"]
     },
 
     {
@@ -76,6 +76,7 @@
             "variant3.png"
         ],
 
+        "keywords": ["NGS", "SNVs"],
         "maintained": false
     },
 
@@ -101,7 +102,7 @@
             "cellbase1.jpg"
         ],
 
-        "keywords": ["Pathway"]
+        "keywords": ["databases"]
     },
 
     {
@@ -130,7 +131,7 @@
             "genomemaps1.jpg",
             "genomemaps2.png"
         ],
-        "keywords": ["Genomics", "Proteomics"]
+        "keywords": ["genome browser"]
     },
 
     {
@@ -157,7 +158,7 @@
             }
         ],
         "publications": ["<p>Alemán A, Garcia-Garcia F, Salavert F, Medina I, Dopazo J. A web-based interactive framework to assist in the prioritization of disease candidate genes in whole-exome sequencing studies. Nucleic Acids Res. 2014 Jul;42(Web Server issue):W88-93. doi: 10.1093/nar/gku407. <a href='http://www.ncbi.nlm.nih.gov/pubmed/24803668'>PubMed</a> <a href='http://nar.oxfordjournals.org/content/42/W1/W88.long'>NAR</a> <a href='http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4086071/'>PMC</a></p>"],
-        "keywords": ["Genomics"],
+        "keywords": ["WES", "CIBERER", "Medical Genome Project", "Diagnostic"],
         "maintained": true,
         "screenshots": [
             "bierapp1.jpg",
@@ -166,7 +167,6 @@
             "bierapp4.png"
         ]
     },
-
     {
         "name": "TEAM",
         "shortDescription": "A web tool for the design and management of panels of genes for targeted enrichment and massive sequencing for clinical applications",
@@ -193,6 +193,7 @@
         "publications": [
            "<p>Alemán A, Garcia-Garcia F, Medina I, Dopazo J. 2014. <a href='http://nar.oxfordjournals.org/content/42/W1/W83.long'>A web tool for the design and management of panels of genes for targeted enrichment and massive sequencing for clinical applications.</a> Nucleic Acids Res. 42:W83-W87</p>"
         ],
+        "keywords": ["Diagnostic"],
         "maintained": true,
         "screenshots": [
             "Team1.png",
@@ -227,7 +228,9 @@
         "screenshots": [
             "renato1.jpg",
             "renato2.png"
-        ]
+        ],
+
+        "keywords": ["Transcription factors", "microRNAs", "Regulatory networks"]
     },
     {
         "name": "PATHiWays",
@@ -251,7 +254,7 @@
             "Sebastián-León P, Carbonell J, Salavert F, Sanchez R, Medina I, Dopazo J. <a href='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' class='urlextern' title='http://nar.oxfordjournals.org/content/early/2013/06/08/nar.gkt451.full' rel='nofollow'>Inferring the functional effect of gene expression changes in signaling pathways</a>. Nucleic Acids Res. 2013;41:W213-W217</a>"
         ],
         "maintained": true,
-        "keywords": ["Pathway", "Genomics", "Proteomics"],
+        "keywords": ["Signaling pathways viewer"],
         "screenshots": [
             "pathiways1.jpg",
             "pathiways2.png",
@@ -264,11 +267,6 @@
         "launch-link": "http://pathivar.babelomics.org/",
         "icon": "http://pathivar.babelomics.org/images/pathiways-logo.svg",
         "completeDescription": "<p>Modern sequencing technologies produce increasingly detailed data on genomic variation. However, conventional methods for relating either individual variants or mutated genes to phenotypes present known limitations given the complex, multigenic nature of many diseases or traits. Here we present PATHiVar, a web-based tool that integrates genomic variation data with gene expression tissue information. PATHiVar constitutes a new generation of genomic data analysis methods that allow studying variants found in next-generation sequencing experiment in the context of signaling pathways. Simple Boolean models of pathways provide detailed descriptions of the impact of mutations in cell functionality so as, recurrences in functionality failures can easily be related to diseases, even if they are produced by mutations in different genes. Patterns of changes in signal transmission circuits, often unpredictable from individual genes mutated, correspond to patterns of affected functionalities that can be related to complex traits such as disease progression, drug response, etc.&nbsp;</p>",
-        "publications": [
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra iaculis risus at pulvinar. Sed a venenatis eros. Nullam congue pharetra nibh, in dignissim massa tincidunt vitae. Integer tincidunt auctor nunc eu sodales. Etiam et rhoncus sem. Suspendisse vitae posuere justo. Mauris et ultrices erat. Nulla metus enim, blandit at.",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pharetra iaculis risus at pulvinar. Sed a venenatis eros. Nullam congue pharetra nibh, in dignissim massa tincidunt vitae. Integer tincidunt auctor nunc eu sodales. Etiam et rhoncus sem. Suspendisse vitae posuere justo. Mauris et ultrices erat. Nulla metus enim, blandit at."
-        ],
-
         "links":[
             {
                 "text": "Source",
@@ -297,7 +295,9 @@
            "Hernansaiz-Ballesteros RD, Salavert F, Sebastián-León P, Alemán A, Medina I, Dopazo J. 2015. <a href='http://nar.oxfordjournals.org/content/43/W1/W270'>Assessing the impact of mutations found in next generation sequencing data over human signaling pathways</a>. Nucleic Acids Res.&nbsp;43 (W1): W270-W275."
         ],
 
-        "maintained": true
+        "maintained": true,
+
+        "keywords": ["NGS", "Genomic Variation", "Gene expression tissue"]
     },
     {
         "name": "Phylemon",
@@ -320,6 +320,7 @@
         "publications": [
            "Sánchez R, Serra F, Tárraga J, Medina I, Carbonell, J, Pulido L, De Maria A, Capella-Gutíerrez S, Huerta-Cepas J, Gabaldón T, Dopazo J, Dopazo H. <a href='http://nar.oxfordjournals.org/content/early/2011/06/06/nar.gkr408.full' targer='_blank'>Phylemon 2.0: a suite of web-tools for molecular evolution, phylogenetics, phylogenomics and hypotheses testing</a>. Nucleic Acids Res. 2011;39(Web Server issue):W470-4."
         ],
-        "maintained": false
+        "maintained": false,
+        "keywords": ["Molecular evolution", "Phylogenetics", "Phylogenomics"]
     }
 ]
