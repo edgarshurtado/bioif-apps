@@ -261,7 +261,7 @@
         */
 
         @media screen and (max-width: 425px) {
-            img-slider, .slideshow_container {
+            .img-slider, .slideshow_container {
                 display: none;
             }
         }
@@ -380,14 +380,12 @@
             </section>
 
             <!-- Img slider -->
-            <section class="dark_background description">
+            <section class="dark_background description img-slider">
                 <template is="dom-if" if="[[_validArray(screenshots)]]">
-                    <div class="slideshow_container">
                         <img-slider id="slider" img-url-array="[[_addImgRoute(screenshots)]]"
                                     height="[[_slider.currentSliderSize.height]]"
                                     width="[[_slider.currentSliderSize.width]]"
                                     interval="5000"></img-slider>
-                    </div>
                 </template>
             </section>
 
