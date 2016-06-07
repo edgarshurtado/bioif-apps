@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Bioinfo-apps</title>
 
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>Bioinfo-apps</title>
 
-    <!-- Dependencies -->
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="jsUtils/jsonCall.js"></script>
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link href='fonts/fonts.css' rel='stylesheet' type='text/css'>
 
-    <link rel="import" href="bioinfo-apps-main/bioinfo-apps-main.html">
+        <!-- Dependencies -->
+        <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+        <script src="jsUtils/jsonCall.js"></script>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="fonts/fonts.css">
-</head>
+        <link rel="import" href="bioinfo-apps-main/bioinfo-apps-main.html">
 
-<style>
-    body, html{
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    }
-</style>
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts.css">
+    </head>
 
-<body>
-    <bioinfo-apps-main></bioinfo-apps-main>
-</body>
+    <style>
+        body,
+        html {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <body>
+        <bioinfo-apps-main></bioinfo-apps-main>
+        <script>
+            var app = document.querySelector('bioinfo-apps-main');
+        </script>
+    </body>
+
 </html>

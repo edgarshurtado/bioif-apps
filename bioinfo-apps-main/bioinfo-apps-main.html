@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/carbon-route/carbon-location.html">
-<link rel="import" href="../bower_components/carbon-route/carbon-route.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
 
 <link rel="import" href="../app-search/app-search.html">
 <link rel="import" href="../app-info/app-info.html">
@@ -10,7 +10,6 @@
 <dom-module id="bioinfo-apps-main">
     <template>
         <style is="custom-style" include="iron-flex">
-
             :root {
                 font-family: Lato;
             }
@@ -20,17 +19,17 @@
                 height: 100%;
             }
 
-            ::-webkit-scrollbar{
+            ::-webkit-scrollbar {
                 display: none;
             }
 
-            .container{
+            .container {
                 width: 100vw;
                 -webkit-overflow-scrolling: touch;
             }
-
             /* Sidebar styles */
-            .menu_wrapper{
+
+            .menu_wrapper {
                 z-index: 100;
                 position: fixed;
                 transform: translate(-150px, 0);
@@ -38,11 +37,14 @@
                 box-sizing: border-box;
             }
 
-            .menu_wrapper[show]{
+            .menu_wrapper[show] {
                 transform: translate(0);
             }
 
             bz-collection {
+                --menu-background: #2a2a2a;
+                --sidbar-active-background: rgba(255, 255, 255, 0.1);
+                --sidebar-hover-background: rgba(255, 255, 255, 0.05);
                 width: 150px;
             }
 
@@ -55,14 +57,12 @@
                 overflow-y: scroll;
             }
 
-            .blocking_div{
+            .blocking_div {
                 width: 100%;
                 height: 100%;
                 top: 0;
                 position: fixed;
-
-                background-color: rgba(0,0,0,0.2);
-
+                background-color: rgba(0, 0, 0, 0.2);
                 z-index: 50;
             }
 
@@ -70,61 +70,43 @@
                 --search-width: 200px;
             }
 
-            @media screen and (min-width: 1200px){
+            @media screen and (min-width: 1200px) {
                 app-info {
                     margin-left: 150px;
                 }
-
                 .menu_wrapper {
                     transform: translate(0);
                 }
-
                 /* Made with opacity instead of display: none because of no affecting the Flex layout*/
                 .banner_item.menu_burger {
                     display: none;
                 }
-
             }
 
-            @media screen and (max-height: 530px), screen and (max-width: 530px){
+            @media screen and (max-height: 530px),
+            screen and (max-width: 530px) {
                 .search_box {
                     display: none;
                 }
             }
         </style>
 
-        <carbon-location route="{{route}}"
-                         use-hash-as-path></carbon-location>
-        <carbon-route route="{{route}}"
-                      pattern="/:application"
-                      data="{{applicationData}}"></carbon-route>
+        <app-location route="{{route}}" use-hash-as-path></app-location>
+        <app-route route="{{route}}" pattern="/:application" data="{{applicationData}}"></app-route>
 
 
         <div class="container">
             <div class="menu_wrapper" id="menuWrapper">
-                <bz-collection id="bzCollection"
-                               tabindex="-1"
-                               route="{{route}}"
-                                data="[[appCollection]]"
-                                on-click="_handleHideMenu"></bz-collection>
+                <bz-collection id="bzCollection" tabindex="-1" route="{{route}}" data="[[appCollection]]" on-click="_handleHideMenu"></bz-collection>
             </div>
 
-                <app-info id="appInfo" on-click-menu="_handleHideMenu"
-                          app-name="[[selectedApp.name]]"
-                          launch-link="[[selectedApp.launch-link]]"
-                          links="[[selectedApp.links]]"
-                          short-description="[[selectedApp.shortDescription]]"
-                          description="[[selectedApp.completeDescription]]"
-                          publications="[[selectedApp.publications]]"
-                          screenshots="[[selectedApp.screenshots]]"
-                          maintained="[[selectedApp.maintained]]"
-                          img-root-dir="./img/">
+            <app-info id="appInfo" on-click-menu="_handleHideMenu" app-name="[[selectedApp.name]]" launch-link="[[selectedApp.launch-link]]" links="[[selectedApp.links]]" short-description="[[selectedApp.shortDescription]]" description="[[selectedApp.completeDescription]]" publications="[[selectedApp.publications]]" screenshots="[[selectedApp.screenshots]]" maintained="[[selectedApp.maintained]]" img-root-dir="./img/">
 
-                    <!-- Banner content -->
-                        <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_handleShowMenu"></i>
-                        <span class="banner_item banner banner_name">[[selectedApp.name]]</span>
-                        <app-search class="search_box banner_item banner_right" id="searchBox" data="[[appCollection]]"></app-search>
-                </app-info>
+                <!-- Banner content -->
+                <i class="fa fa-bars menu_burger banner_item banner_left" on-click="_handleShowMenu"></i>
+                <span class="banner_item banner banner_name">[[selectedApp.name]]</span>
+                <app-search class="search_box banner_item banner_right" id="searchBox" data="[[appCollection]]"></app-search>
+            </app-info>
 
             <div class="blocking_div" id="blockingDiv" on-click="_handleHideMenu" hidden></div>
         </div>
@@ -136,9 +118,9 @@
             properties: {
                 route: {
                     type: Object,
-                    observer: "_handleUrl"
+                    // observer: "_handleUrl"
                 },
-                appCollection: Array/Object,
+                appCollection: Array / Object,
                 /**
                  * Url for the json which contains the apps information
                  */
@@ -150,11 +132,14 @@
                 /**
                  * Placeholder for all the information about an app to pass to the different components
                  */
-                selectedApp:  Object
+                selectedApp: Object
             },
+            observers: [
+                '_handleUrlPath(route.path)'
+            ],
 
             ready: function() {
-                jsonUtils.jsonRequest(this._jsonSrc, function(response){ // Load the apps info from json file
+                jsonUtils.jsonRequest(this._jsonSrc, function(response) { // Load the apps info from json file
                     this.appCollection = response;
                 }.bind(this));
             },
@@ -163,12 +148,12 @@
              * Every time called, manages to hide or show the menu
              * @private
              */
-            _handleHideMenu: function(){
+            _handleHideMenu: function() {
                 Polymer.dom(this.$.menuWrapper).removeAttribute("show");
                 Polymer.dom(this.$.blockingDiv).setAttribute("hidden", "");
             },
 
-            _handleShowMenu: function(){
+            _handleShowMenu: function() {
                 this.$.menuWrapper.setAttribute("show", "");
                 this.$.blockingDiv.removeAttribute("hidden");
             },
@@ -177,12 +162,12 @@
              * Looks for the app requested in the url and set it to the `selectedApp`
              * @private
              */
-            _handleUrl: function(){
-                if(!this.route.path){
+            _handleUrlPath: function() {
+                if (!this.route.path) {
                     this.set("route.path", "/babelomics");
                 }
                 // Needed to be async because in the first load of the page appCollection isn't set yet
-                this.async(function(){
+                this.async(function() {
                     var app = this.appCollection.find(searchApp, this);
                     this.selectedApp = app;
                     this.$.appInfo.scrollTop = 0; // Default scroll position
@@ -190,7 +175,7 @@
                 }, 200);
 
                 // Helper inner function to use with find() method.
-                function searchApp(app){
+                function searchApp(app) {
                     var appOnRoute = this.applicationData.application.toLowerCase();
                     return appOnRoute === app.name.toLowerCase();
                 }

@@ -1,25 +1,27 @@
 {
-  "name": "bioinfo-apps",
-  "authors": [
-    "Edgar S. Hurtado <edsanhu@gmail.com>"
-  ],
-  "description": "An app launcher for bioinformatics tools at cipf",
-  "main": "",
-  "license": "MIT",
-  "homepage": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0",
-    "font-awesome": "fontawesome#^4.6.1",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.3.1",
-    "iron-media-query": "PolymerElements/iron-media-query#^1.0.8",
-    "carbon-route": "PolymerElements/carbon-route#^0.8.4",
-    "img-slider": "https://github.com/edgarshurtado/img-slider.git#^1.0.4"
-  }
+    "name": "bioinfo-apps",
+    "authors": [
+        "Edgar S. Hurtado <edsanhu@gmail.com>"
+    ],
+    "description": "An app launcher for bioinformatics tools at cipf",
+    "main": "",
+    "license": "MIT",
+    "homepage": "",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "polymer": "Polymer/polymer#1.4.0",
+        "font-awesome": "fontawesome#^4.6.1",
+        "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.3.1",
+        "iron-media-query": "PolymerElements/iron-media-query#^1.0.8",
+        "app-route": "PolymerElements/app-route#0.9.1",
+        "img-slider": "https://github.com/edgarshurtado/img-slider.git#^1.0.4",
+        "badge-element": "https://github.com/edgarshurtado/badge-element.git#^1.0.0",
+        "bz-sidebar": "https://github.com/edgarshurtado/bz-sidebar.git#^1.0.0"
+    }
 }
