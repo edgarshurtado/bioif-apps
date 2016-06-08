@@ -1,30 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Bioinfo-apps</title>
 
-    <!-- Dependencies -->
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="bower_components/jsUtils/jsonCall.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <title>Bioinfo-apps</title>
 
-    <link rel="import" href="bower_components/bioinfo-apps-main/bioinfo-apps-main.html">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link href='fonts/fonts.css' rel='stylesheet' type='text/css'>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="fonts/fonts.css">
-</head>
+        <!-- Dependencies -->
+        <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+        <script src="jsUtils/jsonCall.js"></script>
 
-<style>
-    body, html{
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    }
-</style>
+        <link rel="import" href="bioinfo-apps-main/bioinfo-apps-main.html">
 
-<body>
-    <bioinfo-apps-main></bioinfo-apps-main>
-</body>
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts.css">
+    </head>
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+        /*body.fullbleed {
+            margin: 0;
+            height: 100vh;
+        }
+
+        body[unresolved] {
+            opacity: 0;
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body {
+            transition: opacity ease-in 0.1s;
+        }*/
+    </style>
+
+    <body unresolved class="fullbleed">
+
+        <!-- <bioinfo-apps-main></bioinfo-apps-main> -->
+        <script>
+            var app = document.createElement('bioinfo-apps-main');
+            jsonUtils.jsonRequest(app._jsonSrc, function(response) { // Load the apps info from json file
+                this.appCollection = response;
+                setTimeout(function() {
+                    document.body.appendChild(app);
+                }, 200);
+            }.bind(app));
+        </script>
+    </body>
+
 </html>

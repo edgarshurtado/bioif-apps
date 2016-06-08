@@ -1,0 +1,570 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/img-slider/img-slider.html">
+<link rel="import" href="../bower_components/badge-element/badge-element.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+
+<dom-module id="app-info">
+    <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning">
+
+        /*
+        * General Settings
+        */
+
+        :host {
+            color: #647276;
+            font-family: "Lato";
+            font-weight: 300;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header, main {
+            width: 100%;
+        }
+
+        header, footer{
+            position: relative;
+            background-color: #333;
+        }
+
+        ul, ol {
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            display: block;
+        }
+
+        h1, h2 {
+            color: #647276;
+            margin: 0;
+            padding: 1rem 0;
+        }
+        header, footer {
+            color: #FBFBF9;
+        }
+
+
+        /*
+        * Header
+        */
+
+        .site-nav {
+            padding: 1rem;
+            background-color: #222;
+            box-sizing: border-box;
+            position: fixed;
+            right: 0; /*To don't push the search-box out of the body*/
+            left: 0;
+            z-index: 99;
+        }
+
+        .banner_title{
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+        }
+
+        .banner_right{
+            float: right;
+        }
+
+        .banner_left{
+            float: left;
+        }
+
+        .site-container {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .site-container > h1 {
+            color: #FBFBF9;
+        }
+
+        .site-container > h1 {
+            /*font-family: "Copperplate";*/
+            font-family: "Lato";
+            font-weight: normal;;
+            margin: 0;
+            font-size: 3em;
+            text-shadow: 3px 3px 5px #222;
+        }
+
+        .site-container > p {
+            text-align: center;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+         /*Launch button*/
+        .launch_btn_holder {
+            padding: 3rem 0 2rem 0;
+        }
+
+        .launch-button {
+            background: #3498db;
+            background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+            background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+            background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+            background-image: -o-linear-gradient(top, #3498db, #2980b9);
+            background-image: linear-gradient(to bottom, #3498db, #2980b9);
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            font-family: Arial;
+            font-size: 1.5em;
+            padding: 1rem 0;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            text-decoration: none;
+        }
+
+        .launch-button > span {
+            color: #ffffff;
+        }
+
+        .launch-button:hover {
+            background: #3cb0fd;
+            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Link icons */
+        header .link-icons {
+            background-color: rgba(0,0,0,0.1);
+            min-height: 86px;
+            box-sizing: border-box;
+        }
+
+        .link-icons{
+            width: 100%;
+            font-size: 1.2em;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .link-icons > ul {
+            width: 90%;
+        }
+
+        .link-icons .link{
+            display: block;
+            padding: 1.25rem;
+            margin-right: 15px;
+            color: white;
+        }
+
+        .link-icons .link  i {
+            color: #3cb0fd;
+        }
+
+        .link-icons .link:hover {
+            color: #3cb0fd;
+        }
+
+        .link-icons .link[href=""]{
+            display: none;
+        }
+
+
+        /*
+        * Main
+        */
+        section {
+            width: 100%;
+            padding: 2em 0;
+            font-size: 1.5em;
+        }
+
+        section h2 {
+            text-align: center;
+        }
+
+        section a {
+            color: #214753;
+            border-bottom: 1px dotted #C5596D;
+        }
+
+        .light {
+            background-color: white;
+        }
+
+        .dark_background {
+            background-color: #f1f5f5;
+        }
+
+
+        .content-text {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+        }
+
+        .description_text {
+            width:100%;
+        }
+
+
+        .publications_list > li {
+            border-bottom: black solid 1px;
+            margin: 1em 0;
+            padding: 1em 0;
+        }
+
+        .publications_list li:last-of-type {
+            border-bottom: none;
+        }
+
+        /*
+        * Footer
+        */
+        footer {
+            padding-top: 2em;
+            padding-bottom: 1em;
+            text-align: center;
+        }
+
+        footer > div {
+            margin-top: 1em;
+        }
+
+        .link-icons.footer-container {
+            display: block;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer > a {
+            color:#99ccff;
+            border-bottom: 1px dotted #C5596D;
+        }
+
+        /*
+        *  Slider
+        */
+
+        .slideshow_container{
+            width: 100%;
+        }
+
+        /*
+        * Media Queries
+        */
+
+        @media screen and (max-width: 425px) {
+            .img-slider, .slideshow_container {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 425px){
+            .launch-button{
+                width: 255px;
+            }
+
+            footer .link-icons.app-info > ul {
+                width: 191.25px
+            }
+
+        }
+
+        @media screen and (max-width: 490px){
+            section {
+                font-size: 1.2em;
+            }
+        }
+
+        @media screen and (min-width: 620px){
+            header .site-container > h1{
+               font-size: 5rem;
+            }
+
+            header .site-container > p {
+               font-size: 1.7em;
+            }
+
+            .link-icons > ul {
+                width: 558px;
+            }
+        }
+
+        @media screen and (min-width: 1200px){
+            /*To make the banner as width as the screen width - 150px */
+            .site-nav {
+                left: 150px;
+                right: 0;
+            }
+
+
+        }
+
+        @media screen and (min-width: 1400px) {
+            .section_container {
+                width: 1250px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media screen and (min-width: 1440px) {
+            .link-icons {
+                font-size: 1.5em;
+            }
+
+            .link-icons > ul {
+                width: 700px;
+            }
+        }
+
+
+    </style>
+    <template>
+        <!-- Media queries to set the size of the slider -->
+        <iron-media-query query="(max-width: 760px)" query-matches="{{_smallSlider}}"></iron-media-query>
+        <iron-media-query query="(min-width: 1250px)" query-matches="{{_bigSlider}}"></iron-media-query>
+
+        <header id="header">
+            <!-- Badge for deprecated apps -->
+            <template is="dom-if" if="{{!maintained}}">
+                <badge-element bottom right style="bottom: 82px; right: 0">
+                    <span>Deprecated</span>
+                </badge-element>
+            </template>
+            <div class="site-nav">
+                <div class="banner_left">
+                    <content select=".banner_item.banner_left"></content>
+                </div>
+                <div class="banner_title">
+                    <content select=".banner_item.banner_name"></content>
+                </div>
+                <div class="banner_right">
+                    <content select=".banner_item.banner_right"></content>
+                </div>
+            </div>
+            <div class="site-container">
+                <h1>[[appName]]</h1>
+                <p>[[shortDescription]]</p>
+                <div class="launch_btn_holder">
+                        <a href="{{launchLink}}"  target="_blank">
+                            <div class="launch-button"><span>Launch</span></div>
+                        </a>
+                </div>
+            </div>
+
+            <div class="link-icons">
+                <ul class="layout horizontal justified wrap">
+                    <template is="dom-repeat" items="[[links]]">
+                        <li><a class="link" href="[[item.link]]" target="_blank"><i class$="fa [[item.faIcon]]"></i><span> {{item.text}}</span></a></li>
+                    </template>
+                </ul>
+            </div>
+        </header>
+
+        <main>
+            <!-- DESCRIPTION -->
+            <section class="light description">
+                    <h2>Description</h2>
+                    <div class="content-text">
+                        <!-- App description -->
+                        <div id="description" class="description_text"></div>
+                    </div>
+            </section>
+
+            <!-- Img slider -->
+            <section class="dark_background description img-slider">
+                <template is="dom-if" if="[[_validArray(screenshots)]]">
+                        <img-slider id="slider" img-url-array="[[_addImgRoute(screenshots)]]"
+                                    height="[[_slider.currentSliderSize.height]]"
+                                    width="[[_slider.currentSliderSize.width]]"
+                                    interval="5000"></img-slider>
+                </template>
+            </section>
+
+            <!--CITATION-->
+            <section class="light citation">
+                <div class="section_container">
+                    <h2>How to cite <i class="fa fa-pencil-square-o"></i></h2>
+                    <div id="citation" class="content-text"></div>
+                </div>
+            </section>
+
+            <!-- PUBLICATIONS -->
+            <template is="dom-if" if="[[_arrayGreaterThan(publications,1)]]" id="publicationsTemplate">
+                <section class="dark_background">
+                    <h2>Other publications</h2>
+                    <div id="publications">
+                        <ol class="content-text publications_list"></ol>
+                    </div>
+                </section>
+            </template>
+        </main>
+        <footer>
+            <a href="[[appToDisplay.link]]">[[appName]]</a> has been developed by the <a href="http://bioinfo.cipf.es/">Computational Genomics Department</a>
+            <br>
+            Principe Felipe Research Center
+            <br>
+            <div class="link-icons footer-container">
+                <ul class="layout horizontal around-justified">
+                    <li><a class="link" href="https://twitter.com/Babelomics" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="link" href="mailto:babelomics@cipf.es"><i class="fa fa-envelope-o"></i></a></li>
+                </ul>
+            </div>
+        </footer>
+    </template>
+    <script>
+        Polymer({
+            is: "app-info",
+            properties: {
+                appName: String,
+
+                links: Array,
+
+                publications: {
+                    type: Array,
+                    observer: "_handleChangePublications"
+                },
+
+                description: String,
+
+                screenshots: Array,
+
+                maintained: Boolean,
+
+                imgRootDir: String,
+
+                launchLink: String,
+
+                route: {
+                    type: String,
+                    observer: "_handleRoute"
+                },
+
+                _slider: {
+                    type: Object,
+                    observer: "_setSliderSize",
+                    value: function(){
+                        return {
+                            sliderSizes : {
+                                "default": {height: 600, width: 700},
+                                "big": {height: 700, width: 900},
+                                "small": {height: 300, width: 400}
+                            },
+                            currentSliderSize:{}
+                        }
+                    }
+                },
+
+                _smallSlider: {
+                    type: Boolean,
+                    observer: "_setSliderSize"
+                },
+
+                _bigSlider: {
+                    type: Boolean,
+                    observer: "_setSliderSize"
+                }
+            },
+
+            observers: ["_insertHTML(description, publications)"],
+
+            ready: function(){
+                this.$.publicationsTemplate.addEventListener("dom-change", function listener(){
+                    this._insertArrayHTML(this.publications, this.$$('.publications_list'));
+                    this.$.publicationsTemplate.removeEventListener("dom-change", listener);
+                }.bind(this));
+            },
+
+            /**
+             * Inserts the strings from description, citation and publications as html on its correspondent containers
+             * @param description
+             * @param citation
+             * @param publications
+             * @private
+             */
+            _insertHTML: function(description, publications) {
+                Polymer.dom(this.$.citation).innerHTML = publications[0];
+                Polymer.dom(this.$.description).innerHTML = description;
+            },
+
+            /**
+             * Help funtion for the case in which we want to insert as html an array of strings
+             * @param collection
+             * @param target
+             * @private
+             */
+            _insertArrayHTML: function(collection, target){
+                if(this._arrayGreaterThan(collection, 1)){
+                    target.innerHTML = "";
+                    collection = collection.slice(1);
+                    collection.forEach(function(text){
+                        var li = document.createElement("li");
+                        Polymer.dom(li).innerHTML = text;
+                        Polymer.dom(target).appendChild(li);
+                    });
+                }
+            },
+
+            _handleChangePublications: function(newValue, oldValue){
+                if(oldValue !== undefined){
+                    this._insertArrayHTML(this.publications, this.$$('.publications_list'));
+                }
+            },
+
+
+            /**
+             * Set the size for the slider according to the values set by iron-media-query
+             * @private
+             */
+            _setSliderSize: function(){
+                if(this._smallSlider){
+                    this._slider.currentSliderSize = this._slider.sliderSizes.small;
+                }else if(this._bigSlider){
+                    this._slider.currentSliderSize = this._slider.sliderSizes.big;
+                }else {
+                    this._slider.currentSliderSize = this._slider.sliderSizes.default;
+                }
+
+                // Notify polymer that the subproperty has been updated
+                this.notifyPath("_slider.currentSliderSize", this._slider.currentSliderSize);
+            },
+
+            /**
+             * Add the `imgRootDir` to the array `imgUrlArray`
+             * @param imgUrlArray
+             * @returns {*}
+             * @private
+             */
+            _addImgRoute: function(imgUrlArray){
+                if(this._validArray(imgUrlArray)){
+                    return imgUrlArray.map(function(url){
+                        return (this.imgRootDir || "") + url;
+                    }, this);
+                }else {
+                    return []
+                }
+            },
+
+            _validArray(array){
+                return array !== undefined && array.length > 0 || false;
+            },
+
+            _arrayGreaterThan: function(array, num){
+                if(array !== undefined){
+                    return array.length > num;
+                }
+                return false; // Executed in case array is undefined
+            }
+        })
+    </script>
+</dom-module>

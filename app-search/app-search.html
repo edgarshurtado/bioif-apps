@@ -1,0 +1,280 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="app-search">
+    <template>
+        <style>
+            input{
+                border: black 1px solid;
+                padding: 0.2rem;
+                width: var(--search-width);
+            }
+            .results_box{
+                box-sizing: border-box;
+                border: 1px solid black;
+                position: absolute;
+                width: var(--search-width);
+            }
+
+            .results_box > ul{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .results_list > li {
+                padding: 0.5rem;
+                background-color: white;
+            }
+
+            .results_list > li.label{
+                background-color: cornflowerblue;
+                color: white;
+            }
+
+            .results_list > li:not(.label){
+                color: black;
+                cursor: pointer;
+            }
+
+            .results_list > li:not(.label):hover, li:not(.label)[hover] {
+                background-color: #99ccff;
+            }
+
+            #queryBox {
+                background-image: url("../app-search/magnifying_glass.png");
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position:right;
+            }
+
+        </style>
+
+        <input type="text" id="queryBox" placeholder="Search..." on-blur="_handleBlur" on-keyup="_handleKeyUp" on-focus="_toggleResultsBox">
+        <div class="results_box" id="resultsBox"  hidden>
+            <ul id="resultsList" class="results_list" on-mouseenter="_removeHoverAttr">
+                <template is="dom-repeat" items="{{results}}">
+                    <li class="label"><i class$="fa {{item.iconFaTag}}"></i> {{item.classTag}}</li>
+                    <template is="dom-repeat" items="{{item.items}}">
+                        <li data-name="{{item}}" on-click="_handleClick"><i class="fa fa-dot-circle-o"></i> {{item}}</li>
+                    </template>
+                </template>
+            </ul>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: "app-search",
+
+            properties:{
+                /**
+                 * Copy of the data where the `app-search` is going to look at.
+                 * @type Array<Object>
+                 */
+                data: {
+                    type: Array/Object,
+                    reflectOnAttribute: true
+                },
+
+                /**
+                 * Storage for the results of the current query prepared to be rendered by `dom-repeat`
+                 */
+                results: {
+                    type: Array/Object,
+                    value: [],
+                    observer: "_toggleResultsBox"
+                }
+            },
+
+            _handleBlur: function(e){
+                this.async(function(){
+                    Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+                }, 200);
+            },
+
+//            Key press Handlers
+
+            /**
+             * This is a switcher helper that when receives a key press event decides into which envent handler it
+             * passes de keyCode
+             * @param e The on-keyup event
+             * @private
+             */
+            _handleKeyUp: function(e) {
+
+                switch(e.keyCode){
+                    // enter key
+                    case 13:
+                        this._handleEnterPress();
+                        break;
+                    // left
+                    case 37: break;
+                    // right
+                    case 39: break;
+                    // up
+                    case 38:
+                    // down
+                    case 40:
+                        this._handleUpDownArrow(e.keyCode);
+                        break;
+                    default: this.results = this._search(e.target.value)
+                }
+            },
+
+            /**
+             * Logic to allow the navigation through the search results using the arrow keys. This function should only
+             * receive the code for either the up arrow or down arrow.
+             * @param code Code for the key
+             * @private
+             */
+            _handleUpDownArrow(code) {
+                /**
+                 * Helper function to use in array.findIndex
+                 */
+                function findHover(el){
+                    return el.hasAttribute("hover")
+                }
+
+                var polDom = Polymer.dom(this.root);
+                var elements = polDom.querySelectorAll("li:not(.label)");
+                var indexCurrentSelected = elements.findIndex(findHover);
+
+                if(indexCurrentSelected > -1){ // If there's an element highlighted already
+                    this._removeHoverAttr(); // Remove current hovered
+
+                    switch(code){
+                        case 38: // Up arrow key
+                                if(indexCurrentSelected > 0){
+                                    var prevEl = elements[indexCurrentSelected - 1];
+                                    Polymer.dom(prevEl).setAttribute("hover", "");
+                                }
+                            break;
+                        case 40: // Down arrow key
+                                var nextEl;
+                                if(indexCurrentSelected < elements.length - 1){
+                                    nextEl = elements[indexCurrentSelected + 1];
+                                }else {
+                                    nextEl = elements[indexCurrentSelected];
+                                }
+
+                                Polymer.dom(nextEl).setAttribute("hover", "");
+                            break;
+                        default:
+                    }
+                }else if(code === 40){ // If there's no any result item highlighted yet
+                    elements[0].setAttribute("hover", "");
+                }
+            },
+
+            /**
+             * Triggers a click event on the currently selected search resault
+             * @private
+             */
+            _handleEnterPress: function(){
+                var element = Polymer.dom(this.root).querySelector("li:not(.label)[hover]");
+                if(element){
+                    element.click();
+                }
+            },
+
+            /**
+             * Logic for the selection of a search result.
+             * @param e The click event
+             * @private
+             */
+            _handleClick: function(e) {
+                window.location.href = "#/" + e.target.dataName.toLowerCase();
+                // Clear input and results for better UX
+                this.$.queryBox.value = "";
+                this.results = [];
+            },
+
+            _removeHoverAttr: function(e) {
+                Polymer.dom(this.root).querySelector('li[hover]').removeAttribute("hover");
+            },
+
+            /**
+             * Function that searches in `this.data` object. Specifically in the keys *name* and *keywords*. Returns an
+             * object with the results. Ready to be rendered by the dom template.
+             * @param query
+             * @return Array<Object>
+             * @private
+             */
+            _search: function(query){
+                if(query.length >= 2){
+                    var results = {applications: [], keywords: []};
+                    var re = new RegExp(".*" + query + ".*", "i");
+
+                    this.data.forEach(function(app){ // Iterate over every element(app) of the `data` object
+//                    Matches with app name
+                        if(re.test(app.name)){
+                            results.applications.push(app.name);
+                        }
+
+//                    Matches by Keyword
+                        if(app.keywords !== undefined){
+                            app.keywords.forEach(function(keyword){
+                                if(re.test(keyword)){
+                                    if(results.keywords[keyword] !== undefined){
+                                        results.keywords[keyword].push(app.name)
+                                    }else {
+                                        results.keywords[keyword] = [app.name];
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    results = this._prepareResults(results); // Prepare results for dom-if template
+                } else {
+                    results = [];
+                }
+
+                return results;
+            },
+
+            /**
+             * Helper method that parses the results from `_search` to dom-if template ready. The array returned has one
+             * object per section. The sections created are a **NAME** section for the apps that match the query by name
+             * and then a section for each keyword that matches. The keywords sections gather all the applications that
+             * have a keyword that matches with the query.
+             * @param results
+             * @returns {Array}
+             * @private
+             */
+            _prepareResults: function(results){
+                function getSectionObject(classTag, iconFaTag, items){
+                   return {
+                       "classTag": classTag,
+                       "iconFaTag": iconFaTag,
+                       "items": items
+                   };
+                }
+
+                var finalResults = [];
+                if(results.applications.length !== 0){
+                    finalResults.push(getSectionObject("BY NAME", "fa-desktop", results.applications));
+                }
+
+                Object.keys(results.keywords).forEach(function(keyword){
+                    finalResults.push(getSectionObject(keyword.toUpperCase(), "fa-tag", results.keywords[keyword]));
+                });
+
+                return finalResults;
+            },
+
+            /**
+             * Event handler. If there are results shows the results box
+             * @private
+             */
+            _toggleResultsBox: function(newValue, oldValue){
+                if(oldValue !== undefined){
+                    if(this.results.length > 0){
+                        Polymer.dom(this.$.resultsBox).removeAttribute("hidden");
+                    }else {
+                        Polymer.dom(this.$.resultsBox).setAttribute("hidden", "");
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>
