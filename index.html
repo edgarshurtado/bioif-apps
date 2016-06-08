@@ -26,27 +26,11 @@
             width: 100%;
             height: 100%;
         }
-        /*body.fullbleed {
-            margin: 0;
-            height: 100vh;
-        }
-
-        body[unresolved] {
-            opacity: 0;
-            display: block;
-            overflow: hidden;
-            position: relative;
-        }
-
-        body {
-            transition: opacity ease-in 0.1s;
-        }*/
     </style>
 
     <body unresolved class="fullbleed">
 
-        <!-- <bioinfo-apps-main></bioinfo-apps-main> -->
-        <script>
+        <script> // Initiate application
             var app = document.createElement('bioinfo-apps-main');
 
             jsonUtils.jsonRequest("src/test-apps.json", function(response) { // Load the apps info from json file
