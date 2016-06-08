@@ -48,9 +48,11 @@
         <!-- <bioinfo-apps-main></bioinfo-apps-main> -->
         <script>
             var app = document.createElement('bioinfo-apps-main');
-            jsonUtils.jsonRequest(app._jsonSrc, function(response) { // Load the apps info from json file
+
+            jsonUtils.jsonRequest("src/test-apps.json", function(response) { // Load the apps info from json file
                 this.appCollection = response;
-                setTimeout(function() {
+                console.log(response);
+                setTimeout(function() { // Attach to the body with delay for avoiding an awful behavior when loading the page
                     document.body.appendChild(app);
                 }, 200);
             }.bind(app));
